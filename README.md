@@ -1,13 +1,13 @@
-# TP WEB - GRUPO 19 A
+# TP CUATRIMESTRAL - GRUPO 19 A
 
 Realizado por Valentina Conde, Les Yparraguirre y Milagros Dubuis.
 
 • Comando para clonar repo:   
 
-    git clone https://github.com/valentinaconde/tp-web-equipo-19A.git
+    git clone https://github.com/valentinaconde/tp-cuatrimestral-equipo-19A.git
 
 # Descripcion del proyecto:<br/>
-## Comercio<br/>
+## Propuesta Comercio<br/>
 Se requiere una aplicación web para administrar las compras y ventas de un negocio multipropósito.<br/>
 El sistema debe administrar clientes, proveedores, productos y registro de ventas y compras.<br/>
 Los productos van a estar discriminados por marcas y tipos y/o categorias (también administrables), además, estarán asociados a uno o más proveedores.<br/>
