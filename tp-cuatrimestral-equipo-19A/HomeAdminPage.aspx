@@ -2,8 +2,8 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
-        <h1 id="title">Comercio</h1>
-          <!-- TO-DO: ELIMINAR TEXTO INFORMATIVO    -->
+        <h1 id="title">ADMINISTRACIÓN</h1>
+        <!-- TO-DO: ELIMINAR TEXTO INFORMATIVO    -->
         <p class="text-danger">ELEGIR PAGINA PRINCIPAL</p>
 
     </main>
