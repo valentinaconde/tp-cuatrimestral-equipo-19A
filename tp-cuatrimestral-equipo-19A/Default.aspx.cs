@@ -18,13 +18,19 @@ namespace tp_cuatrimestral_equipo_19A
                 bool isAuthenticated = AuthenticateUser(email, password);
                 if (isAuthenticated)
                 {
-                    Response.Redirect("HomePage.aspx");
+                    Response.Redirect("HomeAdminPage.aspx");
                 }
+                else
+                {
+                Response.Redirect("HomeVendedorPage.aspx");
+
+            }
         }
 
         private bool AuthenticateUser(string email, string password)
         {
             
+
             return email == "test@prueba.com" && password == "password123";
         }
     }

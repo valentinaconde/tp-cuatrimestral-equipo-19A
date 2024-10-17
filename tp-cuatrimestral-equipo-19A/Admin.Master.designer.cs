@@ -11,7 +11,7 @@ namespace tp_cuatrimestral_equipo_19A
 {
 
 
-    public partial class SiteMaster
+    public partial class AdminMaster
     {
 
         /// <summary>

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace tp_cuatrimestral_equipo_19A
 {
-    public partial class SiteMaster : MasterPage
+    public partial class HomeVendedorPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
