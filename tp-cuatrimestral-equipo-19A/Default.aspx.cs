@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -11,7 +7,25 @@ namespace tp_cuatrimestral_equipo_19A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+        }
 
+        protected void LoginButton_Click(object sender, EventArgs e)
+        {
+                string email = EmailTextBox.Text;
+                string password = PasswordTextBox.Text;
+
+
+                bool isAuthenticated = AuthenticateUser(email, password);
+                if (isAuthenticated)
+                {
+                    Response.Redirect("HomePage.aspx");
+                }
+        }
+
+        private bool AuthenticateUser(string email, string password)
+        {
+            
+            return email == "test@prueba.com" && password == "password123";
         }
     }
 }
