@@ -19,6 +19,7 @@
             <div class="form-group col-4">
                 <label for="txtEmail">Email</label>
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+                <label class="text-info ">La contraseña por defecto es el email de la persona.</label>
             </div>
             <div class="form-group col-4">
                 <label for="ddlRol">Rol</label>
