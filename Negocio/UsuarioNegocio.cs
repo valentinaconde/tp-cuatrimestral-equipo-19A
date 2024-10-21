@@ -29,6 +29,7 @@ namespace Negocio
                     aux.email = datos.Lector["email"].ToString();
                     aux.password = datos.Lector["password"].ToString();
                     aux.rol_id = (int)datos.Lector["rol_id"];
+                    
 
                     lista.Add(aux);
                 }

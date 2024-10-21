@@ -17,6 +17,5 @@ namespace Dominio
 
         public int rol_id { get; set; }
 
-
     }
 }
