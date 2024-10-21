@@ -28,7 +28,7 @@ namespace Negocio
                     aux.apellido = datos.Lector["apellido"].ToString();
                     aux.email = datos.Lector["email"].ToString();
                     aux.password = datos.Lector["password"].ToString();
-                    aux.rol_id = datos.Lector["rol_id"].ToString();
+                    aux.rol_id = (int)datos.Lector["rol_id"];
 
                     lista.Add(aux);
                 }
@@ -42,7 +42,7 @@ namespace Negocio
             }
         }
 
-        public void agregar(string nombre, string apellido, string email, string password, string rol_id)
+        public void agregar(string nombre, string apellido, string email, string password, int rol_id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -65,7 +65,7 @@ namespace Negocio
             }
         }
 
-        public void modificar(int id, string nombre, string apellido, string email, string password, string rol_id)
+        public void modificar(int id, string nombre, string apellido, string email, string password, int rol_id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -106,6 +106,38 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public Usuario buscarUsuario(string email)
+        {
+            Usuario usuario = new Usuario();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id from usuarios where email = @email");
+                datos.setearParametro("@email", email);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    usuario.id = (int)datos.Lector["id"];
+                    usuario.nombre = datos.Lector["nombre"].ToString();
+                    usuario.apellido = datos.Lector["apellido"].ToString();
+                    usuario.email = datos.Lector["email"].ToString();
+                    usuario.password = datos.Lector["password"].ToString();
+                    usuario.rol_id = (int)datos.Lector["rol_id"];
+                }
+
+                datos.cerrarConexion();
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+
             }
         }
     }

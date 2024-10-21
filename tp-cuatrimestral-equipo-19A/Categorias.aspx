@@ -1,4 +1,6 @@
-﻿<%@ Page Title="Categorías" Language="C#" AutoEventWireup="true" CodeBehind="Categorias.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Categorias" %>
+﻿<%@ Page Title="Categorías" Language="C#"  AutoEventWireup="true" CodeBehind="Categorias.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Categorias" %>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">

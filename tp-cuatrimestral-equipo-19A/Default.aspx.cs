@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Web.UI;
+using Dominio;
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -15,23 +17,32 @@ namespace tp_cuatrimestral_equipo_19A
                 string password = PasswordTextBox.Text;
 
 
-                bool isAuthenticated = AuthenticateUser(email, password);
-                if (isAuthenticated)
+                bool isError = AuthenticateUser(email, password);
+                if (isError)
                 {
-                    Response.Redirect("HomeAdminPage.aspx");
+                errorLabel.Text = "Usuario o contraseña incorrectos";
+                   
                 }
-                else
-                {
-                Response.Redirect("HomeVendedorPage.aspx");
 
-            }
+
+
         }
 
         private bool AuthenticateUser(string email, string password)
         {
-            
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            Usuario usuario = new Usuario();
+            usuario = usuarioNegocio.buscarUsuario(email);
+            if (usuario == null) return true;
+            if (usuario.password != password) return true;
 
-            return email == "test@prueba.com" && password == "password123";
+
+
+            if (usuario.rol_id == 1) Response.Redirect("HomeAdminPage.aspx");
+            else Response.Redirect("HomeVendedorPage.aspx");
+            return false;
+
+
         }
     }
 }

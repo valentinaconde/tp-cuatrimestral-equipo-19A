@@ -87,6 +87,15 @@ namespace tp_cuatrimestral_equipo_19A
         protected global::System.Web.UI.WebControls.RegularExpressionValidator PasswordValidator;
 
         /// <summary>
+        /// errorLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorLabel;
+
+        /// <summary>
         /// LoginButton control.
         /// </summary>
         /// <remarks>
