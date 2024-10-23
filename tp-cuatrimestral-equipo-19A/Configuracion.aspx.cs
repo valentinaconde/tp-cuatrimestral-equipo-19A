@@ -30,13 +30,12 @@ namespace tp_cuatrimestral_equipo_19A
                 nombre = txtNombre.Text,
                 apellido = txtApellido.Text,
                 email = txtEmail.Text,
-                password = txtEmail.Text, // La contraseña por defecto es el email
+                password = txtEmail.Text, 
                 rol_id = int.Parse(ddlRol.SelectedValue)
             };
 
             if (UsuarioId.HasValue)
             {
-                // Editar usuario existente
                 nuevoUsuario.id = UsuarioId.Value;
                 usuarioNegocio.modificar(nuevoUsuario.id, nuevoUsuario.nombre, nuevoUsuario.apellido, nuevoUsuario.email, nuevoUsuario.password, nuevoUsuario.rol_id);
                 lblMessage.Text = "Usuario modificado exitosamente.";
@@ -45,7 +44,6 @@ namespace tp_cuatrimestral_equipo_19A
             }
             else
             {
-                // Agregar nuevo usuario
                 usuarioNegocio.agregar(nuevoUsuario.nombre, nuevoUsuario.apellido, nuevoUsuario.email, nuevoUsuario.password, nuevoUsuario.rol_id);
                 lblMessage.Text = "Usuario agregado exitosamente.";
             }
@@ -61,8 +59,8 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (e.CommandName == "editar")
             {
-                Usuario usuario = usuarioNegocio.listar().Find(u => u.id == id);
-                if (usuario != null)
+                Usuario usuario = usuarioNegocio.buscarUsuarioPorId(id);
+                if (usuario.email != null)
                 {
                     txtNombre.Text = usuario.nombre;
                     txtApellido.Text = usuario.apellido;

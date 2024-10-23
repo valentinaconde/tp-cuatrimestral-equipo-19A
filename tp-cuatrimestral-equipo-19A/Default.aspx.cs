@@ -32,7 +32,7 @@ namespace tp_cuatrimestral_equipo_19A
         {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             Usuario usuario = new Usuario();
-            usuario = usuarioNegocio.buscarUsuario(email);
+            usuario = usuarioNegocio.buscarUsuarioPorEmail(email);
             if (usuario.email == null) return true;
             if (usuario.password != password) return true;
 

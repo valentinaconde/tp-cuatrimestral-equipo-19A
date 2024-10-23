@@ -110,7 +110,7 @@ namespace Negocio
             }
         }
 
-        public Usuario buscarUsuario(string email)
+        public Usuario buscarUsuarioPorEmail(string email)
         {
             Usuario usuario = new Usuario();
             AccesoDatos datos = new AccesoDatos();
@@ -119,6 +119,38 @@ namespace Negocio
             {
                 datos.setearConsulta("select id, nombre, apellido, email, password, rol_id from usuarios where email = @email");
                 datos.setearParametro("@email", email);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    usuario.id = (int)datos.Lector["id"];
+                    usuario.nombre = datos.Lector["nombre"].ToString();
+                    usuario.apellido = datos.Lector["apellido"].ToString();
+                    usuario.email = datos.Lector["email"].ToString();
+                    usuario.password = datos.Lector["password"].ToString();
+                    usuario.rol_id = (int)datos.Lector["rol_id"];
+                }
+
+                datos.cerrarConexion();
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+
+            }
+        }
+
+        public Usuario buscarUsuarioPorId(int id)
+        {
+            Usuario usuario = new Usuario();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id from usuarios where id = @id");
+                datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
                 if (datos.Lector.Read())
