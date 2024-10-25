@@ -48,7 +48,7 @@ namespace tp_cuatrimestral_equipo_19A
             cargarCategorias();
         }
 
-        protected void CategoriasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void categoriasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int id = Convert.ToInt32(e.CommandArgument);
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();

@@ -84,10 +84,6 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                // datos.setearParametro("@id", id);
-                //  datos.setearConsulta("UPDATE ARTICULOS SET IdMarca = NULL WHERE IdMarca = @id");
-                // datos.ejecutarAccion();
-
                 datos.setearConsulta("delete from marcas where id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
@@ -102,6 +98,32 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public Marca buscarMarcaPorId(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id, nombre from marcas where id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+
+                Marca aux = new Marca();
+
+                if (datos.Lector.Read())
+                {
+                    aux.id = (int)datos.Lector["id"];
+                    aux.nombre = datos.Lector["nombre"].ToString();
+                }
+
+                datos.cerrarConexion();
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
  

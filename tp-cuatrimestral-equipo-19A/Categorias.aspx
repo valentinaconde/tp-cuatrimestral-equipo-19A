@@ -7,6 +7,7 @@
             <div class="form-group col-4">
                 <label for="txtNombreCategoria">Nombre de la Categoría</label>
                 <asp:TextBox ID="txtNombreCategoria" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ID="rfvNombreCategoria" runat="server" ControlToValidate="txtNombreCategoria" ErrorMessage="El nombre de la categoría es requerido." CssClass="text-danger" Display="Dynamic" />
             </div>
         </div>
 
@@ -17,14 +18,14 @@
         </div>
     </div>
 
-    <asp:GridView ID="CategoriasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="CategoriasGridView_RowCommand">
+    <asp:GridView ID="CategoriasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="categoriasGridView_RowCommand">
         <Columns>
             <asp:BoundField DataField="id" HeaderText="ID" />
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning btn-sm" />
-                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');" />
+                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning btn-sm" CausesValidation="false" />
+                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');" CausesValidation="false" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
