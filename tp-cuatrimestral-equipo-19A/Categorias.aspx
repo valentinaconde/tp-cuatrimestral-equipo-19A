@@ -1,14 +1,32 @@
-﻿<%@ Page Title="Categorías" Language="C#" AutoEventWireup="true" CodeBehind="Categorias.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Categorias" MasterPageFile="~/Admin.master" %>
+﻿<%@ Page Title="Configuración de Categorías" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="ConfiguracionCategorias.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.ConfiguracionCategorias" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<body>
-        <div class="container">
-            <h1 class="mt-5">Listado de Categorías</h1>
-            <asp:GridView ID="CategoriasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False">
-                <Columns>
-                    <asp:BoundField DataField="id" HeaderText="ID" />
-                    <asp:BoundField DataField="nombre" HeaderText="Nombre" />
-                </Columns>
-            </asp:GridView>
+    <div class="mb-5">
+        <h2>Agregar Nueva Categoría</h2>
+        <div class="row">
+            <div class="form-group col-4">
+                <label for="txtNombreCategoria">Nombre de la Categoría</label>
+                <asp:TextBox ID="txtNombreCategoria" runat="server" CssClass="form-control" />
+            </div>
         </div>
-</body>
-    </asp:Content>
+
+        <div class="d-flex align-items-center gap-3">
+            <asp:Button ID="btnAgregarCategoria" runat="server" CssClass="btn btn-primary mt-3" Text="Agregar Categoría" OnClick="btnAgregarCategoria_Click" />
+            <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
+            <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
+        </div>
+    </div>
+
+    <asp:GridView ID="CategoriasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="CategoriasGridView_RowCommand">
+        <Columns>
+            <asp:BoundField DataField="id" HeaderText="ID" />
+            <asp:BoundField DataField="nombre" HeaderText="Nombre" />
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning btn-sm" />
+                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');" />
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
+</asp:Content>

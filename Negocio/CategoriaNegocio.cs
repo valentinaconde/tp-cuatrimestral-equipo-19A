@@ -57,13 +57,13 @@ namespace Negocio
             }
         }
 
-        public void modificar(int id, string desc)
+        public void modificar(int id, string nombre)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("update categorias set nombre = @nombre where id = @id");
-                datos.setearParametro("@nombre", desc);
+                datos.setearParametro("@nombre", nombre);
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
             }
@@ -84,9 +84,6 @@ namespace Negocio
             {
                 datos.setearParametro("@id", id);
 
-              //  datos.setearConsulta("UPDATE ARTICULOS SET IdCategoria = NULL WHERE IdCategoria = @id");
-                datos.ejecutarAccion();
-
                 datos.setearConsulta("delete from categorias where id = @id");
                 datos.ejecutarAccion();
 
@@ -98,6 +95,32 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public Categoria buscarCategoriaPorId(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id, nombre from categorias where id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+
+                Categoria aux = new Categoria();
+
+                if (datos.Lector.Read())
+                {
+                    aux.id = (int)datos.Lector["id"];
+                    aux.nombre = datos.Lector["nombre"].ToString();
+                }
+
+                datos.cerrarConexion();
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

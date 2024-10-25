@@ -7,10 +7,12 @@
             <div class="form-group col-4">
                 <label for="txtNombre">Nombre</label>
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombre" ErrorMessage="El nombre es requerido." CssClass="text-danger" Display="Static" />
             </div>
             <div class="form-group col-4">
                 <label for="txtApellido">Apellido</label>
                 <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ControlToValidate="txtApellido" ErrorMessage="El apellido es requerido." CssClass="text-danger" Display="Static" />
             </div>
         </div>
 
@@ -18,6 +20,7 @@
             <div class="form-group col-4">
                 <label for="txtEmail">Email</label>
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="El email es requerido." CssClass="text-danger" Display="Static" />
                 <label class="text-info">La contraseña por defecto es el email de la persona.</label>
             </div>
             <div class="form-group col-4">
@@ -26,6 +29,7 @@
                     <asp:ListItem Value="1">Admin</asp:ListItem>
                     <asp:ListItem Value="2">User</asp:ListItem>
                 </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvRol" runat="server" ControlToValidate="ddlRol" InitialValue="" ErrorMessage="El rol es requerido." CssClass="text-danger" Display="Static" />
             </div>
         </div>
 
