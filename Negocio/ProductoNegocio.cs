@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, stock_actual, porcentaje_ganancia, marca_id, categoria_id from productos");
+                datos.setearConsulta("select id, nombre, stock_actual, stock_minimo, porcentaje_ganancia, marca_id, categoria_id from productos");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -24,11 +24,11 @@ namespace Negocio
                     Producto aux = new Producto();
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
-                    aux.stock = (int)datos.Lector["stock_actual"];
+                    aux.stockactual = (int)datos.Lector["stock_actual"];
+                    aux.stockminimo = (int)datos.Lector["stock_minimo"];
                     aux.ganancia = Convert.ToSingle(datos.Lector["porcentaje_ganancia"]);
                     aux.idmarca = (int)datos.Lector["marca_id"];
                     aux.idcategoria = (int)datos.Lector["categoria_id"];
-
                     lista.Add(aux);
                 }
 

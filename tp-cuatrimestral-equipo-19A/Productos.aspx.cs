@@ -15,17 +15,30 @@ namespace tp_cuatrimestral_equipo_19A
         {
             if (!IsPostBack)
             {
-                CargarProductos();
+                cargarProductos();
             }
 
         }
-        private void CargarProductos()
+        protected void productosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            ProductoNegocio productonegocio = new ProductoNegocio();
-            List<Producto> listaProducto = productonegocio.listar();
 
-            ProductosGridView.DataSource = listaProducto;
-            ProductosGridView.DataBind();
+        }
+        private void cargarProductos()
+        {
+            /*
+            ProductoNegocio productonegocio = new ProductoNegocio();
+            ProductosGridView.DataSource = productonegocio.listar();
+            ProductosGridView.DataBind();*/
+        }
+
+        protected void ProductosGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
