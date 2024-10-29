@@ -31,7 +31,7 @@
     </div>
 
     <div class="d-flex align-items-center gap-3">
-        <asp:Button ID="btnAgregarCliente" runat="server" CssClass="btn btn-primary mb-5" Text="Agregar Cliente" OnClick="btnAgregarCliente_Click" />
+        <asp:Button ID="btnAgregarCliente" runat="server" CssClass="btn btn-primary mb-5" Text="Agregar Cliente" OnClick="btnAgregarCliente_Click" OnClientClick="return confirm('¿Estás seguro de que deseas agregar este cliente?');" />
         <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
         <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
     </div>

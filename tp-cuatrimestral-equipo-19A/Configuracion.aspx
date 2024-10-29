@@ -21,6 +21,7 @@
                 <label for="txtEmail">Email</label>
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="El email es requerido." CssClass="text-danger" Display="Static" />
+                <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Formato de email inválido." CssClass="text-danger" Display="Dynamic" ValidationExpression="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
                 <label class="text-info">La contraseña por defecto es el email de la persona.</label>
             </div>
             <div class="form-group col-4">

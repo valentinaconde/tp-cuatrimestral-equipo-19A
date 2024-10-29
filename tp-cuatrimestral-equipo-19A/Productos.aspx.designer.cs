@@ -51,6 +51,15 @@ namespace tp_cuatrimestral_equipo_19A
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStockProducto;
 
         /// <summary>
+        /// Control revStockActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revStockActual;
+
+        /// <summary>
         /// Control txtStockMinimo.
         /// </summary>
         /// <remarks>
@@ -69,6 +78,15 @@ namespace tp_cuatrimestral_equipo_19A
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStockMinimo;
 
         /// <summary>
+        /// Control revStockMinimo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revStockMinimo;
+
+        /// <summary>
         /// Control txtPorcentajeGanancia.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,15 @@ namespace tp_cuatrimestral_equipo_19A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPorcentajeGanancia;
+
+        /// <summary>
+        /// Control rvPorcentajeGanancia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvPorcentajeGanancia;
 
         /// <summary>
         /// Control txtMarcaId.

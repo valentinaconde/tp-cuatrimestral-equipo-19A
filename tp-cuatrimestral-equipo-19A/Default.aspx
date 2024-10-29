@@ -24,7 +24,7 @@
                 <div class="d-flex flex-column align-items-center mt-5">
                     <div class="w-25 mt-5">
                         <asp:Label ID="EmailLabel" runat="server" Text="Email:" AssociatedControlID="EmailTextBox" />
-                        <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-control" />
+                        <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-control" placeholder="example@example.com" />
                         <asp:RegularExpressionValidator ID="EmailValidator" runat="server"
                             ControlToValidate="EmailTextBox"
                             ErrorMessage="Por favor ingrese un email valido."
@@ -56,6 +56,9 @@
 
                     <asp:Label ID="errorLabel" runat="server" Text="" CssClass="text-danger"/>
                     <asp:Button ID="LoginButton" runat="server" Text="Iniciar sesion" CssClass="btn btn-primary mt-5" OnClick="LoginButton_Click" ValidationGroup="LoginGroup" />
+                    <asp:HyperLink ID="RecoverPassword" runat="server" NavigateUrl="~/RecuperarContraseña.aspx" CssClass="btn btn-link mt-3">
+                        Olvidaste tu contraseña?
+                    </asp:HyperLink>
                 </div>
 
             </main>

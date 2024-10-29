@@ -14,11 +14,13 @@
                 <label for="txtStockActual">StockActual</label>
                 <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator ID="rfvStockProducto" runat="server" ControlToValidate="txtStockActual" ErrorMessage="El stock del producto es obligatorio." CssClass="text-danger" Display="Static" />
+                <asp:RegularExpressionValidator ID="revStockActual" runat="server" ControlToValidate="txtStockActual" ErrorMessage="El stock actual debe ser un número entero positivo." CssClass="text-danger" Display="Dynamic"  ValidationExpression="^\d+$" />
             </div>
             <div class="form-group col-4">
                 <label for="txtStockMinimo">StockMinimo</label>
                 <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator ID="rfvStockMinimo" runat="server" ControlToValidate="txtStockMinimo" ErrorMessage="El stock minimo del producto es obligatorio." CssClass="text-danger" Display="Static" />
+                <asp:RegularExpressionValidator ID="revStockMinimo" runat="server" ControlToValidate="txtStockMinimo" ErrorMessage="El stock minimo debe ser un número entero positivo." CssClass="text-danger" Display="Dynamic"  ValidationExpression="^\d+$" />
             </div>
         </div>
         <div class="row">
@@ -26,6 +28,7 @@
                 <label for="txtPorcentajeGanancia">PorcentajeGanancia</label>
                 <asp:TextBox ID="txtPorcentajeGanancia" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator ID="rfvPorcentajeGanancia" runat="server" ControlToValidate="txtPorcentajeGanancia" ErrorMessage="El Porcentaje de ganacia del producto es obligatorio." CssClass="text-danger" Display="Static" />
+                <asp:RangeValidator ID="rvPorcentajeGanancia" runat="server"  ControlToValidate="txtPorcentajeGanancia" MinimumValue="0" MaximumValue="100" Type="Double" ErrorMessage="El porcentaje de ganancia debe estar entre 0 y 100." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="form-group col-4">
                 <label for="txtMarcaId">IDMarca</label>
