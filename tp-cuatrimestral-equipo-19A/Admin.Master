@@ -52,7 +52,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Marcas.aspx">Marcas</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Clientes.aspx">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Proveedores.aspx">Proveedores</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Compras</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Compras.aspx">Compras</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Ventas</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Facturas</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Reportes</a></li>
