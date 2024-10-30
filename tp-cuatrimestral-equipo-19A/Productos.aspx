@@ -57,7 +57,7 @@
                 <asp:BoundField DataField="nombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="stockactual" HeaderText="StockActual" />
                 <asp:BoundField DataField="stockminimo" HeaderText="StockMinimo" />
-                <asp:BoundField DataField="porcentaje_ganancia" HeaderText="Porcentaje de Ganancia" />
+                <asp:BoundField DataField="ganancia" HeaderText="Porcentaje de Ganancia" />
                 <asp:BoundField DataField="idmarca" HeaderText="Idmarca" />
                 <asp:BoundField DataField="idcategoria" HeaderText="Idcategoria" />
                 <asp:TemplateField>
