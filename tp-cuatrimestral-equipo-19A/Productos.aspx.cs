@@ -59,6 +59,7 @@ namespace tp_cuatrimestral_equipo_19A
         }
         protected void productosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             ProductoNegocio productonegocio = new ProductoNegocio();
 
@@ -96,6 +97,7 @@ namespace tp_cuatrimestral_equipo_19A
             ProductoNegocio productonegocio = new ProductoNegocio();
             ProductosGridView.DataSource = productonegocio.listar();
             ProductosGridView.DataBind();
+            UpdatePagerInfo();
         }
         private void limpiarFormulario()
         {
@@ -107,6 +109,26 @@ namespace tp_cuatrimestral_equipo_19A
             txtCategoriaId.Text = string.Empty;
             lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;
+        }
+
+        protected void ProductosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            ProductosGridView.PageIndex = e.NewPageIndex;
+            cargarProductos();
+            UpdatePagerInfo();
+        }
+
+        private void UpdatePagerInfo()
+        {
+            GridViewRow pagerRow = ProductosGridView.BottomPagerRow;
+            if (pagerRow != null)
+            {
+                Label lblPageInfo = (Label)pagerRow.FindControl("lblPageInfo");
+                if (lblPageInfo != null)
+                {
+                    lblPageInfo.Text = $"Página {ProductosGridView.PageIndex + 1} de {ProductosGridView.PageCount}";
+                }
+            }
         }
     }
 }
