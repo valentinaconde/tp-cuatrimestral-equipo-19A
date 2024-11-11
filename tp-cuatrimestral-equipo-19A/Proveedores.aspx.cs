@@ -51,8 +51,9 @@ namespace tp_cuatrimestral_equipo_19A
             cargarProveedores();
         }
 
-        protected void proveedoresGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void ProveedoresGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
 
@@ -87,6 +88,7 @@ namespace tp_cuatrimestral_equipo_19A
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
             ProveedoresGridView.DataSource = proveedorNegocio.listar();
             ProveedoresGridView.DataBind();
+            UpdatePagerInfo();
         }
 
         private void limpiarFormulario()
@@ -97,6 +99,26 @@ namespace tp_cuatrimestral_equipo_19A
             txtEmailProveedor.Text = string.Empty;
             lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;
+        }
+
+        protected void ProveedoresGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            ProveedoresGridView.PageIndex = e.NewPageIndex;
+            cargarProveedores();
+            UpdatePagerInfo();
+        }
+
+        private void UpdatePagerInfo()
+        {
+            GridViewRow pagerRow = ProveedoresGridView.BottomPagerRow;
+            if (pagerRow != null)
+            {
+                Label lblPageInfo = (Label)pagerRow.FindControl("lblPageInfo");
+                if (lblPageInfo != null)
+                {
+                    lblPageInfo.Text = $"Página {ProveedoresGridView.PageIndex + 1} de {ProveedoresGridView.PageCount}";
+                }
+            }
         }
     }
 }

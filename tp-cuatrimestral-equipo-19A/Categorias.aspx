@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <asp:GridView ID="CategoriasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="categoriasGridView_RowCommand" AllowPaging="true" PageSize="5" OnPageIndexChanging="categoriasGridView_PageIndexChanging">
+    <asp:GridView ID="CategoriasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="categoriasGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="categoriasGridView_PageIndexChanging">
         <Columns>
             <asp:BoundField DataField="id" HeaderText="ID" />
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
