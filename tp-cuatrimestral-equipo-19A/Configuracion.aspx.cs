@@ -54,6 +54,7 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void UsuariosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
 
@@ -83,6 +84,7 @@ namespace tp_cuatrimestral_equipo_19A
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             UsuariosGridView.DataSource = usuarioNegocio.listar();
             UsuariosGridView.DataBind();
+            UpdatePagerInfo();
         }
 
         private void limpiarFormulario()
@@ -93,6 +95,26 @@ namespace tp_cuatrimestral_equipo_19A
             ddlRol.SelectedIndex = 0;
             lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;
+        }
+
+        protected void UsuariosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            UsuariosGridView.PageIndex = e.NewPageIndex;
+            cargarUsuarios();
+            UpdatePagerInfo();
+        }
+
+        private void UpdatePagerInfo()
+        {
+            GridViewRow pagerRow = UsuariosGridView.BottomPagerRow;
+            if (pagerRow != null)
+            {
+                Label lblPageInfo = (Label)pagerRow.FindControl("lblPageInfo");
+                if (lblPageInfo != null)
+                {
+                    lblPageInfo.Text = $"Página {UsuariosGridView.PageIndex + 1} de {UsuariosGridView.PageCount}";
+                }
+            }
         }
     }
 }
