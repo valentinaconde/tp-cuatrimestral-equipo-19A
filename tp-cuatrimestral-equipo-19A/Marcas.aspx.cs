@@ -50,6 +50,7 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void marcasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             MarcaNegocio marcaNegocio = new MarcaNegocio();
 
@@ -72,11 +73,19 @@ namespace tp_cuatrimestral_equipo_19A
             }
         }
 
+        protected void MarcasGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            MarcasGridView.PageIndex = e.NewPageIndex;
+            cargarMarcas();
+            UpdatePagerInfo();
+        }
+
         private void cargarMarcas()
         {
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             MarcasGridView.DataSource = marcaNegocio.listar();
             MarcasGridView.DataBind();
+            UpdatePagerInfo();
         }
 
         private void limpiarFormulario()
@@ -84,6 +93,19 @@ namespace tp_cuatrimestral_equipo_19A
             txtNombreMarca.Text = string.Empty;
             lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;
+        }
+
+        private void UpdatePagerInfo()
+        {
+            GridViewRow pagerRow = MarcasGridView.BottomPagerRow;
+            if (pagerRow != null)
+            {
+                Label lblPageInfo = (Label)pagerRow.FindControl("lblPageInfo");
+                if (lblPageInfo != null)
+                {
+                    lblPageInfo.Text = $"Página {MarcasGridView.PageIndex + 1} de {MarcasGridView.PageCount}";
+                }
+            }
         }
     }
 }

@@ -31,9 +31,6 @@ namespace tp_cuatrimestral_equipo_19A
                 direccion = txtDireccionCliente.Text,
                 telefono = txtTelefonoCliente.Text,
                 email = txtEmailCliente.Text
-
-
-
             };
 
             if (ClienteId.HasValue)
@@ -56,6 +53,7 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void clientesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             ClienteNegocio clienteNegocio = new ClienteNegocio();
 
@@ -68,7 +66,6 @@ namespace tp_cuatrimestral_equipo_19A
                     txtDireccionCliente.Text = cliente.direccion;
                     txtTelefonoCliente.Text = cliente.telefono;
                     txtEmailCliente.Text = cliente.email;
-
 
                     ClienteId = cliente.id;
                     btnAgregarCliente.Text = "Modificar Cliente";
@@ -86,11 +83,18 @@ namespace tp_cuatrimestral_equipo_19A
             }
         }
 
+        protected void ClientesGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            ClientesGridView.PageIndex = e.NewPageIndex;
+            cargarClientes();
+        }
+
         private void cargarClientes()
         {
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             ClientesGridView.DataSource = clienteNegocio.listar();
             ClientesGridView.DataBind();
+            UpdatePagerInfo();
         }
 
         private void limpiarFormulario()
@@ -101,8 +105,19 @@ namespace tp_cuatrimestral_equipo_19A
             txtDireccionCliente.Text = string.Empty;
             txtTelefonoCliente.Text = string.Empty;
             txtEmailCliente.Text = string.Empty;
+        }
 
-
+        private void UpdatePagerInfo()
+        {
+            GridViewRow pagerRow = ClientesGridView.BottomPagerRow;
+            if (pagerRow != null)
+            {
+                Label lblPageInfo = (Label)pagerRow.FindControl("lblPageInfo");
+                if (lblPageInfo != null)
+                {
+                    lblPageInfo.Text = $"Página {ClientesGridView.PageIndex + 1} de {ClientesGridView.PageCount}";
+                }
+            }
         }
     }
 }
