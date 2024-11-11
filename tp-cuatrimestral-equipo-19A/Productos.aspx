@@ -17,10 +17,10 @@
                 <asp:RegularExpressionValidator ID="revStockActual" runat="server" ControlToValidate="txtStockActual" ErrorMessage="El stock actual debe ser un número entero positivo." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+$" />
             </div>
             <div class="form-group col-4">
-                <label for="txtStockMinimo">StockMinimo</label>
-                <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="form-control" />
-                <asp:RequiredFieldValidator ID="rfvStockMinimo" runat="server" ControlToValidate="txtStockMinimo" ErrorMessage="El stock minimo del producto es obligatorio." CssClass="text-danger" Display="Static" />
-                <asp:RegularExpressionValidator ID="revStockMinimo" runat="server" ControlToValidate="txtStockMinimo" ErrorMessage="El stock minimo debe ser un número entero positivo." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+$" />
+                <label for="txtPrecioUnitario">Precio Unitario</label>
+                <asp:TextBox ID="txtPrecioUnitario" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ID="rfvPrecioUnitario" runat="server" ControlToValidate="txtPrecioUnitario" ErrorMessage="El precio unitario del producto es obligatorio." CssClass="text-danger" Display="Static" />
+                <asp:RegularExpressionValidator ID="revPrecioUnitario" runat="server" ControlToValidate="txtPrecioUnitario" ErrorMessage="El precio unitario debe ser un número entero positivo." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+$" />
             </div>
         </div>
         <div class="row">
@@ -56,7 +56,7 @@
             <asp:BoundField DataField="id" HeaderText="ID" />
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
             <asp:BoundField DataField="stockactual" HeaderText="StockActual" />
-            <asp:BoundField DataField="stockminimo" HeaderText="StockMinimo" />
+            <asp:BoundField DataField="precio_unitario" HeaderText="Precio Unitario" />
             <asp:BoundField DataField="ganancia" HeaderText="Porcentaje de Ganancia" />
             <asp:BoundField DataField="idmarca" HeaderText="Idmarca" />
             <asp:BoundField DataField="idcategoria" HeaderText="Idcategoria" />

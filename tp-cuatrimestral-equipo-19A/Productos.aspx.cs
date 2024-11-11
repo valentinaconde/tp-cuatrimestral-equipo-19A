@@ -31,7 +31,7 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 nombre = txtNombreProducto.Text,
                 stockactual = int.Parse(txtStockActual.Text),
-                stockminimo = int.Parse(txtStockMinimo.Text),
+                precio_unitario = int.Parse(txtPrecioUnitario.Text),
                 ganancia = float.Parse(txtPorcentajeGanancia.Text),
                 idmarca = int.Parse(txtMarcaId.Text),
                 idcategoria = int.Parse(txtCategoriaId.Text)
@@ -70,7 +70,7 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     txtNombreProducto.Text = producto.nombre;
                     txtStockActual.Text = producto.stockactual.ToString();
-                    txtStockMinimo.Text = producto.stockminimo.ToString();
+                    txtPrecioUnitario.Text = producto.precio_unitario.ToString();
                     txtPorcentajeGanancia.Text = producto.ganancia.ToString();
                     txtMarcaId.Text = producto.idmarca.ToString();
                     txtCategoriaId.Text = producto.idcategoria.ToString();
@@ -103,7 +103,7 @@ namespace tp_cuatrimestral_equipo_19A
         {
             txtNombreProducto.Text = string.Empty;
             txtStockActual.Text = string.Empty;
-            txtStockMinimo.Text = string.Empty;
+            txtPrecioUnitario.Text = string.Empty;
             txtPorcentajeGanancia.Text = string.Empty;
             txtMarcaId.Text = string.Empty;
             txtCategoriaId.Text = string.Empty;

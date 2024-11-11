@@ -60,31 +60,31 @@ namespace tp_cuatrimestral_equipo_19A
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revStockActual;
 
         /// <summary>
-        /// txtStockMinimo control.
+        /// txtPrecioUnitario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStockMinimo;
+        protected global::System.Web.UI.WebControls.TextBox txtPrecioUnitario;
 
         /// <summary>
-        /// rfvStockMinimo control.
+        /// rfvPrecioUnitario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStockMinimo;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrecioUnitario;
 
         /// <summary>
-        /// revStockMinimo control.
+        /// revPrecioUnitario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revStockMinimo;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revPrecioUnitario;
 
         /// <summary>
         /// txtPorcentajeGanancia control.

@@ -11,7 +11,7 @@ namespace Dominio
         public int id { get; set; }
         public string nombre { get; set; }
         public int stockactual { get; set; }
-        public int stockminimo { get; set; }
+        public int precio_unitario { get; set; }
         public float ganancia { get; set; }
         public int idmarca { get; set; }
         public int idcategoria { get; set; }

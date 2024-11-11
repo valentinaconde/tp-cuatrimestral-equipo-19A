@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dominio;
 
 namespace Negocio
@@ -44,44 +41,66 @@ namespace Negocio
             }
         }
 
-        public void agregar(DateTime fecha, float total, int proveedorID, int CompraId, List<DetalleCompra> detalles)
+        public void agregar(DateTime fecha, float total, int proveedorID, List<DetalleCompra> detalles)
         {
             AccesoDatos datos = new AccesoDatos();
-            
-                    try
-                    {
-                        
-                        datos.setearConsulta("INSERT INTO compras (fecha, total, proveedor_id) VALUES (@Fecha, @Total, @ProveedorId); SELECT CAST(SCOPE_IDENTITY() AS int);");
-                        datos.setearParametro("@Fecha", fecha);
-                        datos.setearParametro("@Total", total);
-                        datos.setearParametro("@ProveedorId", proveedorID);
+            try
+            {
+                datos.setearConsulta("INSERT INTO compras (fecha, total, proveedor_id) VALUES (@Fecha, @Total, @ProveedorId); SELECT CAST(SCOPE_IDENTITY() AS int);");
+                datos.setearParametro("@Fecha", fecha);
+                datos.setearParametro("@Total", total);
+                datos.setearParametro("@ProveedorId", proveedorID);
 
-                        datos.ejecutarAccion();
+                  datos.abrirConexion();
+                datos.Comando.Connection = datos.Conexion;
+                int idCompra = Convert.ToInt32(datos.Comando.ExecuteScalar());
+                datos.cerrarConexion();
 
-                        // detalles de la compra
-                        foreach (var detalle in detalles)
-                        {
-                            datos.setearConsulta("INSERT INTO detalle_compras (cantidad, precio_unitario, compra_id, producto_id) VALUES (@Cantidad, @PrecioUnitario, @CompraId, @ProductoId)");
-                            datos.setearParametro("@Cantidad", detalle.Cantidad);
-                            datos.setearParametro("@PrecioUnitario", detalle.PrecioUnitario);
-                            datos.setearParametro("@CompraId", CompraId);
-                            datos.setearParametro("@ProductoId", detalle.ProductoId);
+                foreach (var detalle in detalles)
+                {
+                    datos.setearConsulta("INSERT INTO detalle_compras (cantidad, precio_unitario, compra_id, producto_id) VALUES (@Cantidad, @PrecioUnitario, @CompraId, @ProductoId)");
+                    datos.setearParametro("@Cantidad", detalle.Cantidad);
+                    datos.setearParametro("@PrecioUnitario", detalle.PrecioUnitario);
+                    datos.setearParametro("@CompraId", idCompra);
+                    datos.setearParametro("@ProductoId", detalle.ProductoId);
 
-                            datos.ejecutarAccion();
-                        }
-
-        
-                    }
-                    catch (Exception ex)
-                    {
-                        
-                        throw ex;
-                    }
-                    finally
-                    {
-                        datos.cerrarConexion();
-                    }
+                    datos.ejecutarAccion();
+                    // Actualizar stock y precio de compra del producto
+                    //actualizarStockYPrecio(detalle.ProductoId, detalle.Cantidad, detalle.PrecioUnitario);
+                }
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
+
+        //private void actualizarStockYPrecio(int productoId, int cantidad, float precioUnitario)
+        //{
+        //    AccesoDatos datos = new AccesoDatos();
+        //    try
+        //    {
+        //        datos.setearConsulta("UPDATE productos SET stock_actual = stock_actual + @Cantidad, precio_compra = @PrecioUnitario WHERE id = @ProductoId");
+        //        datos.setearParametro("@Cantidad", cantidad);
+        //        datos.setearParametro("@PrecioUnitario", precioUnitario);
+        //        datos.setearParametro("@ProductoId", productoId);
+
+        //        datos.ejecutarAccion();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        datos.cerrarConexion();
+        //    }
+        //}
 
         public void modificar(int id, DateTime fecha, float total, int proveedorID)
         {
@@ -130,5 +149,3 @@ namespace Negocio
         }
     }
 }
-
-

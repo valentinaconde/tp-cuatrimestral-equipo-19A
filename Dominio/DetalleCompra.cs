@@ -15,5 +15,6 @@ namespace Dominio
         public int CompraId { get; set; }
         public int ProductoId { get; set; }
 
+
     }
 }
