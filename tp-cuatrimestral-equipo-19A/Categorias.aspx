@@ -12,7 +12,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-3">
-            <asp:Button ID="btnAgregarCategoria" runat="server" CssClass="btn btn-primary mt-3" Text="Agregar Categoría" OnClick="btnAgregarCategoria_Click" OnClientClick="return confirm('¿Estás seguro de que deseas agregar esta categoría?');"/>
+            <asp:Button ID="btnAgregarCategoria" runat="server" CssClass="btn btn-primary mt-3" Text="Agregar Categoría" OnClick="btnAgregarCategoria_Click" OnClientClick="return confirm('¿Estás seguro de que deseas agregar esta categoría?');" />
             <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
             <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
         </div>
@@ -24,8 +24,13 @@
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning btn-sm" CausesValidation="false" />
-                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');" CausesValidation="false" />
+                    <asp:LinkButton ID="LinkButton1" runat="server" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm" CausesValidation="false">
+                        <span class="material-symbols-outlined text-warning ">edit</span>
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="btnEliminar" runat="server" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm"
+                        OnClientClick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');" CausesValidation="false">
+                        <span class="material-symbols-outlined text-danger">delete</span>
+                    </asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

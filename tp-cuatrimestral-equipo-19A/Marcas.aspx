@@ -24,8 +24,13 @@
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button ID="btnEditar" runat="server" Text="Editar" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-warning btn-sm" CausesValidation="false" />
-                    <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Estás seguro de que deseas eliminar esta marca?');" CausesValidation="false" />
+                    <asp:LinkButton ID="LinkButton1" runat="server" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm" CausesValidation="false">
+                            <span class="material-symbols-outlined text-warning ">edit</span>
+                       </asp:LinkButton>
+                    <asp:LinkButton ID="btnEliminar" runat="server" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm"
+                        OnClientClick="return confirm('¿Estás seguro de que deseas eliminar esta marca?');" CausesValidation="false">
+                         <span class="material-symbols-outlined text-danger">delete</span>
+                    </asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
