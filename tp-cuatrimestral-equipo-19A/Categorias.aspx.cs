@@ -50,6 +50,7 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void categoriasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
@@ -68,6 +69,7 @@ namespace tp_cuatrimestral_equipo_19A
                 categoriaNegocio.eliminar(id);
                 lblMessage.Text = "Categoría eliminada exitosamente.";
                 cargarCategorias();
+
             }
         }
 
@@ -76,6 +78,7 @@ namespace tp_cuatrimestral_equipo_19A
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             CategoriasGridView.DataSource = categoriaNegocio.listar();
             CategoriasGridView.DataBind();
+            UpdatePagerInfo();
         }
 
         private void limpiarFormulario()
@@ -83,6 +86,26 @@ namespace tp_cuatrimestral_equipo_19A
             txtNombreCategoria.Text = string.Empty;
             lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;
+        }
+
+        protected void categoriasGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            CategoriasGridView.PageIndex = e.NewPageIndex;
+            cargarCategorias();
+            UpdatePagerInfo();
+        }
+
+        private void UpdatePagerInfo()
+        {
+            GridViewRow pagerRow = CategoriasGridView.BottomPagerRow;
+            if (pagerRow != null)
+            {
+                Label lblPageInfo = (Label)pagerRow.FindControl("lblPageInfo");
+                if (lblPageInfo != null)
+                {
+                    lblPageInfo.Text = $"Página {CategoriasGridView.PageIndex + 1} de {CategoriasGridView.PageCount}";
+                }
+            }
         }
     }
 }
