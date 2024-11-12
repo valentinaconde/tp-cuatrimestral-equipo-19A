@@ -55,6 +55,12 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
+
+            if(txtProducto.Text == string.Empty || txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || txtFecha.Text == string.Empty)
+            {
+                txtErrorCompras.Text = "Debe completar todos los campos.";
+                return;
+            }
             DataRow dr = dtProductos.NewRow();
             dr["Producto"] = txtProducto.Text;
             dr["Cantidad"] = txtCantidad.Text;
@@ -69,6 +75,7 @@ namespace tp_cuatrimestral_equipo_19A
             txtProducto.Text = string.Empty;
             txtCantidad.Text = string.Empty;
             txtPrecio.Text = string.Empty;
+            txtErrorCompras.Text = "";
         }
 
         protected void btnRegistrarCompra_Click(object sender, EventArgs e)
@@ -100,7 +107,6 @@ namespace tp_cuatrimestral_equipo_19A
                     producto.idmarca = int.Parse(ddlMarca.SelectedValue);
 
                     producto = productoNegocio.buscarProductoPorNombreYMarca(producto.nombre, producto.idmarca);
-                    txtErrorCompras.Text = producto.id.ToString();
                     if (producto.id > 0)
                     {
                         producto.stockactual += int.Parse(row["Cantidad"].ToString());
@@ -133,12 +139,20 @@ namespace tp_cuatrimestral_equipo_19A
 
                 compraNegocio.agregar(fecha, total, proveedorID, detalles);
 
+
+                dtProductos.Clear();
+                ViewState["dtProductos"] = dtProductos;
+
+                gvProductos.DataSource = dtProductos;
+                gvProductos.DataBind();
+
                 //txtErrorCompras.Text = "Agregado con exito";
             }
             catch (Exception ex)
             {
                 txtErrorCompras.Text = "Error al registrar la compra" + ex;
             }
+            
         }
 
         private int obtenerProductoId(string nombreProducto)

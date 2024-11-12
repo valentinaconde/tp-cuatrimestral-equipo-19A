@@ -37,7 +37,7 @@ namespace tp_cuatrimestral_equipo_19A
             if (usuario.password != password) return true;
 
 
-
+            Session["UsuarioActual"] = usuario;
             if (usuario.rol_id == 1) Response.Redirect("HomeAdminPage.aspx");
             else Response.Redirect("HomeVendedorPage.aspx");
             return false;

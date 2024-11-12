@@ -27,6 +27,11 @@
             }
             input.value = formattedValue;
         }
+
+        function validateDateFormat(sender, args) {
+            var datePattern = /^(0[1-9]|1[0-9]|2[0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+            args.IsValid = datePattern.test(args.Value);
+        }
     </script>
     <div class="container mt-4">
         <h2>Registrar Nueva Compra</h2>
@@ -42,25 +47,23 @@
             <div class="form-group">
                 <label for="txtFecha">Fecha</label>
                 <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" Text='<%# DateTime.Now.ToString("dd/MM/yyyy") %>' onkeyup="formatDateString(this)"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="La fecha es obligatoria." CssClass="text-danger" Display="Dynamic" />
+                <asp:CustomValidator ID="cvFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="Formato de fecha inválido." CssClass="text-danger" Display="Dynamic" ClientValidationFunction="validateDateFormat" />
+
             </div>
         </div>
         <div class="d-flex gap-2">
             <div class="form-group">
                 <label for="txtProducto">Producto</label>
                 <asp:TextBox ID="txtProducto" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvProducto" runat="server" ControlToValidate="txtProducto" ErrorMessage="El campo es obligatorio." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="form-group">
                 <label for="txtCantidad">Cantidad</label>
                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="El campo es obligatorio." CssClass="text-danger" Display="Dynamic" />
                 <asp:RegularExpressionValidator ID="revCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="Ingrese una cantidad válida." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+$" />
             </div>
             <div class="form-group">
                 <label for="txtPrecio">Precio</label>
                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvPrecio" runat="server" ControlToValidate="txtPrecio" ErrorMessage="El campo es obligatorio." CssClass="text-danger" Display="Dynamic" />
                 <asp:RegularExpressionValidator ID="revPrecio" runat="server" ControlToValidate="txtPrecio" ErrorMessage="Ingrese un precio válido." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+(\.\d{1,2})?$" />
             </div>
         </div>
@@ -70,14 +73,12 @@
                 <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control">
                     <asp:ListItem Text="" Value="" />
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlCategoria" InitialValue="" ErrorMessage="Seleccione una categoria." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="form-group d-flex flex-column col-6">
                 <label for="ddlMarca">Marca</label>
                 <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-control">
                     <asp:ListItem Text="" Value="" />
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlMarca" InitialValue="" ErrorMessage="Seleccione una categoria." CssClass="text-danger" Display="Dynamic" />
             </div>
         </div>
         <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-secondary mt-3" Text="Agregar Producto" OnClick="btnAgregarProducto_Click" />
@@ -88,8 +89,10 @@
                 <asp:BoundField DataField="Precio" HeaderText="Precio" />
             </Columns>
         </asp:GridView>
-        <asp:Button ID="btnRegistrarCompra" runat="server" CssClass="btn btn-primary mt-3" Text="Registrar Compra" OnClick="btnRegistrarCompra_Click" />
-    </div>
-        <asp:TextBox ID="txtErrorCompras" runat="server" CssClass="form-control" />
+        <div class="d-flex align-items-center gap-2">
+            <asp:Button ID="btnRegistrarCompra" runat="server" CssClass="btn btn-primary mt-3" Text="Registrar Compra" OnClick="btnRegistrarCompra_Click" />
+            <asp:TextBox ID="txtErrorCompras" runat="server" CssClass="w-100 border-0 text-danger mt-2" />
+        </div>
 
+    </div>
 </asp:Content>

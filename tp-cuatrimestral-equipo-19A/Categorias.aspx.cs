@@ -24,6 +24,10 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            {
+
+           
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             Categoria nuevaCategoria = new Categoria
             {
@@ -46,6 +50,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarCategorias();
+            }
         }
 
         protected void categoriasGridView_RowCommand(object sender, GridViewCommandEventArgs e)

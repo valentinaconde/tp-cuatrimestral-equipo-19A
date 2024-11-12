@@ -24,6 +24,9 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void btnAgregarMarca_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            {
+
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             Marca nuevaMarca = new Marca
             {
@@ -46,6 +49,8 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarMarcas();
+
+            }
         }
 
         protected void marcasGridView_RowCommand(object sender, GridViewCommandEventArgs e)

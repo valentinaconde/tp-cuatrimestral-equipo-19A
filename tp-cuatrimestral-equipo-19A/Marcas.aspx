@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="mb-5">
-        <h2>Agregar Nueva Marca</h2>
+        <h2 class="fst-italic fw-medium">Administración de marcas</h2>
         <div class="row">
             <div class="form-group col-4">
                 <label for="txtNombreMarca">Nombre de la Marca</label>
@@ -12,18 +12,19 @@
         </div>
 
         <div class="d-flex align-items-center gap-3">
-            <asp:Button ID="btnAgregarMarca" runat="server" CssClass="btn btn-primary mt-3" Text="Agregar Marca" OnClick="btnAgregarMarca_Click" />
+            <asp:Button ID="btnAgregarMarca" runat="server" CssClass="btn btn-secondary mt-3" Text="Agregar Marca" OnClick="btnAgregarMarca_Click" />
             <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
             <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
         </div>
     </div>
 
-    <asp:GridView ID="MarcasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" AllowPaging="true" PageSize="10" OnPageIndexChanging="MarcasGridView_PageIndexChanging" OnRowCommand="marcasGridView_RowCommand">
+    <h4 class="fst-italic fw-medium">Listado</h4>
+    <asp:GridView ID="MarcasGridView" runat="server" CssClass="table table-striped table-width" AutoGenerateColumns="False" AllowPaging="true" PageSize="10" OnPageIndexChanging="MarcasGridView_PageIndexChanging" OnRowCommand="marcasGridView_RowCommand">
         <Columns>
             <asp:BoundField DataField="id" HeaderText="ID" />
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
-            <asp:TemplateField>
-                <ItemTemplate>
+            <asp:TemplateField  HeaderText="Acciones">
+                <ItemTemplate >
                     <asp:LinkButton ID="LinkButton1" runat="server" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm" CausesValidation="false">
                         <span class="material-symbols-outlined text-warning">edit</span>
                     </asp:LinkButton>

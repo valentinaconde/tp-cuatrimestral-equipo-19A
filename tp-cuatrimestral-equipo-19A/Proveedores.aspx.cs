@@ -24,6 +24,9 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void btnAgregarProveedor_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            {
+
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
             Proveedor nuevoProveedor = new Proveedor
             {
@@ -49,10 +52,14 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarProveedores();
+
+            }
         }
 
         protected void ProveedoresGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            lblMessage.Text = string.Empty;
+            lblMessage2.Text = string.Empty;
             if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
@@ -97,8 +104,6 @@ namespace tp_cuatrimestral_equipo_19A
             txtDireccionProveedor.Text = string.Empty;
             txtTelefonoProveedor.Text = string.Empty;
             txtEmailProveedor.Text = string.Empty;
-            lblMessage.Text = string.Empty;
-            lblMessage2.Text = string.Empty;
         }
 
         protected void ProveedoresGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)

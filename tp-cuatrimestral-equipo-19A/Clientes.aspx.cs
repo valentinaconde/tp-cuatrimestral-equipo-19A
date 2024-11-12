@@ -24,6 +24,10 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void btnAgregarCliente_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            {
+
+            
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             Cliente nuevoCliente = new Cliente
             {
@@ -49,10 +53,15 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarClientes();
+
+            }
         }
 
         protected void clientesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+
+            lblMessage2.Text = "";
+            lblMessage.Text = "";
             if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             ClienteNegocio clienteNegocio = new ClienteNegocio();
@@ -100,7 +109,6 @@ namespace tp_cuatrimestral_equipo_19A
         private void limpiarFormulario()
         {
             txtNombreCliente.Text = string.Empty;
-            lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;
             txtDireccionCliente.Text = string.Empty;
             txtTelefonoCliente.Text = string.Empty;

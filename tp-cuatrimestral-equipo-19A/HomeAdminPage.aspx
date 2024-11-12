@@ -2,9 +2,19 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main aria-labelledby="title">
-        <h1 id="title">ADMINISTRACIÓN</h1>
-        <!-- TO-DO: ELIMINAR TEXTO INFORMATIVO    -->
-        <p class="text-danger">ELEGIR PAGINA PRINCIPAL</p>
-
+        <h1 id="title" class="fst-italic fw-light">Bienvenido, <%# usuario.nombre%></h1>
+        <div class="d-flex mt-4">
+            <a href="Compras.aspx" class="btn btn-secondary mt-2 w-25 btn-lg mx-2 d-flex align-items-center gap-2 justify-content-center">
+                Generar nueva compra <span class="material-symbols-outlined">shopping_cart</span>
+            </a>
+            <a href="Ventas.aspx" class="btn btn-secondary mt-2 w-25 btn-lg mx-2 d-flex align-items-center gap-2 justify-content-center">
+                Generar nueva venta <span class="material-symbols-outlined">attach_money</span>
+            </a>
+            <a href="Reportes.aspx" class="btn btn-secondary mt-2 w-25 btn-lg mx-2 d-flex align-items-center gap-2 justify-content-center">
+                Reportes <span class="material-symbols-outlined">summarize</span>
+            </a>
+        </div>
     </main>
 </asp:Content>
+
+

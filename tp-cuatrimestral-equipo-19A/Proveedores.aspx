@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="mb-3">
-        <h2>Agregar Nuevo Proveedor</h2>
+        <h2 class="fst-italic fw-medium">Administración de proveedores</h2>
         <div class="row">
             <div class="form-group col-4">
                 <label for="txtNombreProveedor">Nombre</label>
@@ -30,12 +30,13 @@
         </div>
     </div>
 
-    <div class="d-flex align-items-center gap-3">
-        <asp:Button ID="btnAgregarProveedor" runat="server" CssClass="btn btn-primary mb-5" Text="Agregar Proveedor" OnClick="btnAgregarProveedor_Click" />
+    <div class="d-flex align-items-center gap-3 mb-5">
+        <asp:Button ID="btnAgregarProveedor" runat="server" CssClass="btn btn-secondary " Text="Agregar Proveedor" OnClick="btnAgregarProveedor_Click"/>
         <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
         <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
     </div>
 
+    <h4 class="fst-italic fw-medium">Listado</h4>
     <asp:GridView ID="ProveedoresGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="ProveedoresGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="ProveedoresGridView_PageIndexChanging">
         <Columns>
             <asp:BoundField DataField="id" HeaderText="ID" />

@@ -56,9 +56,11 @@ namespace Negocio
                 int idCompra = Convert.ToInt32(datos.Comando.ExecuteScalar());
                 datos.cerrarConexion();
 
+                datos.setearConsulta("INSERT INTO detalle_compras (cantidad, precio_unitario, compra_id, producto_id) VALUES (@Cantidad, @PrecioUnitario, @CompraId, @ProductoId)");
                 foreach (var detalle in detalles)
                 {
-                    datos.setearConsulta("INSERT INTO detalle_compras (cantidad, precio_unitario, compra_id, producto_id) VALUES (@Cantidad, @PrecioUnitario, @CompraId, @ProductoId)");
+
+                    datos.Comando.Parameters.Clear();
                     datos.setearParametro("@Cantidad", detalle.Cantidad);
                     datos.setearParametro("@PrecioUnitario", detalle.PrecioUnitario);
                     datos.setearParametro("@CompraId", idCompra);

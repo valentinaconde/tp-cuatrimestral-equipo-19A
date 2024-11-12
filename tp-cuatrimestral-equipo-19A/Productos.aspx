@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="mb-3">
-        <h2>Agregar Nuevo Producto</h2>
+        <h2>Administración de productos</h2>
         <div class="row">
             <div class="form-group col-4">
                 <label for="txtNombreProducto">Nombre</label>
