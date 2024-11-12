@@ -20,12 +20,18 @@ namespace tp_cuatrimestral_equipo_19A
         {
             if (!IsPostBack)
             {
+                cargarMarcas();
                 cargarProductos();
             }
 
         }
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
+            if (ddlMarca.SelectedValue == "0")
+            {
+                lblMessage.Text = "Por favor, seleccione una marca válida.";
+                return;
+            }
             ProductoNegocio productonegocio = new ProductoNegocio();
             Producto nuevoProducto = new Producto
             {
@@ -33,10 +39,8 @@ namespace tp_cuatrimestral_equipo_19A
                 stockactual = int.Parse(txtStockActual.Text),
                 precio_unitario = int.Parse(txtPrecioUnitario.Text),
                 ganancia = float.Parse(txtPorcentajeGanancia.Text),
-                idmarca = int.Parse(txtMarcaId.Text),
+                idmarca = int.Parse(ddlMarca.SelectedValue),
                 idcategoria = int.Parse(txtCategoriaId.Text)
-
-
             };
 
             if (ProductoId.HasValue)
@@ -72,7 +76,7 @@ namespace tp_cuatrimestral_equipo_19A
                     txtStockActual.Text = producto.stockactual.ToString();
                     txtPrecioUnitario.Text = producto.precio_unitario.ToString();
                     txtPorcentajeGanancia.Text = producto.ganancia.ToString();
-                    txtMarcaId.Text = producto.idmarca.ToString();
+                    ddlMarca.SelectedValue = producto.idmarca.ToString();
                     txtCategoriaId.Text = producto.idcategoria.ToString();
 
                     ProductoId = producto.id;
@@ -99,13 +103,24 @@ namespace tp_cuatrimestral_equipo_19A
             ProductosGridView.DataBind();
             UpdatePagerInfo();
         }
+        private void cargarMarcas()
+        {
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            List<Marca> marcas = marcaNegocio.listar();
+
+            ddlMarca.DataSource = marcas;
+            ddlMarca.DataTextField = "Nombre";
+            ddlMarca.DataValueField = "Id";
+            ddlMarca.DataBind();
+            ddlMarca.Items.Insert(0, new ListItem(string.Empty, "0"));
+        }
         private void limpiarFormulario()
         {
             txtNombreProducto.Text = string.Empty;
             txtStockActual.Text = string.Empty;
             txtPrecioUnitario.Text = string.Empty;
             txtPorcentajeGanancia.Text = string.Empty;
-            txtMarcaId.Text = string.Empty;
+            ddlMarca.SelectedValue = "0";
             txtCategoriaId.Text = string.Empty;
             lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;

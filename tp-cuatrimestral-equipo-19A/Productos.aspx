@@ -31,9 +31,10 @@
                 <asp:RangeValidator ID="rvPorcentajeGanancia" runat="server" ControlToValidate="txtPorcentajeGanancia" MinimumValue="0" MaximumValue="100" Type="Double" ErrorMessage="El porcentaje de ganancia debe estar entre 0 y 100." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="form-group col-4">
-                <label for="txtMarcaId">IDMarca</label>
-                <asp:TextBox ID="txtMarcaId" runat="server" CssClass="form-control" />
-                <asp:RequiredFieldValidator ID="rfvMarcaId" runat="server" ControlToValidate="txtMarcaId" ErrorMessage="El IDMarca del producto es obligatorio." CssClass="text-danger" Display="Static" />
+                <label for="ddlMarca">Marca</label>
+                <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-control">
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvMarca" runat="server" ControlToValidate="ddlMarca" InitialValue="" ErrorMessage="La marca es requerida." CssClass="text-danger" Display="Static" />
             </div>
             <div class="form-group col-4">
                 <label for="txtCategoriaId">IDCategoria</label>
@@ -58,7 +59,11 @@
             <asp:BoundField DataField="stockactual" HeaderText="StockActual" />
             <asp:BoundField DataField="precio_unitario" HeaderText="Precio Unitario" />
             <asp:BoundField DataField="ganancia" HeaderText="Porcentaje de Ganancia" />
-            <asp:BoundField DataField="idmarca" HeaderText="Idmarca" />
+            <asp:TemplateField HeaderText="Marca">
+                <ItemTemplate>
+                    <%# Eval("idmarca") %>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="idcategoria" HeaderText="Idcategoria" />
             <asp:TemplateField>
                 <ItemTemplate>
