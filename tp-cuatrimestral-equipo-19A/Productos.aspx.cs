@@ -21,6 +21,7 @@ namespace tp_cuatrimestral_equipo_19A
             if (!IsPostBack)
             {
                 cargarMarcas();
+                cargarCategorias();
                 cargarProductos();
             }
 
@@ -29,9 +30,16 @@ namespace tp_cuatrimestral_equipo_19A
         {
             if (ddlMarca.SelectedValue == "0")
             {
-                lblMessage.Text = "Por favor, seleccione una marca válida.";
+                lblMessage.Text = "Por favor, seleccione una marca.";
                 return;
             }
+
+            if (ddlCategoria.SelectedValue == "0")
+            {
+                lblMessage.Text = "Por favor, seleccione una categoria.";
+                return;
+            }
+
             ProductoNegocio productonegocio = new ProductoNegocio();
             Producto nuevoProducto = new Producto
             {
@@ -40,7 +48,7 @@ namespace tp_cuatrimestral_equipo_19A
                 precio_unitario = int.Parse(txtPrecioUnitario.Text),
                 ganancia = float.Parse(txtPorcentajeGanancia.Text),
                 idmarca = int.Parse(ddlMarca.SelectedValue),
-                idcategoria = int.Parse(txtCategoriaId.Text)
+                idcategoria = int.Parse(ddlCategoria.SelectedValue)
             };
 
             if (ProductoId.HasValue)
@@ -77,7 +85,7 @@ namespace tp_cuatrimestral_equipo_19A
                     txtPrecioUnitario.Text = producto.precio_unitario.ToString();
                     txtPorcentajeGanancia.Text = producto.ganancia.ToString();
                     ddlMarca.SelectedValue = producto.idmarca.ToString();
-                    txtCategoriaId.Text = producto.idcategoria.ToString();
+                    ddlCategoria.SelectedValue = producto.idcategoria.ToString();
 
                     ProductoId = producto.id;
                     btnAgregaProducto.Text = "Modificar Producto";
@@ -114,6 +122,17 @@ namespace tp_cuatrimestral_equipo_19A
             ddlMarca.DataBind();
             ddlMarca.Items.Insert(0, new ListItem(string.Empty, "0"));
         }
+
+        private void cargarCategorias()
+        {
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+
+            ddlCategoria.DataSource = categoriaNegocio.listar();
+            ddlCategoria.DataTextField = "Nombre";
+            ddlCategoria.DataValueField= "Id";
+            ddlCategoria.DataBind();
+            ddlCategoria.Items.Insert(0, new ListItem(string.Empty, "0"));
+        }
         private void limpiarFormulario()
         {
             txtNombreProducto.Text = string.Empty;
@@ -121,7 +140,7 @@ namespace tp_cuatrimestral_equipo_19A
             txtPrecioUnitario.Text = string.Empty;
             txtPorcentajeGanancia.Text = string.Empty;
             ddlMarca.SelectedValue = "0";
-            txtCategoriaId.Text = string.Empty;
+            ddlCategoria.SelectedValue = "0";
             lblMessage.Text = string.Empty;
             lblMessage2.Text = string.Empty;
         }

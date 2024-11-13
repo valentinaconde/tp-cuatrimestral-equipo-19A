@@ -37,9 +37,10 @@
                 <asp:RequiredFieldValidator ID="rfvMarca" runat="server" ControlToValidate="ddlMarca" InitialValue="" ErrorMessage="La marca es requerida." CssClass="text-danger" Display="Static" />
             </div>
             <div class="form-group col-4">
-                <label for="txtCategoriaId">IDCategoria</label>
-                <asp:TextBox ID="txtCategoriaId" runat="server" CssClass="form-control" />
-                <asp:RequiredFieldValidator ID="rfvCategoriaId" runat="server" ControlToValidate="txtCategoriaId" ErrorMessage="El IDCategoria del producto es obligatorio." CssClass="text-danger" Display="Static" />
+                <label for="ddlCategoria">Categoria</label>
+                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control">
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvCategoria" runat="server" ControlToValidate="ddlCategoria" InitialValue="" ErrorMessage="La categoria es requerida." CssClass="text-danger" Display="Static" />
             </div>
         </div>
     </div>
@@ -64,7 +65,11 @@
                     <%# Eval("idmarca") %>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="idcategoria" HeaderText="Idcategoria" />
+            <asp:TemplateField HeaderText="Categoria">
+                <ItemTemplate>
+                    <%# Eval("idcategoria") %>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:LinkButton ID="LinkButton1" runat="server" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm" CausesValidation="false">

@@ -132,22 +132,22 @@ namespace tp_cuatrimestral_equipo_19A
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMarca;
 
         /// <summary>
-        /// Control txtCategoriaId.
+        /// Control ddlCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCategoriaId;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
-        /// Control rfvCategoriaId.
+        /// Control rfvCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoriaId;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoria;
 
         /// <summary>
         /// Control btnAgregaProducto.
