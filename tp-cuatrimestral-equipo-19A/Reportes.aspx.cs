@@ -12,6 +12,23 @@ namespace tp_cuatrimestral_equipo_19A
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+        }
+        protected void btnGenerarReporte_Click(object sender, EventArgs e)
+        {
+            // Lógica para obtener los datos filtrados y llenar el GridView.
+
+
+        }
+
+        protected void btnExportarPDF_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnExportarExcel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
