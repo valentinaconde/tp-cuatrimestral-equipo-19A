@@ -27,10 +27,10 @@ namespace Negocio
 
                     aux.id = (int)datos.Lector["id"];
                     aux.fecha = (DateTime)datos.Lector["fecha"];
-                    aux.total = (float)datos.Lector["total"];
-                    aux.nroFactura = datos.Lector["numero_factura"].ToString();
-                    aux.clienteID = (int)datos.Lector["cliente_id"];
-                    aux.usuarioID = (int)datos.Lector["usuario_id"];
+                    aux.total = Convert.ToSingle(datos.Lector["total"]);
+                    aux.numero_factura = datos.Lector["numero_factura"].ToString();
+                    aux.cliente_id = (int)datos.Lector["cliente_id"];
+                    aux.usuario_id = (int)datos.Lector["usuario_id"];
 
                     lista.Add(aux);
                 }

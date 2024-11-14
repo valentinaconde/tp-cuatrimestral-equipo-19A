@@ -11,9 +11,9 @@ namespace Dominio
         public int id { get; set; }
         public DateTime fecha { get; set; }
         public float total { get; set; }
-        public string nroFactura { get; set; }
-        public int clienteID { get; set; }
-        public int usuarioID { get; set; }
+        public string numero_factura { get; set; }
+        public int cliente_id { get; set; }
+        public int usuario_id { get; set; }
         public List<DetalleVenta> Detalles {  get; set; }
     }
 }
