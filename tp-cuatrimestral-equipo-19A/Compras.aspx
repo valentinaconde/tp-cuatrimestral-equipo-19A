@@ -28,25 +28,34 @@
             input.value = formattedValue;
         }
 
+        
+
         function validateDateFormat(sender, args) {
             var datePattern = /^(0[1-9]|1[0-9]|2[0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
             args.IsValid = datePattern.test(args.Value);
         }
     </script>
+    <style>
+        .height{
+            height: 27px;
+            border: 1px solid #AAAAAA;
+            width: 200px;
+        }
+    </style>
     <div class="container mt-4">
         <h2>Registrar Nueva Compra</h2>
         <label class="text-warning">Para registrar una compra el proveedor debe estar registrado en sistema.</label>
         <div class="d-flex gap-2">
             <div class="form-group d-flex flex-column">
                 <label for="ddlProveedor">Proveedor</label>
-                <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="form-control">
+                <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="form-control height">
                     <asp:ListItem Text="" Value="" />
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvProveedor" runat="server" ControlToValidate="ddlProveedor" InitialValue="" ErrorMessage="Seleccione un proveedor." CssClass="text-danger" Display="Dynamic" />
             </div>
             <div class="form-group">
                 <label for="txtFecha">Fecha</label>
-                <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" Text='<%# DateTime.Now.ToString("dd/MM/yyyy") %>' onkeyup="formatDateString(this)"></asp:TextBox>
+                <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control height" Text='<%# DateTime.Now.ToString("dd/MM/yyyy") %>' onkeyup="formatDateString(this)"></asp:TextBox>
                 <asp:CustomValidator ID="cvFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="Formato de fecha inválido." CssClass="text-danger" Display="Dynamic" ClientValidationFunction="validateDateFormat" />
 
             </div>
@@ -54,29 +63,29 @@
         <div class="d-flex gap-2">
             <div class="form-group">
                 <label for="txtProducto">Producto</label>
-                <asp:TextBox ID="txtProducto" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtProducto" runat="server" CssClass="form-control height"></asp:TextBox>
             </div>
             <div class="form-group">
                 <label for="txtCantidad">Cantidad</label>
-                <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control height"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="revCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="Ingrese una cantidad válida." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+$" />
             </div>
             <div class="form-group">
-                <label for="txtPrecio">Precio</label>
-                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control"></asp:TextBox>
+                <label for="txtPrecio">Precio unitario</label>
+                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control height"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="revPrecio" runat="server" ControlToValidate="txtPrecio" ErrorMessage="Ingrese un precio válido." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+(\.\d{1,2})?$" />
             </div>
         </div>
-        <div class="row w-50">
-            <div class="form-group d-flex flex-column col-6">
+        <div class="d-flex justify-content-start gap-2">
+            <div class="form-group d-flex flex-column">
                 <label for="ddlCategoria">Categoria</label>
-                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control">
+                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control height">
                     <asp:ListItem Text="" Value="" />
                 </asp:DropDownList>
             </div>
-            <div class="form-group d-flex flex-column col-6">
+            <div class="form-group d-flex flex-column">
                 <label for="ddlMarca">Marca</label>
-                <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-control">
+                <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-control height">
                     <asp:ListItem Text="" Value="" />
                 </asp:DropDownList>
             </div>
@@ -86,7 +95,8 @@
             <Columns>
                 <asp:BoundField DataField="Producto" HeaderText="Producto" />
                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                <asp:BoundField DataField="Precio" HeaderText="Precio" />
+                <asp:BoundField DataField="Precio" HeaderText="Precio unitario" />
+                <asp:BoundField DataField="Categoria" HeaderText="Categoria" />
             </Columns>
         </asp:GridView>
         <div class="d-flex align-items-center gap-2">

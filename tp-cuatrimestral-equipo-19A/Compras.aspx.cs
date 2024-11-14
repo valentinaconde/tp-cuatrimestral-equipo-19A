@@ -21,6 +21,7 @@ namespace tp_cuatrimestral_equipo_19A
                 dtProductos.Columns.Add("Producto");
                 dtProductos.Columns.Add("Cantidad");
                 dtProductos.Columns.Add("Precio");
+                dtProductos.Columns.Add("Categoria");
                 ViewState["dtProductos"] = dtProductos;
             }
             else
@@ -65,6 +66,7 @@ namespace tp_cuatrimestral_equipo_19A
             dr["Producto"] = txtProducto.Text;
             dr["Cantidad"] = txtCantidad.Text;
             dr["Precio"] = txtPrecio.Text;
+            dr["Categoria"] = ddlCategoria.SelectedValue;
             dtProductos.Rows.Add(dr);
 
             ViewState["dtProductos"] = dtProductos;
