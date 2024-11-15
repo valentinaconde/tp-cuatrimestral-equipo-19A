@@ -37,33 +37,32 @@ namespace tp_cuatrimestral_equipo_19A
         {
             if (Page.IsValid)
             {
+                ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+                Proveedor nuevoProveedor = new Proveedor
+                {
+                    nombre = txtNombreProveedor.Text,
+                    direccion = txtDireccionProveedor.Text,
+                    telefono = txtTelefonoProveedor.Text,
+                    email = txtEmailProveedor.Text,
+                    cuit = txtCuitProveedor.Text // Nuevo campo
+                };
 
-            ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            Proveedor nuevoProveedor = new Proveedor
-            {
-                nombre = txtNombreProveedor.Text,
-                direccion = txtDireccionProveedor.Text,
-                telefono = txtTelefonoProveedor.Text,
-                email = txtEmailProveedor.Text
-            };
+                if (ProveedorId.HasValue)
+                {
+                    nuevoProveedor.id = ProveedorId.Value;
+                    proveedorNegocio.modificar(nuevoProveedor);
+                    lblMessage.Text = "Proveedor modificado exitosamente.";
+                    btnAgregarProveedor.Text = "Agregar Proveedor";
+                    ProveedorId = null;
+                }
+                else
+                {
+                    proveedorNegocio.agregar(nuevoProveedor);
+                    lblMessage.Text = "Proveedor agregado exitosamente.";
+                }
 
-            if (ProveedorId.HasValue)
-            {
-                nuevoProveedor.id = ProveedorId.Value;
-                proveedorNegocio.modificar(nuevoProveedor);
-                lblMessage.Text = "Proveedor modificado exitosamente.";
-                btnAgregarProveedor.Text = "Agregar Proveedor";
-                ProveedorId = null;
-            }
-            else
-            {
-                proveedorNegocio.agregar(nuevoProveedor);
-                lblMessage.Text = "Proveedor agregado exitosamente.";
-            }
-
-            limpiarFormulario();
-            cargarProveedores();
-
+                limpiarFormulario();
+                cargarProveedores();
             }
         }
 
@@ -84,6 +83,7 @@ namespace tp_cuatrimestral_equipo_19A
                     txtDireccionProveedor.Text = proveedor.direccion;
                     txtTelefonoProveedor.Text = proveedor.telefono;
                     txtEmailProveedor.Text = proveedor.email;
+                    txtCuitProveedor.Text = proveedor.cuit; // Nuevo campo
 
                     ProveedorId = proveedor.id;
                     btnAgregarProveedor.Text = "Modificar Proveedor";
@@ -93,6 +93,7 @@ namespace tp_cuatrimestral_equipo_19A
                     lblMessage2.Text = "Error al cargar el proveedor.";
                 }
             }
+
             else if (e.CommandName == "eliminar")
             {
                 proveedorNegocio.eliminar(id);
@@ -115,6 +116,7 @@ namespace tp_cuatrimestral_equipo_19A
             txtDireccionProveedor.Text = string.Empty;
             txtTelefonoProveedor.Text = string.Empty;
             txtEmailProveedor.Text = string.Empty;
+            txtCuitProveedor.Text = string.Empty;
         }
 
         protected void ProveedoresGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)

@@ -10,6 +10,11 @@
                 <asp:RequiredFieldValidator ID="rfvNombreProveedor" runat="server" ControlToValidate="txtNombreProveedor" ErrorMessage="El nombre del proveedor es obligatorio." CssClass="text-danger" Display="Static" />
             </div>
             <div class="form-group col-4">
+                <label for="txtCuitProveedor">CUIT</label>
+                <asp:TextBox ID="txtCuitProveedor" runat="server" CssClass="form-control" />
+                <asp:RequiredFieldValidator ID="rfvCuitProveedor" runat="server" ControlToValidate="txtCuitProveedor" ErrorMessage="El CUIT del proveedor es obligatorio." CssClass="text-danger" Display="Static" />
+            </div>
+            <div class="form-group col-4">
                 <label for="txtDireccionProveedor">Dirección</label>
                 <asp:TextBox ID="txtDireccionProveedor" runat="server" CssClass="form-control" />
                 <asp:RequiredFieldValidator ID="rfvDireccionProveedor" runat="server" ControlToValidate="txtDireccionProveedor" ErrorMessage="La dirección del proveedor es obligatoria." CssClass="text-danger" Display="Static" />
@@ -31,7 +36,7 @@
     </div>
 
     <div class="d-flex align-items-center gap-3 mb-5">
-        <asp:Button ID="btnAgregarProveedor" runat="server" CssClass="btn btn-secondary " Text="Agregar Proveedor" OnClick="btnAgregarProveedor_Click"/>
+        <asp:Button ID="btnAgregarProveedor" runat="server" CssClass="btn btn-secondary " Text="Agregar Proveedor" OnClick="btnAgregarProveedor_Click" />
         <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
         <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
     </div>
@@ -40,6 +45,7 @@
     <asp:GridView ID="ProveedoresGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="ProveedoresGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="ProveedoresGridView_PageIndexChanging">
         <Columns>
             <asp:BoundField DataField="id" HeaderText="ID" />
+            <asp:BoundField DataField="cuit" HeaderText="Cuit" />
             <asp:BoundField DataField="nombre" HeaderText="Nombre" />
             <asp:BoundField DataField="direccion" HeaderText="Dirección" />
             <asp:BoundField DataField="telefono" HeaderText="Teléfono" />
@@ -48,7 +54,7 @@
                 <ItemTemplate>
                     <asp:LinkButton ID="LinkButton1" runat="server" CommandName="editar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm" CausesValidation="false">
                 <span class="material-symbols-outlined text-warning ">edit</span>
-            </asp:LinkButton>
+                    </asp:LinkButton>
                     <asp:LinkButton ID="btnEliminar" runat="server" CommandName="eliminar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm"
                         OnClientClick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?');" CausesValidation="false">
                 <span class="material-symbols-outlined text-danger">delete</span>
@@ -56,16 +62,16 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
-            <PagerTemplate>
-        <div class="d-flex justify-content-center align-items-center">
-            <asp:LinkButton ID="lnkPrev" runat="server" CommandName="Page" CommandArgument="Prev" CausesValidation="false" CssClass="btn btn-sm mx-1">
+        <PagerTemplate>
+            <div class="d-flex justify-content-center align-items-center">
+                <asp:LinkButton ID="lnkPrev" runat="server" CommandName="Page" CommandArgument="Prev" CausesValidation="false" CssClass="btn btn-sm mx-1">
                 <span class="material-symbols-outlined text-dark fs-2">chevron_left</span>
-            </asp:LinkButton>
-            <asp:Label ID="lblPageInfo" runat="server" CssClass="mx-2 mb-1"></asp:Label>
-            <asp:LinkButton ID="lnkNext" runat="server" CommandName="Page" CommandArgument="Next" CausesValidation="false" CssClass="btn btn-sm  mx-1">
+                </asp:LinkButton>
+                <asp:Label ID="lblPageInfo" runat="server" CssClass="mx-2 mb-1"></asp:Label>
+                <asp:LinkButton ID="lnkNext" runat="server" CommandName="Page" CommandArgument="Next" CausesValidation="false" CssClass="btn btn-sm  mx-1">
                 <span class="material-symbols-outlined text-dark fs-2">chevron_right</span>
-            </asp:LinkButton>
-        </div>
-    </PagerTemplate>
+                </asp:LinkButton>
+            </div>
+        </PagerTemplate>
     </asp:GridView>
 </asp:Content>

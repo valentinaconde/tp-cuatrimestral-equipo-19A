@@ -54,21 +54,20 @@ namespace Negocio
                 datos.setearConsulta("SELECT TOP 1 numero_factura FROM ventas ORDER BY id DESC");
                 datos.ejecutarLectura();
 
-                string ultimoNumeroFactura = "F00000";
+                string ultimoNumeroFactura = "00000";
                 if (datos.Lector.Read())
                 {
                     ultimoNumeroFactura = datos.Lector["numero_factura"].ToString();
                 }
 
-                string parteNumerica = ultimoNumeroFactura.Substring(1);
-                if (!int.TryParse(parteNumerica, out int numero))
+                if (!int.TryParse(ultimoNumeroFactura, out int numero))
                 {
                     throw new FormatException("El formato del número de factura es incorrecto.");
                 }
 
                 numero += 1;
 
-                string nuevoNumeroFactura = "F" + numero.ToString("D5");
+                string nuevoNumeroFactura = numero.ToString("D5");
 
                 return nuevoNumeroFactura;
             }
@@ -81,7 +80,6 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
         public void agregar(DateTime fecha, float total, int clienteID, int usuarioID, List<DetalleVenta> detalles)
         {
             string nAleatorio = numeroFacturaAleatorio();

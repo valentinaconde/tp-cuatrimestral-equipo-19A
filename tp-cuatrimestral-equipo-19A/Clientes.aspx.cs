@@ -33,40 +33,37 @@ namespace tp_cuatrimestral_equipo_19A
         {
             if (Page.IsValid)
             {
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                Cliente nuevoCliente = new Cliente
+                {
+                    nombre = txtNombreCliente.Text,
+                    direccion = txtDireccionCliente.Text,
+                    telefono = txtTelefonoCliente.Text,
+                    email = txtEmailCliente.Text,
+                    dni = txtDniCliente.Text 
+                };
 
-            
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            Cliente nuevoCliente = new Cliente
-            {
-                nombre = txtNombreCliente.Text,
-                direccion = txtDireccionCliente.Text,
-                telefono = txtTelefonoCliente.Text,
-                email = txtEmailCliente.Text
-            };
+                if (ClienteId.HasValue)
+                {
+                    nuevoCliente.id = ClienteId.Value;
+                    clienteNegocio.modificar(nuevoCliente);
+                    lblMessage.Text = "Cliente modificado exitosamente.";
+                    btnAgregarCliente.Text = "Agregar Cliente";
+                    ClienteId = null;
+                }
+                else
+                {
+                    clienteNegocio.agregar(nuevoCliente);
+                    lblMessage.Text = "Cliente agregado exitosamente.";
+                }
 
-            if (ClienteId.HasValue)
-            {
-                nuevoCliente.id = ClienteId.Value;
-                clienteNegocio.modificar(nuevoCliente);
-                lblMessage.Text = "Cliente modificado exitosamente.";
-                btnAgregarCliente.Text = "Agregar Cliente";
-                ClienteId = null;
-            }
-            else
-            {
-                clienteNegocio.agregar(nuevoCliente);
-                lblMessage.Text = "Cliente agregado exitosamente.";
-            }
-
-            limpiarFormulario();
-            cargarClientes();
-
+                limpiarFormulario();
+                cargarClientes();
             }
         }
 
         protected void clientesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             lblMessage2.Text = "";
             lblMessage.Text = "";
             if (e.CommandName == "Page") return;
@@ -82,6 +79,7 @@ namespace tp_cuatrimestral_equipo_19A
                     txtDireccionCliente.Text = cliente.direccion;
                     txtTelefonoCliente.Text = cliente.telefono;
                     txtEmailCliente.Text = cliente.email;
+                    txtDniCliente.Text = cliente.dni; 
 
                     ClienteId = cliente.id;
                     btnAgregarCliente.Text = "Modificar Cliente";
@@ -120,6 +118,7 @@ namespace tp_cuatrimestral_equipo_19A
             txtDireccionCliente.Text = string.Empty;
             txtTelefonoCliente.Text = string.Empty;
             txtEmailCliente.Text = string.Empty;
+            txtDniCliente.Text = string.Empty; 
         }
 
         private void UpdatePagerInfo()
