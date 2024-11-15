@@ -18,6 +18,17 @@ namespace tp_cuatrimestral_equipo_19A
         {
             if (!IsPostBack)
             {
+                Usuario usuario = new Usuario();
+                usuario = (Usuario)Session["UsuarioActual"];
+                if (usuario == null)
+                {
+                    Response.Redirect("Default.aspx");
+
+                }
+                if (usuario.rol_id == 2)
+                {
+                    Response.Redirect("HomeVendedorPage.aspx");
+                }
                 cargarMarcas();
             }
         }

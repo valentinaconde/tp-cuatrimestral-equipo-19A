@@ -16,6 +16,14 @@ namespace tp_cuatrimestral_equipo_19A
         {
             if (!IsPostBack)
             {
+                Usuario usuario = new Usuario();
+                usuario = (Usuario)Session["UsuarioActual"];
+                if (usuario == null)
+                {
+                    Response.Redirect("Default.aspx");
+
+                }
+
                 dtProductos = new DataTable();
                 dtProductos.Columns.Add("ProductoID");
                 dtProductos.Columns.Add("Producto");
@@ -189,7 +197,7 @@ namespace tp_cuatrimestral_equipo_19A
                     usuario = new Usuario();
                     usuario.nombre = "";
                 }
-                txtErrorVentas.Text = usuario.id.ToString();
+
                 ventaNegocio.agregar(fecha, total, clienteID, usuario.id, detalles);
 
                 dtProductos.Clear();
