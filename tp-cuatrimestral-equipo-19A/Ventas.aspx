@@ -1,13 +1,13 @@
-﻿<%@ Page Title="Ventas" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Ventas.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Ventas" %>
+﻿<%@ Page Title="Ventas" Language="C#" MasterPageFile="~/Sharing.Master" AutoEventWireup="true" CodeBehind="Ventas.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Ventas" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="SharingMain" runat="server">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#<%= ddlCliente.ClientID %>').select2();
-            $('#<%= ddlProducto.ClientID %>').select2(); // Added this line
+            $('#<%= ddlProducto.ClientID %>').select2(); 
         });
 
         function formatDateString(input) {
@@ -86,7 +86,7 @@
 
 
 
-    </div>
+  
 
 
 
@@ -104,4 +104,5 @@
         <asp:Label ID="txtErrorVentas" runat="server" CssClass="w-100 border-0 text-danger mt-2" />
 
     </div>
+          </div>
 </asp:Content>

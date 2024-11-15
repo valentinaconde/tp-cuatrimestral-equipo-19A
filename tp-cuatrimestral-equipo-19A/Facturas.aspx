@@ -1,7 +1,8 @@
-﻿<%@ Page Title="Facturas" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Facturas.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Reportes" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="mb-3">
-        <h2>Facturacion</h2>
+﻿<%@ Page Title="Facturas" Language="C#" MasterPageFile="~/Sharing.Master" AutoEventWireup="true" CodeBehind="Facturas.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Reportes" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="SharingMain" runat="server">
+    <div class="container mt-3">
+    <div class="mb-3 ">
+        <h2 class="fst-italic fw-medium">Facturacion</h2>
     </div>
 
     <asp:GridView ID="FacturasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="facturasGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="FacturasGridView_PageIndexChanging" OnSelectedIndexChanged="FacturasGridView_SelectedIndexChanged" DataKeyNames="id">
@@ -38,4 +39,5 @@
     </div>
 </PagerTemplate>
 </asp:GridView>
+        </div>
 </asp:Content>

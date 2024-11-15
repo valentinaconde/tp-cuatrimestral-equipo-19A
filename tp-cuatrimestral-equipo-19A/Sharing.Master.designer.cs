@@ -11,16 +11,25 @@ namespace tp_cuatrimestral_equipo_19A
 {
 
 
-    public partial class Reportes
+    public partial class Sharing
     {
 
         /// <summary>
-        /// FacturasGridView control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView FacturasGridView;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+        /// <summary>
+        /// SharingMain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder SharingMain;
     }
 }

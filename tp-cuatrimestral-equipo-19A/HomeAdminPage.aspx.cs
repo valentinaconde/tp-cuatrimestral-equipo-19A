@@ -20,8 +20,11 @@ namespace tp_cuatrimestral_equipo_19A
                 usuario = (Usuario)Session["UsuarioActual"];
                 if(usuario == null)
                 {
-                    usuario = new Usuario();
-                    usuario.nombre = "";
+                    Response.Redirect("Default.aspx");
+                }
+                if(usuario.rol_id == 2)
+                {
+                    Response.Redirect("HomeVendedorPage.aspx");
                 }
                 DataBind();
             }

@@ -268,6 +268,13 @@
     <Compile Include="Facturas.aspx.designer.cs">
       <DependentUpon>Facturas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sharing.Master.cs">
+      <DependentUpon>Sharing.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sharing.Master.designer.cs">
+      <DependentUpon>Sharing.Master</DependentUpon>
+    </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,6 +326,7 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <Content Include="Vendedor.Master" />
+    <Content Include="Sharing.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
