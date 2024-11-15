@@ -4,7 +4,7 @@
         <h2>Facturacion</h2>
     </div>
 
-    <asp:GridView ID="FacturasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="facturasGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="FacturasGridView_PageIndexChanging">
+    <asp:GridView ID="FacturasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="facturasGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="FacturasGridView_PageIndexChanging" OnSelectedIndexChanged="FacturasGridView_SelectedIndexChanged" DataKeyNames="id">
     <Columns>
         <asp:BoundField DataField="id" HeaderText="ID" />
         <asp:BoundField DataField="fecha" HeaderText="Nombre" />
@@ -22,9 +22,7 @@
         </asp:TemplateField>
         <asp:TemplateField>
             <ItemTemplate>
-                <asp:LinkButton ID="btnGenerar" runat="server" CommandName="generar" CommandArgument='<%# Eval("id") %>' CssClass="btn btn-sm" CausesValidation="false">
-                    <span class="material-symbols-outlined text-warning ">edit</span>
-                 </asp:LinkButton>
+                <asp:Button ID="btnGenerarFactura" runat="server" CssClass="btn btn-primary mb-5" Text="Generar" OnClick="btnGenerarFactura_Click" />
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>

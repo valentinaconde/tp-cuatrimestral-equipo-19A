@@ -26,14 +26,14 @@ namespace tp_cuatrimestral_equipo_19A
         }
         protected void facturasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Page") return;
-            int id = Convert.ToInt32(e.CommandArgument);
-            VentaNegocio ventanegocio = new VentaNegocio();
+            //if (e.CommandName == "Page") return;
+            //int id = Convert.ToInt32(e.CommandArgument);
+            //VentaNegocio ventanegocio = new VentaNegocio();
 
-            if (e.CommandName == "generar")
-            {
-               
-            }
+            //if (e.CommandName == "generar")
+            //{
+
+            //}
 
         }
         private void cargarFacturas()
@@ -62,6 +62,43 @@ namespace tp_cuatrimestral_equipo_19A
                     lblPageInfo.Text = $"Página {FacturasGridView.PageIndex + 1} de {FacturasGridView.PageCount}";
                 }
             }
+        }
+
+        protected void FacturasGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnGenerarFactura_Click(object sender, EventArgs e)
+        {
+
+            Button btnGenerar = (Button)sender;
+            GridViewRow fila = (GridViewRow)btnGenerar.NamingContainer;
+            int facturaId = Convert.ToInt32(FacturasGridView.DataKeys[fila.RowIndex].Value);
+
+            VentaNegocio ventaNegocio = new VentaNegocio();
+            Venta factura = ventaNegocio.BuscarPorId(facturaId);
+
+            if (factura != null)
+            {
+                string contenido = $"Factura N°: {factura.numero_factura}\n";
+                contenido += $"Fecha: {factura.fecha:dd/MM/yyyy}\n";
+                contenido += $"Cliente ID: {factura.cliente_id}\n";
+                contenido += $"Usuario ID: {factura.usuario_id}\n";
+                contenido += $"Total: ${factura.total}\n";
+                contenido += "-------------------------------------\n";
+                contenido += "Gracias por su compra.";
+
+                Response.Clear();
+                Response.ContentType = "text/plain";
+                Response.AddHeader("Content-Disposition", $"attachment; filename=Factura_{factura.numero_factura}.txt");
+                Response.Write(contenido);
+                Response.End();
+            }
+            else
+            { 
+                Response.Write("Factura no encontrada.");
+            }
+
         }
     }
 }
