@@ -125,6 +125,7 @@
     <Content Include="Global.asax" />
     <Content Include="HomeVendedorPage.aspx" />
     <Content Include="Marcas.aspx" />
+    <Content Include="OlvideContra.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Proveedores.aspx" />
     <Content Include="Facturas.aspx" />
@@ -246,6 +247,13 @@
     </Compile>
     <Compile Include="Marcas.aspx.designer.cs">
       <DependentUpon>Marcas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OlvideContra.aspx.cs">
+      <DependentUpon>OlvideContra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OlvideContra.aspx.designer.cs">
+      <DependentUpon>OlvideContra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productos.aspx.cs">
       <DependentUpon>Productos.aspx</DependentUpon>

@@ -56,7 +56,7 @@
 
                     <asp:Label ID="errorLabel" runat="server" Text="" CssClass="text-danger"/>
                     <asp:Button ID="LoginButton" runat="server" Text="Iniciar sesion" CssClass="btn btn-primary mt-5" OnClick="LoginButton_Click" ValidationGroup="LoginGroup" />
-                    <asp:HyperLink ID="RecoverPassword" runat="server" NavigateUrl="~/RecuperarContraseña.aspx" CssClass="btn btn-link mt-3">
+                    <asp:HyperLink ID="RecoverPassword" runat="server" NavigateUrl="~/OlvideContra.aspx" CssClass="btn btn-link mt-3">
                         Olvidaste tu contraseña?
                     </asp:HyperLink>
                 </div>
