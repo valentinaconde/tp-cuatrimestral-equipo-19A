@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre from categorias");
+                datos.setearConsulta("select id, nombre, activo from categorias");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -25,8 +25,8 @@ namespace Negocio
                     Categoria aux = new Categoria();
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
-
-                    lista.Add(aux);
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
+                    if (aux.activo == true) lista.Add(aux);
                 }
 
                 datos.cerrarConexion();
@@ -83,8 +83,8 @@ namespace Negocio
             try
             {
                 datos.setearParametro("@id", id);
+                datos.setearConsulta("update categorias set activo = 0 where id = @id");
 
-                datos.setearConsulta("delete from categorias where id = @id");
                 datos.ejecutarAccion();
 
             }
@@ -113,6 +113,7 @@ namespace Negocio
                 {
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();

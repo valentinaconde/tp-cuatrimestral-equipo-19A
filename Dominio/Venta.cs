@@ -15,5 +15,6 @@ namespace Dominio
         public int cliente_id { get; set; }
         public int usuario_id { get; set; }
         public List<DetalleVenta> Detalles {  get; set; }
+        public bool activo { get; set; }
     }
 }

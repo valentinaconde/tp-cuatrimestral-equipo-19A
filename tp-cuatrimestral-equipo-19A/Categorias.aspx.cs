@@ -73,7 +73,7 @@ namespace tp_cuatrimestral_equipo_19A
             if (e.CommandName == "editar")
             {
                 Categoria categoria = categoriaNegocio.buscarCategoriaPorId(id);
-                if (categoria.nombre != null)
+                if (categoria.nombre != null && categoria.activo == true)
                 {
                     txtNombreCategoria.Text = categoria.nombre;
                     CategoriaId = categoria.id;

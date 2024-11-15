@@ -15,6 +15,7 @@ namespace Dominio
         public float ganancia { get; set; }
         public int idmarca { get; set; }
         public int idcategoria { get; set; }
+        public bool activo { get; set; }
 
 
     }

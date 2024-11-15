@@ -14,6 +14,7 @@ namespace Dominio
         public float PrecioUnitario { get; set; }
         public int CompraId { get; set; }
         public int ProductoId { get; set; }
+        public bool activo { get; set; }
 
 
     }

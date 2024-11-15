@@ -14,6 +14,7 @@ namespace Dominio
         public float total { get; set; }
         public int proveedorID { get; set; }
         public List<DetalleCompra> Detalles { get; set; }
+        public bool activo { get; set; }
 
     }
 }

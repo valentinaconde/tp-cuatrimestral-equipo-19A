@@ -16,6 +16,7 @@ namespace Dominio
         public string password { get; set; }
 
         public int rol_id { get; set; }
+        public bool activo { get; set; }
 
     }
 }
