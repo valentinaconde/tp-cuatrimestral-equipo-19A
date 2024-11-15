@@ -48,7 +48,12 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Clientes.aspx">Clientes</a></li>
-     
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contras.aspx">Contraseñas</a></li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <asp:Button ID="btnCerrarSesion" runat="server" CssClass="btn btn-link nav-link" Text="Cerrar Sesión" OnClick="btnCerrarSesion_Click" CausesValidation="false"/>
+                        </li>
                     </ul>
                 </div>
             </div>

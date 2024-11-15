@@ -48,7 +48,7 @@ namespace tp_cuatrimestral_equipo_19A
             if (UsuarioId.HasValue)
             {
                 nuevoUsuario.id = UsuarioId.Value;
-                usuarioNegocio.modificar(nuevoUsuario.id, nuevoUsuario.nombre, nuevoUsuario.apellido, nuevoUsuario.email, nuevoUsuario.password, nuevoUsuario.rol_id);
+                usuarioNegocio.modificar(nuevoUsuario);
                 lblMessage.Text = "Usuario modificado exitosamente.";
                 btnAgregar.Text = "Agregar Usuario";
                 UsuarioId = null;

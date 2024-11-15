@@ -101,6 +101,7 @@
   <ItemGroup>
     <Content Include="Categorias.aspx" />
     <Content Include="Clientes.aspx" />
+    <Content Include="Contras.aspx" />
     <Content Include="HomeAdminPage.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -206,6 +207,13 @@
     </Compile>
     <Compile Include="Clientes.aspx.designer.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contras.aspx.cs">
+      <DependentUpon>Contras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contras.aspx.designer.cs">
+      <DependentUpon>Contras.aspx</DependentUpon>
     </Compile>
     <Compile Include="HomeAdminPage.aspx.cs">
       <DependentUpon>HomeAdminPage.aspx</DependentUpon>

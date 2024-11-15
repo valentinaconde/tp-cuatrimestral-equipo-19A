@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,21 @@ namespace tp_cuatrimestral_equipo_19A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Usuario usuario = (Usuario)Session["UsuarioActual"];
+                if (usuario == null)
+                {
+                    Response.Redirect("Default.aspx");
+                }
+            }
 
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session["UsuarioActual"] = null;
+            Response.Redirect("Default.aspx");
         }
     }
 }
