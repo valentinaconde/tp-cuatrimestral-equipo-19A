@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre from marcas");
+                datos.setearConsulta("select id, nombre, activo from marcas");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -24,8 +24,9 @@ namespace Negocio
                     Marca aux = new Marca();
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
-
-                    lista.Add(aux);
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
+                    if (aux.activo == true) lista.Add(aux); 
+                    
                 }
       
                 return lista;
@@ -84,7 +85,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("delete from marcas where id = @id");
+                datos.setearConsulta("update marcas set activo = 0 where id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
 
@@ -113,6 +114,7 @@ namespace Negocio
                 {
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();

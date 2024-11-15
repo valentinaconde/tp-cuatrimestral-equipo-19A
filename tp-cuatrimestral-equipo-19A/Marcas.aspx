@@ -12,7 +12,8 @@
         </div>
 
         <div class="d-flex align-items-center gap-3">
-            <asp:Button ID="btnAgregarMarca" runat="server" CssClass="btn btn-secondary mt-3" Text="Agregar Marca" OnClick="btnAgregarMarca_Click" />
+            
+    <asp:Button ID="btnAgregarMarca" runat="server" CssClass="btn btn-secondary mt-3" Text="Agregar Marca" OnClick="btnAgregarMarca_Click" />
             <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
             <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
         </div>

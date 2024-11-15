@@ -73,7 +73,7 @@ namespace tp_cuatrimestral_equipo_19A
             if (e.CommandName == "editar")
             {
                 Marca marca = marcaNegocio.buscarMarcaPorId(id);
-                if (marca.nombre != null)
+                if (marca.nombre != null && marca.activo == true)
                 {
                     txtNombreMarca.Text = marca.nombre;
                     MarcaId = marca.id;
