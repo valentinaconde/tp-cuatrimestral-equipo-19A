@@ -19,6 +19,13 @@
         </div>
     </div>
 
+    <div class="col-6">
+        <div class="mb-3">
+            <asp:Label Text="Buscar" runat="server" />
+            <asp:TextBox runat="server" ID="txtFiltroMarca" CssClass="form-control" AutoPostBack="true" OnTextChanged="BuscarMarca_TextChanged" />
+        </div>
+    </div>
+
     <h4 class="fst-italic fw-medium">Listado</h4>
     <asp:GridView ID="MarcasGridView" runat="server" CssClass="table table-striped table-width" AutoGenerateColumns="False" AllowPaging="true" PageSize="10" OnPageIndexChanging="MarcasGridView_PageIndexChanging" OnRowCommand="marcasGridView_RowCommand">
         <Columns>
@@ -47,4 +54,5 @@
             </div>
         </PagerTemplate>
     </asp:GridView>
+        <asp:Label ID="lblNoResultsMarca" runat="server" CssClass="text-danger" Visible="false" />
 </asp:Content>

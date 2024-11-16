@@ -3,6 +3,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -99,7 +102,11 @@ namespace tp_cuatrimestral_equipo_19A
         private void cargarMarcas()
         {
             MarcaNegocio marcaNegocio = new MarcaNegocio();
-            MarcasGridView.DataSource = marcaNegocio.listar();
+            List<Marca> listaMarcas = marcaNegocio.listar();
+
+            Session["listaMarcas"] = listaMarcas;
+
+            MarcasGridView.DataSource = listaMarcas;
             MarcasGridView.DataBind();
             UpdatePagerInfo();
         }
@@ -121,6 +128,37 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     lblPageInfo.Text = $"Página {MarcasGridView.PageIndex + 1} de {MarcasGridView.PageCount}";
                 }
+            }
+        }
+        protected void BuscarMarca_TextChanged(object sender, EventArgs e)
+        {
+            List<Marca> listaMarcas = (List<Marca>)Session["listaMarcas"];
+
+            if (listaMarcas != null)
+            {
+                List<Marca> listaFiltrada = listaMarcas.FindAll(x => x.nombre.ToUpper().Contains(txtFiltroMarca.Text.ToUpper()))
+                    .ToList();
+
+
+                if (listaFiltrada.Count > 0)
+                {
+                    MarcasGridView.DataSource = listaFiltrada;
+                    MarcasGridView.DataBind();
+                    lblNoResultsMarca.Visible = false;
+                }
+                else
+                {
+                    MarcasGridView.DataSource = null;
+                    MarcasGridView.DataBind();
+                    lblNoResultsMarca.Text = "No se encontraron marcas.";
+                    lblNoResultsMarca.Visible = true;
+
+                }
+            }
+            if (string.IsNullOrEmpty(txtFiltroMarca.Text))
+            {
+                cargarMarcas();
+                lblNoResultsMarca.Visible = false;
             }
         }
     }
