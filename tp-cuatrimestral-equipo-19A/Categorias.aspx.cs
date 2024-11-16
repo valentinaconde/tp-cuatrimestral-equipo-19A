@@ -3,6 +3,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -85,14 +87,19 @@ namespace tp_cuatrimestral_equipo_19A
                 categoriaNegocio.eliminar(id);
                 lblMessage.Text = "Categoría eliminada exitosamente.";
                 cargarCategorias();
-
+                
             }
         }
 
         private void cargarCategorias()
         {
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            CategoriasGridView.DataSource = categoriaNegocio.listar();
+            List<Categoria> listaCategorias = categoriaNegocio.listar();
+            
+            Session["listaCategorias"] = listaCategorias;
+
+
+            CategoriasGridView.DataSource = listaCategorias;
             CategoriasGridView.DataBind();
             UpdatePagerInfo();
         }
@@ -123,5 +130,33 @@ namespace tp_cuatrimestral_equipo_19A
                 }
             }
         }
+        protected void Buscar_TextChanged(object sender, EventArgs e)
+        {
+
+            List<Categoria> listaCategorias = (List<Categoria>)Session["listaCategorias"];
+            List<Categoria> listaFiltrada = listaCategorias.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+
+            if (listaFiltrada.Count > 0)
+            {
+                CategoriasGridView.DataSource = listaFiltrada;
+                CategoriasGridView.DataBind();
+                lblNoResults.Visible = false;
+            }
+            else
+            {
+                CategoriasGridView.DataSource = null;
+                CategoriasGridView.DataBind();
+                lblNoResults.Text = "No se encontraron categorías.";
+                lblNoResults.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(txtFiltro.Text))
+            {
+                cargarCategorias();
+                lblNoResults.Visible = false;
+            }
+        }
+
     }
+
 }

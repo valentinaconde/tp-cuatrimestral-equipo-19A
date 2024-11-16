@@ -10,13 +10,20 @@
                 <asp:RequiredFieldValidator ID="rfvNombreCategoria" runat="server" ControlToValidate="txtNombreCategoria" ErrorMessage="El nombre de la categoría es requerido." CssClass="text-danger" Display="Dynamic" />
             </div>
         </div>
-
         <div class="d-flex align-items-center gap-3">
             <asp:Button ID="btnAgregarCategoria" runat="server" CssClass="btn btn-secondary mt-3" Text="Agregar Categoría" OnClick="btnAgregarCategoria_Click"  />
             <asp:Label ID="lblMessage2" runat="server" CssClass="mt-3 fw-medium text-danger" />
             <asp:Label ID="lblMessage" runat="server" CssClass="mt-3 fw-medium text-success" />
         </div>
-    </div>
+    </div>              
+    <div class="col-6">
+            <div class="mb-3">
+                <asp:Label Text="Buscar" runat="server" />
+                <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="Buscar_TextChanged"  />
+            </div>
+        </div>
+
+    
 
     <h4 class="fst-italic fw-medium">Listado</h4>
     <asp:GridView ID="CategoriasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="categoriasGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="categoriasGridView_PageIndexChanging">
@@ -47,4 +54,5 @@
         </div>
     </PagerTemplate>
     </asp:GridView>
+    <asp:Label ID="lblNoResults" runat="server" CssClass="text-danger" Visible="false" />
 </asp:Content>
