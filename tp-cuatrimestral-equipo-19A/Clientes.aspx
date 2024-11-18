@@ -7,7 +7,7 @@
                 <h2 class="mb-0 fst-italic">Administración de clientes</h2>
             </div>
             <div class="card-body">
-                <!-- Formulario para agregar clientes -->
+            
                 <div class="row mb-4">
                     <div class="col-md-4">
                         <label for="txtNombreCliente" class="form-label">Nombre</label>

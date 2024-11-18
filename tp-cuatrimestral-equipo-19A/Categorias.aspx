@@ -67,7 +67,7 @@
                         </div>
                     </PagerTemplate>
                 </asp:GridView>
-                <asp:Label ID="lblNoResults" runat="server" CssClass="text-danger" Visible="false" Text="No se encontraron categorías." />
+                <asp:Label ID="lblNoResults" runat="server" CssClass="text-dark fst-italic" Visible="false" Text="No se encontraron categorías." />
             </div>
         </div>
     </div>

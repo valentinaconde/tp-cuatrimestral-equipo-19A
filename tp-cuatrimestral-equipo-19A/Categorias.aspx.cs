@@ -100,6 +100,17 @@ namespace tp_cuatrimestral_equipo_19A
             
             Session["listaCategorias"] = listaCategorias;
 
+            if(listaCategorias.Count == 0)
+            {
+                lblNoResults.Text = "No se encontraron categorías.";
+                lblNoResults.Visible = true;
+            }
+            else
+            {
+                lblNoResults.Visible = false;
+            }
+
+
 
             CategoriasGridView.DataSource = listaCategorias;
             CategoriasGridView.DataBind();

@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.Collections.Generic;
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -110,8 +111,20 @@ namespace tp_cuatrimestral_equipo_19A
         {
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             ClientesGridView.DataSource = clienteNegocio.listar();
+            List<Cliente> listaClientes = clienteNegocio.listar();
             ClientesGridView.DataBind();
             UpdatePagerInfo();
+
+
+            if (listaClientes.Count == 0)
+            {
+                lblNoResults.Text = "No se encontraron clientes.";
+                lblNoResults.Visible = true;
+            }
+            else
+            {
+                lblNoResults.Visible = false;
+            }
         }
 
         private void limpiarFormulario()
