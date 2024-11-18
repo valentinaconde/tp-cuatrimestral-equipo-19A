@@ -60,7 +60,7 @@ namespace tp_cuatrimestral_equipo_19A
                 ganancia = float.Parse(txtPorcentajeGanancia.Text),
                 idmarca = int.Parse(ddlMarca.SelectedValue),
                 idcategoria = int.Parse(ddlCategoria.SelectedValue),
-                activo = true // Set the product as active by default
+                activo = true 
             };
 
             if (ProductoId.HasValue)

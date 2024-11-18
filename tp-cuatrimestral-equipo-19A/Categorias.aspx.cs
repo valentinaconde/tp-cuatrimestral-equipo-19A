@@ -72,7 +72,7 @@ namespace tp_cuatrimestral_equipo_19A
             int id = Convert.ToInt32(e.CommandArgument);
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
-            if (e.CommandName == "editar")
+            if (e.CommandName == "editar" )
             {
                 Categoria categoria = categoriaNegocio.buscarCategoriaPorId(id);
                 if (categoria.nombre != null && categoria.activo == true)

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
 
@@ -22,11 +19,13 @@ namespace Negocio
 
                 while (datos.Lector.Read())
                 {
-                    Categoria aux = new Categoria();
-                    aux.id = (int)datos.Lector["id"];
-                    aux.nombre = datos.Lector["nombre"].ToString();
-                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
-                    if (aux.activo == true) lista.Add(aux);
+                    Categoria aux = new Categoria
+                    {
+                        id = (int)datos.Lector["id"],
+                        nombre = datos.Lector["nombre"].ToString(),
+                        activo = Convert.ToBoolean(datos.Lector["activo"])
+                    };
+                    if (aux.activo) lista.Add(aux);
                 }
 
                 datos.cerrarConexion();
@@ -62,7 +61,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update categorias set nombre = @nombre where id = @id");
+                datos.setearConsulta("update categorias set nombre = @nombre, activo = @activo where id = @id");
                 datos.setearParametro("@nombre", nombre);
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
@@ -84,9 +83,7 @@ namespace Negocio
             {
                 datos.setearParametro("@id", id);
                 datos.setearConsulta("update categorias set activo = 0 where id = @id");
-
                 datos.ejecutarAccion();
-
             }
             catch (Exception ex)
             {
@@ -103,7 +100,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, nombre from categorias where id = @id");
+                datos.setearConsulta("select id, nombre, activo from categorias where id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
