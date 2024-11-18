@@ -39,5 +39,6 @@
     </div>
 </PagerTemplate>
 </asp:GridView>
+        <asp:Label ID="lblNoResults" runat="server" CssClass="text-danger" Visible="false" Text="No se encontraron Facturas." />
         </div>
 </asp:Content>

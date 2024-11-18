@@ -38,9 +38,22 @@ namespace tp_cuatrimestral_equipo_19A
         }
         private void cargarFacturas()
         {
-
             VentaNegocio ventanegocio = new VentaNegocio();
-            FacturasGridView.DataSource = ventanegocio.listar();
+            List<Venta> ventas = ventanegocio.listar();
+
+            Session["listaVentas"] = ventas;
+
+            if (ventas.Count == 0)
+            {
+                lblNoResults.Text = "No se encontraron Facturas.";
+                lblNoResults.Visible = true;
+            }
+            else
+            {
+                lblNoResults.Visible = false;
+            }
+
+            FacturasGridView.DataSource = ventas;
             FacturasGridView.DataBind();
             UpdatePagerInfo();
         }
