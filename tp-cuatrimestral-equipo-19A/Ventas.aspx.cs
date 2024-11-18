@@ -164,7 +164,7 @@ namespace tp_cuatrimestral_equipo_19A
                     ProductoNegocio productoNegocio = new ProductoNegocio();
                     Producto producto = productoNegocio.buscarProductoPorId(int.Parse(row["ProductoID"].ToString())); 
 
-                    if (producto.id > 0)
+                    if (producto.id > 0 && producto.activo == true)
                     {
                         if (producto.stockactual < int.Parse(row["Cantidad"].ToString()))
                         {

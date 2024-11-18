@@ -149,7 +149,6 @@ namespace Negocio
         }
 
         
-        /* Funcion para buscar ventas por id*/
         public Venta BuscarPorId(int id)
         {
             AccesoDatos datos = new AccesoDatos();

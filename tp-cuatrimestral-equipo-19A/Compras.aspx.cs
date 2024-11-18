@@ -119,7 +119,7 @@ namespace tp_cuatrimestral_equipo_19A
                     producto.idmarca = int.Parse(ddlMarca.SelectedValue);
 
                     producto = productoNegocio.buscarProductoPorNombreYMarca(producto.nombre, producto.idmarca);
-                    if (producto.id > 0)
+                    if (producto.id > 0 && producto.activo == true)
                     {
                         producto.stockactual += int.Parse(row["Cantidad"].ToString());
                         producto.precio_unitario = int.Parse(row["Precio"].ToString());
@@ -135,6 +135,7 @@ namespace tp_cuatrimestral_equipo_19A
                         producto.nombre = row["Producto"].ToString();
                         producto.idcategoria = int.Parse(ddlCategoria.SelectedValue);
                         producto.idmarca = int.Parse(ddlMarca.SelectedValue);
+                        producto.activo = true;
                         productoNegocio.agregar(producto);
 
                     }

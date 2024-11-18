@@ -41,8 +41,9 @@ namespace tp_cuatrimestral_equipo_19A
                 nombre = txtNombre.Text,
                 apellido = txtApellido.Text,
                 email = txtEmail.Text,
-                password = txtEmail.Text, 
-                rol_id = int.Parse(ddlRol.SelectedValue)
+                password = txtEmail.Text,
+                rol_id = int.Parse(ddlRol.SelectedValue),
+                activo = true
             };
 
             if (UsuarioId.HasValue)

@@ -44,7 +44,8 @@ namespace tp_cuatrimestral_equipo_19A
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             Marca nuevaMarca = new Marca
             {
-                nombre = txtNombreMarca.Text
+                nombre = txtNombreMarca.Text,
+                activo = true
             };
 
             if (MarcaId.HasValue)

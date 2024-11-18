@@ -42,10 +42,11 @@ namespace tp_cuatrimestral_equipo_19A
 
            
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            Categoria nuevaCategoria = new Categoria
-            {
-                nombre = txtNombreCategoria.Text
-            };
+                Categoria nuevaCategoria = new Categoria
+                {
+                    nombre = txtNombreCategoria.Text,
+                    activo = true
+                };
 
             if (CategoriaId.HasValue)
             {
