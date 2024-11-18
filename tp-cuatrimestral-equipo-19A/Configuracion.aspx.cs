@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.Collections.Generic;
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -94,8 +95,22 @@ namespace tp_cuatrimestral_equipo_19A
 
         private void cargarUsuarios()
         {
-            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            UsuariosGridView.DataSource = usuarioNegocio.listar();
+            UsuarioNegocio usuarionegocio = new UsuarioNegocio();
+            List<Usuario> usuarios = usuarionegocio.listar();
+
+            Session["listaUsuarios"] = usuarios;
+
+            if (usuarios.Count == 0)
+            {
+                lblNoResults.Text = "No se encontraron proveedores.";
+                lblNoResults.Visible = true;
+            }
+            else
+            {
+                lblNoResults.Visible = false;
+            }
+
+            UsuariosGridView.DataSource = usuarios;
             UsuariosGridView.DataBind();
             UpdatePagerInfo();
         }
@@ -127,6 +142,32 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     lblPageInfo.Text = $"Página {UsuariosGridView.PageIndex + 1} de {UsuariosGridView.PageCount}";
                 }
+            }
+        }
+
+        protected void Buscar_TextChanged(object sender, EventArgs e)
+        {
+            List<Usuario> listaUsuarios = (List<Usuario>)Session["listaUsuarios"];
+            List<Usuario> listaFiltrada = listaUsuarios.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+
+            if (listaFiltrada.Count > 0)
+            {
+                UsuariosGridView.DataSource = listaFiltrada;
+                UsuariosGridView.DataBind();
+                lblNoResults.Visible = false;
+            }
+            else
+            {
+                UsuariosGridView.DataSource = null;
+                UsuariosGridView.DataBind();
+                lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(txtFiltro.Text))
+            {
+                cargarUsuarios();
+                lblNoResults.Visible = false;
             }
         }
     }
