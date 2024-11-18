@@ -44,7 +44,8 @@ namespace tp_cuatrimestral_equipo_19A
                     direccion = txtDireccionProveedor.Text,
                     telefono = txtTelefonoProveedor.Text,
                     email = txtEmailProveedor.Text,
-                    cuit = txtCuitProveedor.Text // Nuevo campo
+                    cuit = txtCuitProveedor.Text,
+                    activo = true
                 };
 
                 if (ProveedorId.HasValue)
@@ -77,13 +78,13 @@ namespace tp_cuatrimestral_equipo_19A
             if (e.CommandName == "editar")
             {
                 Proveedor proveedor = proveedorNegocio.buscarProveedorPorId(id);
-                if (proveedor != null)
+                if (proveedor != null && proveedor.activo == true)
                 {
                     txtNombreProveedor.Text = proveedor.nombre;
                     txtDireccionProveedor.Text = proveedor.direccion;
                     txtTelefonoProveedor.Text = proveedor.telefono;
                     txtEmailProveedor.Text = proveedor.email;
-                    txtCuitProveedor.Text = proveedor.cuit; // Nuevo campo
+                    txtCuitProveedor.Text = proveedor.cuit;
 
                     ProveedorId = proveedor.id;
                     btnAgregarProveedor.Text = "Modificar Proveedor";

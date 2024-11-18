@@ -118,7 +118,7 @@ namespace tp_cuatrimestral_equipo_19A
         private void cargarProductos()
         {
             ProductoNegocio productonegocio = new ProductoNegocio();
-            List<Producto> productos = productonegocio.listar().Where(p => p.activo).ToList();
+            List<Producto> productos = productonegocio.listar();
             ProductosGridView.DataSource = productos;
             ProductosGridView.DataBind();
             UpdatePagerInfo();

@@ -40,7 +40,8 @@ namespace tp_cuatrimestral_equipo_19A
                     direccion = txtDireccionCliente.Text,
                     telefono = txtTelefonoCliente.Text,
                     email = txtEmailCliente.Text,
-                    dni = txtDniCliente.Text 
+                    dni = txtDniCliente.Text,
+                    activo = true
                 };
 
                 if (ClienteId.HasValue)
@@ -73,7 +74,7 @@ namespace tp_cuatrimestral_equipo_19A
             if (e.CommandName == "editar")
             {
                 Cliente cliente = clienteNegocio.buscarClientePorId(id);
-                if (cliente != null)
+                if (cliente != null && cliente.activo)
                 {
                     txtNombreCliente.Text = cliente.nombre;
                     txtDireccionCliente.Text = cliente.direccion;
@@ -81,6 +82,7 @@ namespace tp_cuatrimestral_equipo_19A
                     txtEmailCliente.Text = cliente.email;
                     txtDniCliente.Text = cliente.dni; 
 
+                    ClienteId = cliente.id;
                     ClienteId = cliente.id;
                     btnAgregarCliente.Text = "Modificar Cliente";
                 }

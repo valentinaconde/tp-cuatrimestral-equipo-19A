@@ -143,7 +143,7 @@ namespace tp_cuatrimestral_equipo_19A
                     {
                         Cantidad = int.Parse(row["Cantidad"].ToString()),
                         PrecioUnitario = float.Parse(row["Precio"].ToString()),
-                        ProductoId = obtenerProductoId(row["Producto"].ToString()),
+                        ProductoId = producto.id,
                     };
                     detalles.Add(detalle);
                     total += detalle.Cantidad * detalle.PrecioUnitario;
@@ -158,20 +158,13 @@ namespace tp_cuatrimestral_equipo_19A
                 gvProductos.DataSource = dtProductos;
                 gvProductos.DataBind();
 
-                //txtErrorCompras.Text = "Agregado con exito";
+                txtErrorCompras.Text = "Agregado con exito";
             }
             catch (Exception ex)
             {
                 txtErrorCompras.Text = "Error al registrar la compra" + ex;
             }
             
-        }
-
-        private int obtenerProductoId(string nombreProducto)
-        {
-            // Implementa la lógica para obtener el ID del producto basado en su nombre
-            // Esto puede implicar una consulta a la base de datos
-            return 1; // Placeholder
         }
     }
 }

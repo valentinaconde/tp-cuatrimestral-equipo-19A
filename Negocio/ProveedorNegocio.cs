@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, direccion, telefono, email, cuit from proveedores");
+                datos.setearConsulta("select id, nombre, direccion, telefono, email, cuit, activo from proveedores");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -27,9 +27,9 @@ namespace Negocio
                     aux.direccion = datos.Lector["direccion"].ToString();
                     aux.telefono = datos.Lector["telefono"].ToString();
                     aux.email = datos.Lector["email"].ToString();
-                    aux.cuit = datos.Lector["cuit"].ToString(); 
-
-                    lista.Add(aux);
+                    aux.cuit = datos.Lector["cuit"].ToString();
+                    aux.activo = (bool)datos.Lector["activo"];
+                    if (aux.activo == true) lista.Add(aux);
                 }
 
                 return lista;
@@ -49,12 +49,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into proveedores (nombre, direccion, telefono, email, cuit) values (@nombre, @direccion, @telefono, @correo, @cuit)");
+                datos.setearConsulta("insert into proveedores (nombre, direccion, telefono, email, cuit, activo) values (@nombre, @direccion, @telefono, @correo, @cuit, @activo)");
                 datos.setearParametro("@nombre", proveedor.nombre);
                 datos.setearParametro("@direccion", proveedor.direccion);
                 datos.setearParametro("@telefono", proveedor.telefono);
                 datos.setearParametro("@correo", proveedor.email);
-                datos.setearParametro("@cuit", proveedor.cuit); 
+                datos.setearParametro("@cuit", proveedor.cuit);
+                datos.setearParametro("@activo", proveedor.activo);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -72,12 +73,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update proveedores set nombre = @nombre, direccion = @direccion, telefono = @telefono, email = @correo, cuit = @cuit where id = @id");
+                datos.setearConsulta("update proveedores set nombre = @nombre, direccion = @direccion, telefono = @telefono, email = @correo, cuit = @cuit, activo = @activo where id = @id");
                 datos.setearParametro("@nombre", proveedor.nombre);
                 datos.setearParametro("@direccion", proveedor.direccion);
                 datos.setearParametro("@telefono", proveedor.telefono);
                 datos.setearParametro("@correo", proveedor.email);
-                datos.setearParametro("@cuit", proveedor.cuit); 
+                datos.setearParametro("@cuit", proveedor.cuit);
+                datos.setearParametro("@activo", proveedor.activo);
                 datos.setearParametro("@id", proveedor.id);
                 datos.ejecutarAccion();
             }
@@ -97,7 +99,7 @@ namespace Negocio
             try
             {
                 datos.setearParametro("@id", id);
-                datos.setearConsulta("delete from proveedores where id = @id");
+                datos.setearConsulta("update proveedores set activo = 0 where id = @id");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -128,7 +130,8 @@ namespace Negocio
                     proveedor.direccion = datos.Lector["direccion"].ToString();
                     proveedor.telefono = datos.Lector["telefono"].ToString();
                     proveedor.email = datos.Lector["email"].ToString();
-                    proveedor.cuit = datos.Lector["cuit"].ToString(); 
+                    proveedor.cuit = datos.Lector["cuit"].ToString();
+                    proveedor.activo = (bool)datos.Lector["activo"];
                 }
 
                 datos.cerrarConexion();

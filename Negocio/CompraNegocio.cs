@@ -67,8 +67,7 @@ namespace Negocio
                     datos.setearParametro("@ProductoId", detalle.ProductoId);
 
                     datos.ejecutarAccion();
-                    // Actualizar stock y precio de compra del producto
-                    //actualizarStockYPrecio(detalle.ProductoId, detalle.Cantidad, detalle.PrecioUnitario);
+                    
                 }
                 datos.ejecutarAccion();
             }
@@ -82,27 +81,6 @@ namespace Negocio
             }
         }
 
-        //private void actualizarStockYPrecio(int productoId, int cantidad, float precioUnitario)
-        //{
-        //    AccesoDatos datos = new AccesoDatos();
-        //    try
-        //    {
-        //        datos.setearConsulta("UPDATE productos SET stock_actual = stock_actual + @Cantidad, precio_compra = @PrecioUnitario WHERE id = @ProductoId");
-        //        datos.setearParametro("@Cantidad", cantidad);
-        //        datos.setearParametro("@PrecioUnitario", precioUnitario);
-        //        datos.setearParametro("@ProductoId", productoId);
-
-        //        datos.ejecutarAccion();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        datos.cerrarConexion();
-        //    }
-        //}
 
         public void modificar(int id, DateTime fecha, float total, int proveedorID)
         {

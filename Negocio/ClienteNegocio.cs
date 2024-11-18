@@ -28,8 +28,8 @@ namespace Negocio
                     aux.telefono = datos.Lector["telefono"].ToString();
                     aux.email = datos.Lector["email"].ToString();
                     aux.dni = datos.Lector["dni"].ToString();
-
-                    lista.Add(aux);
+                    aux.activo = (bool)datos.Lector["activo"];
+                    if (aux.activo == true) lista.Add(aux);
                 }
 
                 return lista;
@@ -49,12 +49,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into clientes (nombre, direccion, telefono, email, dni) values (@nombre, @direccion, @telefono, @correo, @dni)");
+                datos.setearConsulta("insert into clientes (nombre, direccion, telefono, email, dni, activo) values (@nombre, @direccion, @telefono, @correo, @dni, @activo)");
                 datos.setearParametro("@nombre", cliente.nombre);
                 datos.setearParametro("@direccion", cliente.direccion);
                 datos.setearParametro("@telefono", cliente.telefono);
                 datos.setearParametro("@correo", cliente.email);
-                datos.setearParametro("@dni", cliente.dni); 
+                datos.setearParametro("@dni", cliente.dni);
+                datos.setearParametro("@activo", cliente.activo);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -72,12 +73,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update clientes set nombre = @nombre, direccion = @direccion, telefono = @telefono, email = @correo, dni = @dni where id = @id");
+                datos.setearConsulta("update clientes set nombre = @nombre, direccion = @direccion, telefono = @telefono, email = @correo, dni = @dni, activo = @activo where id = @id");
                 datos.setearParametro("@nombre", cliente.nombre);
                 datos.setearParametro("@direccion", cliente.direccion);
                 datos.setearParametro("@telefono", cliente.telefono);
                 datos.setearParametro("@correo", cliente.email);
-                datos.setearParametro("@dni", cliente.dni); 
+                datos.setearParametro("@dni", cliente.dni);
+                datos.setearParametro("@activo", cliente.activo);
                 datos.setearParametro("@id", cliente.id);
                 datos.ejecutarAccion();
             }
@@ -97,7 +99,7 @@ namespace Negocio
             try
             {
                 datos.setearParametro("@id", id);
-                datos.setearConsulta("delete from clientes where id = @id");
+                datos.setearConsulta("update clientes set activo = 0 where id = @id");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -128,7 +130,8 @@ namespace Negocio
                     cliente.direccion = datos.Lector["direccion"].ToString();
                     cliente.telefono = datos.Lector["telefono"].ToString();
                     cliente.email = datos.Lector["email"].ToString();
-                    cliente.dni = datos.Lector["dni"].ToString(); 
+                    cliente.dni = datos.Lector["dni"].ToString();
+                    cliente.activo = (bool)datos.Lector["activo"];
                 }
 
                 datos.cerrarConexion();
