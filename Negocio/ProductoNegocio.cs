@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, stock_actual, precio_unitario, porcentaje_ganancia, marca_id, categoria_id from productos");
+                datos.setearConsulta("select id, nombre, stock_actual, precio_unitario, porcentaje_ganancia, marca_id, categoria_id, activo from productos");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -30,7 +30,8 @@ namespace Negocio
                     aux.ganancia = Convert.ToSingle(datos.Lector["porcentaje_ganancia"]);
                     aux.idmarca = (int)datos.Lector["marca_id"];
                     aux.idcategoria = (int)datos.Lector["categoria_id"];
-                    lista.Add(aux);
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
+                    if (aux.activo == true) lista.Add(aux);
                 }
 
                 datos.cerrarConexion();
@@ -47,14 +48,14 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into productos (nombre, stock_actual, precio_unitario, porcentaje_ganancia, marca_id, categoria_id) values (@nombre, @stock_actual, @precio_unitario, @porcentaje_ganancia, @marca_id, @categoria_id)");
+                datos.setearConsulta("insert into productos (nombre, stock_actual, precio_unitario, porcentaje_ganancia, marca_id, categoria_id, activo) values (@nombre, @stock_actual, @precio_unitario, @porcentaje_ganancia, @marca_id, @categoria_id, @activo)");
                 datos.setearParametro("@nombre", producto.nombre);
                 datos.setearParametro("@stock_actual", producto.stockactual);
                 datos.setearParametro("@precio_unitario", producto.precio_unitario);
                 datos.setearParametro("@porcentaje_ganancia", producto.ganancia);
                 datos.setearParametro("@marca_id", producto.idmarca);
                 datos.setearParametro("@categoria_id", producto.idcategoria);
-                datos.setearParametro("@id", producto.id);
+                datos.setearParametro("@activo", producto.activo);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -72,13 +73,14 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update productos set nombre = @nombre, stock_actual = @stock_actual, precio_unitario = @precio_unitario, porcentaje_ganancia = @porcentaje_ganancia, marca_id = @marca_id, categoria_id = @categoria_id where id = @id");
+                datos.setearConsulta("update productos set nombre = @nombre, stock_actual = @stock_actual, precio_unitario = @precio_unitario, porcentaje_ganancia = @porcentaje_ganancia, marca_id = @marca_id, categoria_id = @categoria_id, activo = @activo where id = @id");
                 datos.setearParametro("@nombre", producto.nombre);
                 datos.setearParametro("@stock_actual", producto.stockactual);
                 datos.setearParametro("@precio_unitario", producto.precio_unitario);
                 datos.setearParametro("@porcentaje_ganancia", producto.ganancia);
                 datos.setearParametro("@marca_id", producto.idmarca);
                 datos.setearParametro("@categoria_id", producto.idcategoria);
+                datos.setearParametro("@activo", producto.activo);
                 datos.setearParametro("@id", producto.id);
                 datos.ejecutarAccion();
             }
@@ -98,7 +100,8 @@ namespace Negocio
             try
             {
                 datos.setearParametro("@id", id);
-                datos.setearConsulta("delete from productos where id = @id");
+                datos.setearConsulta("update productos set activo = 0 where id = @id");
+                
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -110,6 +113,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
         public Producto buscarProductoPorId(int id)
         {
             Producto producto = new Producto();
@@ -131,6 +135,7 @@ namespace Negocio
                     producto.ganancia = Convert.ToSingle(datos.Lector["porcentaje_ganancia"]);
                     producto.idmarca = (int)datos.Lector["marca_id"];
                     producto.idcategoria = (int)datos.Lector["categoria_id"];
+                    producto.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();
@@ -164,6 +169,7 @@ namespace Negocio
                     producto.ganancia = Convert.ToSingle(datos.Lector["porcentaje_ganancia"]);
                     producto.idmarca = (int)datos.Lector["marca_id"];
                     producto.idcategoria = (int)datos.Lector["categoria_id"];
+                    producto.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();
@@ -172,7 +178,6 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
-
             }
         }
     }

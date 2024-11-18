@@ -59,7 +59,8 @@ namespace tp_cuatrimestral_equipo_19A
                 precio_unitario = int.Parse(txtPrecioUnitario.Text),
                 ganancia = float.Parse(txtPorcentajeGanancia.Text),
                 idmarca = int.Parse(ddlMarca.SelectedValue),
-                idcategoria = int.Parse(ddlCategoria.SelectedValue)
+                idcategoria = int.Parse(ddlCategoria.SelectedValue),
+                activo = true // Set the product as active by default
             };
 
             if (ProductoId.HasValue)
@@ -89,7 +90,7 @@ namespace tp_cuatrimestral_equipo_19A
             if (e.CommandName == "editar")
             {
                 Producto producto = productonegocio.buscarProductoPorId(id);
-                if (producto != null)
+                if (producto != null && producto.activo)
                 {
                     txtNombreProducto.Text = producto.nombre;
                     txtStockActual.Text = producto.stockactual.ToString();
@@ -116,9 +117,9 @@ namespace tp_cuatrimestral_equipo_19A
         }
         private void cargarProductos()
         {
-            
             ProductoNegocio productonegocio = new ProductoNegocio();
-            ProductosGridView.DataSource = productonegocio.listar();
+            List<Producto> productos = productonegocio.listar().Where(p => p.activo).ToList();
+            ProductosGridView.DataSource = productos;
             ProductosGridView.DataBind();
             UpdatePagerInfo();
         }
@@ -140,7 +141,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             ddlCategoria.DataSource = categoriaNegocio.listar();
             ddlCategoria.DataTextField = "Nombre";
-            ddlCategoria.DataValueField= "Id";
+            ddlCategoria.DataValueField = "Id";
             ddlCategoria.DataBind();
             ddlCategoria.Items.Insert(0, new ListItem(string.Empty, "0"));
         }
