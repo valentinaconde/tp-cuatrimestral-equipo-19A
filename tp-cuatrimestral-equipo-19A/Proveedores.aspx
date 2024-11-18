@@ -48,6 +48,17 @@
         </div>
 
         <div class="card shadow mt-5">
+        <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="txtFiltro" class="form-label fs-4 fst-italic">Buscador</label>
+                        <asp:TextBox runat="server"  placeholder="Buscar proveedor..." ID="txtFiltro" CssClass="form-control mt-3" AutoPostBack="true" OnTextChanged="Buscar_TextChanged" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mt-5">
             <div class="card-header bg-secondary text-white">
                 <h4 class="mb-0 fst-italic">Listado de Proveedores</h4>
             </div>

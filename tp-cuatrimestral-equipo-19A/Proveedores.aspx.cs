@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.Collections.Generic;
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -106,8 +107,22 @@ namespace tp_cuatrimestral_equipo_19A
 
         private void cargarProveedores()
         {
-            ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            ProveedoresGridView.DataSource = proveedorNegocio.listar();
+            ProveedorNegocio proveedornegocio = new ProveedorNegocio();
+            List<Proveedor> proveedores = proveedornegocio.listar();
+
+            Session["listaProveedores"] = proveedores;
+
+            if (proveedores.Count == 0)
+            {
+                lblNoResults.Text = "No se encontraron proveedores.";
+                lblNoResults.Visible = true;
+            }
+            else
+            {
+                lblNoResults.Visible = false;
+            }
+
+            ProveedoresGridView.DataSource = proveedores;
             ProveedoresGridView.DataBind();
             UpdatePagerInfo();
         }
@@ -138,6 +153,32 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     lblPageInfo.Text = $"Página {ProveedoresGridView.PageIndex + 1} de {ProveedoresGridView.PageCount}";
                 }
+            }
+        }
+
+        protected void Buscar_TextChanged(object sender, EventArgs e)
+        {
+            List<Proveedor> listaProveedores = (List<Proveedor>)Session["listaProveedores"];
+            List<Proveedor> listaFiltrada = listaProveedores.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+
+            if (listaFiltrada.Count > 0)
+            {
+                ProveedoresGridView.DataSource = listaFiltrada;
+                ProveedoresGridView.DataBind();
+                lblNoResults.Visible = false;
+            }
+            else
+            {
+                ProveedoresGridView.DataSource = null;
+                ProveedoresGridView.DataBind();
+                lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(txtFiltro.Text))
+            {
+                cargarProveedores();
+                lblNoResults.Visible = false;
             }
         }
     }
