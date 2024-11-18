@@ -43,8 +43,8 @@
         }
     </style>
     <div class="container mt-4">
-        <h2>Registrar Nueva Compra</h2>
-        <label class="text-warning">Para registrar una compra el proveedor debe estar registrado en sistema.</label>
+        <h2 class="fst-italic bg-secondary text-white p-2">Registrar Nueva Compra</h2>
+        <label class="text-danger mb-2">Para registrar una compra el proveedor debe estar registrado en sistema.</label>
         <div class="d-flex gap-2">
             <div class="form-group d-flex flex-column">
                 <label for="ddlProveedor">Proveedor</label>
@@ -60,7 +60,7 @@
 
             </div>
         </div>
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 mt-3">
             <div class="form-group">
                 <label for="txtProducto">Producto</label>
                 <asp:TextBox ID="txtProducto" runat="server" CssClass="form-control height"></asp:TextBox>
@@ -70,13 +70,21 @@
                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control height"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="revCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="Ingrese una cantidad válida." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+$" />
             </div>
-            <div class="form-group">
-                <label for="txtPrecio">Precio unitario</label>
-                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control height"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revPrecio" runat="server" ControlToValidate="txtPrecio" ErrorMessage="Ingrese un precio válido." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+(\.\d{1,2})?$" />
-            </div>
+        
         </div>
-        <div class="d-flex justify-content-start gap-2">
+           <div class="d-flex gap-2 mt-3">
+      <div class="form-group">
+        <label for="txtPrecio">Precio unitario</label>
+        <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control height"></asp:TextBox>
+        <asp:RegularExpressionValidator ID="revPrecio" runat="server" ControlToValidate="txtPrecio" ErrorMessage="Ingrese un precio válido." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+(\.\d{1,2})?$" />
+    </div>
+                  <div class="form-group">
+     <label for="txtPrecio">Porcentaje de ganancia</label>
+     <asp:TextBox ID="txtPorcentaje" runat="server" CssClass="form-control height"></asp:TextBox>
+     <asp:RegularExpressionValidator ID="revPorcentaje" runat="server" ControlToValidate="txtPorcentaje" ErrorMessage="Ingrese un porcentaje válido." CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d+(\.\d{1,2})?$" />
+ </div>
+   </div>
+        <div class="d-flex justify-content-start gap-2 mt-3">
             <div class="form-group d-flex flex-column">
                 <label for="ddlCategoria">Categoria</label>
                 <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control height">
@@ -96,6 +104,7 @@
                 <asp:BoundField DataField="Producto" HeaderText="Producto" />
                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
                 <asp:BoundField DataField="Precio" HeaderText="Precio unitario" />
+                <asp:BoundField DataField="Porcentaje" HeaderText="Porcentaje de ganancia" />
                 <asp:BoundField DataField="Categoria" HeaderText="Categoria" />
             </Columns>
         </asp:GridView>

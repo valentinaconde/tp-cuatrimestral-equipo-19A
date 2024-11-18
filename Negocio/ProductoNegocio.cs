@@ -57,6 +57,7 @@ namespace Negocio
                 datos.setearParametro("@categoria_id", producto.idcategoria);
                 datos.setearParametro("@activo", producto.activo);
                 datos.ejecutarAccion();
+                datos.Comando.Parameters.Clear();
             }
             catch (Exception ex)
             {
@@ -83,6 +84,7 @@ namespace Negocio
                 datos.setearParametro("@activo", producto.activo);
                 datos.setearParametro("@id", producto.id);
                 datos.ejecutarAccion();
+                datos.Comando.Parameters.Clear();
             }
             catch (Exception ex)
             {

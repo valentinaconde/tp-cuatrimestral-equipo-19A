@@ -30,6 +30,7 @@ namespace tp_cuatrimestral_equipo_19A
                 dtProductos = new DataTable();
                 dtProductos.Columns.Add("Producto");
                 dtProductos.Columns.Add("Cantidad");
+                dtProductos.Columns.Add("Porcentaje");
                 dtProductos.Columns.Add("Precio");
                 dtProductos.Columns.Add("Categoria");
                 ViewState["dtProductos"] = dtProductos;
@@ -67,7 +68,7 @@ namespace tp_cuatrimestral_equipo_19A
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
 
-            if(txtProducto.Text == string.Empty || txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || txtFecha.Text == string.Empty)
+            if(txtProducto.Text == string.Empty || txtPorcentaje.Text == string.Empty || txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || txtFecha.Text == string.Empty)
             {
                 txtErrorCompras.Text = "Debe completar todos los campos.";
                 return;
@@ -76,6 +77,7 @@ namespace tp_cuatrimestral_equipo_19A
             dr["Producto"] = txtProducto.Text;
             dr["Cantidad"] = txtCantidad.Text;
             dr["Precio"] = txtPrecio.Text;
+            dr["Porcentaje"] = txtPorcentaje.Text;
             dr["Categoria"] = ddlCategoria.SelectedValue;
             dtProductos.Rows.Add(dr);
 
@@ -87,6 +89,7 @@ namespace tp_cuatrimestral_equipo_19A
             txtProducto.Text = string.Empty;
             txtCantidad.Text = string.Empty;
             txtPrecio.Text = string.Empty;
+            txtPorcentaje.Text = string.Empty;
             txtErrorCompras.Text = "";
         }
 
@@ -123,6 +126,7 @@ namespace tp_cuatrimestral_equipo_19A
                     {
                         producto.stockactual += int.Parse(row["Cantidad"].ToString());
                         producto.precio_unitario = int.Parse(row["Precio"].ToString());
+                        producto.ganancia = float.Parse(row["Porcentaje"].ToString());
                         producto.nombre = row["Producto"].ToString();
 
                         productoNegocio.modificar(producto);
@@ -132,11 +136,14 @@ namespace tp_cuatrimestral_equipo_19A
                     {
                         producto.stockactual = int.Parse(row["Cantidad"].ToString());
                         producto.precio_unitario = int.Parse(row["Precio"].ToString());
+                        producto.ganancia = float.Parse(row["Porcentaje"].ToString());
                         producto.nombre = row["Producto"].ToString();
                         producto.idcategoria = int.Parse(ddlCategoria.SelectedValue);
                         producto.idmarca = int.Parse(ddlMarca.SelectedValue);
                         producto.activo = true;
                         productoNegocio.agregar(producto);
+                        producto = productoNegocio.buscarProductoPorNombreYMarca(producto.nombre, producto.idmarca);
+
 
                     }
 

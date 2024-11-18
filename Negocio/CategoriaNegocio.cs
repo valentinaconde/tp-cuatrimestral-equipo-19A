@@ -61,7 +61,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update categorias set nombre = @nombre, activo = @activo where id = @id");
+                datos.setearConsulta("update categorias set nombre = @nombre where id = @id");
                 datos.setearParametro("@nombre", nombre);
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();

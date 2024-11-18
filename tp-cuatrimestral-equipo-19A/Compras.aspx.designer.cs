@@ -96,6 +96,24 @@ namespace tp_cuatrimestral_equipo_19A
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revPrecio;
 
         /// <summary>
+        /// txtPorcentaje control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPorcentaje;
+
+        /// <summary>
+        /// revPorcentaje control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revPorcentaje;
+
+        /// <summary>
         /// ddlCategoria control.
         /// </summary>
         /// <remarks>

@@ -62,6 +62,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarUsuarios();
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void UsuariosGridView_RowCommand(object sender, GridViewCommandEventArgs e)

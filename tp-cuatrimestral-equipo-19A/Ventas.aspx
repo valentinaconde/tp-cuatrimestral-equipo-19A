@@ -40,9 +40,9 @@
         }
     </style>
     <div class="container mt-4">
-        <h2>Registrar Nueva Venta</h2>
-        <label class="text-warning">Para registrar una venta el cliente debe estar registrado en sistema.</label>
-        <div class="d-flex gap-2">
+        <h2 class="fst-italic bg-secondary text-white p-2">Registrar Nueva Venta</h2>
+        <label class="text-danger">Para registrar una venta el cliente debe estar registrado en sistema.</label>
+        <div class="d-flex gap-2 mt-3">
             <div class="form-group d-flex flex-column">
                 <label for="ddlCliente">Cliente</label>
                 <asp:DropDownList ID="ddlCliente" runat="server" CssClass="form-control height">
@@ -56,7 +56,7 @@
                 <asp:CustomValidator ID="cvFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="Formato de fecha inválido." CssClass="text-danger" Display="Dynamic" ClientValidationFunction="validateDateFormat" />
             </div>
         </div>
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 mt-3">
             <div class="form-group d-flex flex-column">
                 <label for="ddlProducto">Producto</label>
                 <asp:DropDownList ID="ddlProducto" runat="server" CssClass="form-control height" AutoPostBack="true" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged">

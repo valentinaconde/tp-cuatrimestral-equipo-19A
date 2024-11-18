@@ -68,7 +68,7 @@ namespace tp_cuatrimestral_equipo_19A
                 nuevoProducto.id = ProductoId.Value;
                 productonegocio.modificar(nuevoProducto);
                 lblMessage.Text = "Producto modificado exitosamente.";
-                btnAgregaProducto.Text = "Agregar Proveedor";
+                btnAgregaProducto.Text = "Agregar Producto";
                 ProductoId = null;
             }
             else
@@ -79,6 +79,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarProductos();
+            Response.Redirect(Request.RawUrl);
 
         }
         protected void productosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -90,14 +91,36 @@ namespace tp_cuatrimestral_equipo_19A
             if (e.CommandName == "editar")
             {
                 Producto producto = productonegocio.buscarProductoPorId(id);
-                if (producto != null && producto.activo)
+                if (producto.activo == true)
                 {
                     txtNombreProducto.Text = producto.nombre;
                     txtStockActual.Text = producto.stockactual.ToString();
                     txtPrecioUnitario.Text = producto.precio_unitario.ToString();
                     txtPorcentajeGanancia.Text = producto.ganancia.ToString();
+
+
+                    if (ddlMarca.Items.FindByValue(producto.idmarca.ToString()) == null)
+                    {
+                        MarcaNegocio marcaNegocio = new MarcaNegocio();
+                        Marca marca = marcaNegocio.buscarMarcaPorId(producto.idmarca);
+                        if (marca != null)
+                        {
+                            ddlMarca.Items.Add(new ListItem(marca.nombre, marca.id.ToString()));
+                        }
+                    }
                     ddlMarca.SelectedValue = producto.idmarca.ToString();
+
+                    if (ddlCategoria.Items.FindByValue(producto.idcategoria.ToString()) == null)
+                    {
+                        CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                        Categoria categoria = categoriaNegocio.buscarCategoriaPorId(producto.idcategoria);
+                        if (categoria != null)
+                        {
+                            ddlCategoria.Items.Add(new ListItem(categoria.nombre, categoria.id.ToString()));
+                        }
+                    }
                     ddlCategoria.SelectedValue = producto.idcategoria.ToString();
+
 
                     ProductoId = producto.id;
                     btnAgregaProducto.Text = "Modificar Producto";

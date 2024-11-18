@@ -64,6 +64,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarCategorias();
+            Response.Redirect(Request.RawUrl);
             }
         }
 

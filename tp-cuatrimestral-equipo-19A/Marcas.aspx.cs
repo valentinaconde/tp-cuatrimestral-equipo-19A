@@ -64,6 +64,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarMarcas();
+            Response.Redirect(Request.RawUrl);
 
             }
         }
@@ -77,13 +78,13 @@ namespace tp_cuatrimestral_equipo_19A
             if (e.CommandName == "editar")
             {
                 Marca marca = marcaNegocio.buscarMarcaPorId(id);
-                if (marca.nombre != null && marca.activo == true)
+                if (marca.activo == true)
                 {
                     txtNombreMarca.Text = marca.nombre;
                     MarcaId = marca.id;
                     btnAgregarMarca.Text = "Modificar Marca";
                 }
-                else txtNombreMarca.Text = "ERROR";
+                else txtNombreMarca.Text = marca.nombre;
             }
             else if (e.CommandName == "eliminar")
             {

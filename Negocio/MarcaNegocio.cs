@@ -114,7 +114,6 @@ namespace Negocio
                 {
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
-                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();
