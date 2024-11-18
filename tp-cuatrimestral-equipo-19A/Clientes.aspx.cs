@@ -109,22 +109,24 @@ namespace tp_cuatrimestral_equipo_19A
 
         private void cargarClientes()
         {
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            ClientesGridView.DataSource = clienteNegocio.listar();
-            List<Cliente> listaClientes = clienteNegocio.listar();
-            ClientesGridView.DataBind();
-            UpdatePagerInfo();
+            ClienteNegocio clientenegocio = new ClienteNegocio();
+            List<Cliente> clientes = clientenegocio.listar();
 
+            Session["listaClientes"] = clientes;
 
-            if (listaClientes.Count == 0)
+            if (clientes.Count == 0)
             {
-                lblNoResults.Text = "No se encontraron clientes.";
+                lblNoResults.Text = "No se encontraron categorías.";
                 lblNoResults.Visible = true;
             }
             else
             {
                 lblNoResults.Visible = false;
             }
+
+            ClientesGridView.DataSource = clientes;
+            ClientesGridView.DataBind();
+            UpdatePagerInfo();
         }
 
         private void limpiarFormulario()
@@ -147,6 +149,32 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     lblPageInfo.Text = $"Página {ClientesGridView.PageIndex + 1} de {ClientesGridView.PageCount}";
                 }
+            }
+        }
+
+        protected void Buscar_TextChanged(object sender, EventArgs e)
+        {
+            List<Cliente> listaClientes = (List<Cliente>)Session["listaClientes"];
+            List<Cliente> listaFiltrada = listaClientes.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+
+            if (listaFiltrada.Count > 0)
+            {
+                ClientesGridView.DataSource = listaFiltrada;
+                ClientesGridView.DataBind();
+                lblNoResults.Visible = false;
+            }
+            else
+            {
+                ClientesGridView.DataSource = null;
+                ClientesGridView.DataBind();
+                lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(txtFiltro.Text))
+            {
+                cargarClientes();
+                lblNoResults.Visible = false;
             }
         }
     }
