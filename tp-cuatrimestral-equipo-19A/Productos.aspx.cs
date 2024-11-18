@@ -142,6 +142,19 @@ namespace tp_cuatrimestral_equipo_19A
         {
             ProductoNegocio productonegocio = new ProductoNegocio();
             List<Producto> productos = productonegocio.listar();
+
+            Session["listaProductos"] = productos;
+
+            if (productos.Count == 0)
+            {
+                lblNoResults.Text = "No se encontraron categorías.";
+                lblNoResults.Visible = true;
+            }
+            else
+            {
+                lblNoResults.Visible = false;
+            }
+
             ProductosGridView.DataSource = productos;
             ProductosGridView.DataBind();
             UpdatePagerInfo();
@@ -197,6 +210,32 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     lblPageInfo.Text = $"Página {ProductosGridView.PageIndex + 1} de {ProductosGridView.PageCount}";
                 }
+            }
+        }
+
+        protected void Buscar_TextChanged(object sender, EventArgs e)
+        {
+            List<Producto> listaProductos = (List<Producto>)Session["listaProductos"];
+            List<Producto> listaFiltrada = listaProductos.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+
+            if (listaFiltrada.Count > 0)
+            {
+                ProductosGridView.DataSource = listaFiltrada;
+                ProductosGridView.DataBind();
+                lblNoResults.Visible = false;
+            }
+            else
+            {
+                ProductosGridView.DataSource = null;
+                ProductosGridView.DataBind();
+                lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.Visible = true;
+            }
+
+            if (string.IsNullOrEmpty(txtFiltro.Text))
+            {
+                cargarCategorias();
+                lblNoResults.Visible = false;
             }
         }
     }
