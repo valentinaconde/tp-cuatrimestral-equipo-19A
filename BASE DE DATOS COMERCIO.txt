@@ -1,0 +1,177 @@
+CREATE DATABASE DB_COMERCIO_19A;
+GO
+
+
+USE DB_COMERCIO_19A;
+GO
+
+
+CREATE TABLE roles (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  nombre VARCHAR(50) NOT NULL,
+  activo BIT DEFAULT 1
+);
+
+CREATE TABLE usuarios (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  nombre VARCHAR(50) NOT NULL,
+  apellido VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(50) NOT NULL,
+  rol_id INT,
+  activo BIT DEFAULT 1,
+  FOREIGN KEY (rol_id) REFERENCES roles(id)
+);
+
+CREATE TABLE clientes (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  nombre VARCHAR(50) NOT NULL,
+  direccion VARCHAR(50),
+  telefono VARCHAR(50),
+  email VARCHAR(50),
+  dni VARCHAR(20),
+  activo BIT DEFAULT 1
+);
+
+CREATE TABLE proveedores (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  nombre VARCHAR(50) NOT NULL,
+  direccion VARCHAR(50),
+  telefono VARCHAR(50),
+  email VARCHAR(50),
+  cuit VARCHAR(20),
+  activo BIT DEFAULT 1
+);
+
+CREATE TABLE marcas (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  nombre VARCHAR(50) NOT NULL,
+  activo BIT DEFAULT 1
+);
+
+CREATE TABLE categorias (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  nombre VARCHAR(50) NOT NULL,
+  activo BIT DEFAULT 1
+);
+
+CREATE TABLE productos (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  nombre VARCHAR(50) NOT NULL,
+  stock_actual INT NOT NULL,
+  precio_unitario INT NOT NULL,
+  porcentaje_ganancia FLOAT NOT NULL,
+  marca_id INT,
+  categoria_id INT,
+  activo BIT DEFAULT 1,
+  FOREIGN KEY (marca_id) REFERENCES marcas(id),
+  FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+);
+
+CREATE TABLE compras (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  fecha DATETIME NOT NULL,
+  total FLOAT NOT NULL,
+  proveedor_id INT,
+  activo BIT DEFAULT 1,
+  FOREIGN KEY (proveedor_id) REFERENCES proveedores(id)
+);
+
+CREATE TABLE detalle_compras (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  cantidad INT NOT NULL,
+  precio_unitario FLOAT NOT NULL,
+  compra_id INT,
+  producto_id INT,
+  activo BIT DEFAULT 1,
+  FOREIGN KEY (compra_id) REFERENCES compras(id),
+  FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
+CREATE TABLE ventas (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  fecha DATETIME NOT NULL,
+  total FLOAT NOT NULL,
+  numero_factura VARCHAR(50) NOT NULL UNIQUE,
+  cliente_id INT,
+  usuario_id INT,
+  activo BIT DEFAULT 1,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE detalle_ventas (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  cantidad INT NOT NULL,
+  precio_unitario FLOAT NOT NULL,
+  venta_id INT,
+  producto_id INT,
+  activo BIT DEFAULT 1,
+  FOREIGN KEY (venta_id) REFERENCES ventas(id),
+  FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
+
+INSERT INTO roles (nombre) VALUES
+('admin'),
+('vendedor');
+
+
+INSERT INTO usuarios (nombre, apellido, email, password, rol_id) VALUES
+('Juan', 'Perez', 'juan.perez@example.com', 'pass123', 1),
+('Maria', 'Garcia', 'maria.garcia@example.com', 'mypass', 2),
+('Pedro', 'Martinez', 'pedro.martinez@example.com', 'securepass', 2);
+
+
+INSERT INTO clientes (nombre, direccion, telefono, email, dni) VALUES
+('Cliente 1', 'Calle Falsa 123', '555-1234', 'cliente1@example.com', '12345678'),
+('Cliente 2', 'Avenida Siempre Viva 742', '555-5678', 'cliente2@example.com', '87654321'),
+('Cliente 3', 'Calle Los Olivos 456', '555-9876', 'cliente3@example.com', '11223344');
+
+
+INSERT INTO proveedores (nombre, direccion, telefono, email, cuit) VALUES
+('Proveedor 1', 'Calle Comercio 100', '555-2222', 'proveedor1@example.com', '20-12345678-9'),
+('Proveedor 2', 'Avenida Industrial 300', '555-3333', 'proveedor2@example.com', '30-87654321-7'),
+('Proveedor 3', 'Calle Mayor 500', '555-4444', 'proveedor3@example.com', '23-11223344-5');
+
+
+INSERT INTO marcas (nombre) VALUES
+('Marca A'),
+('Marca B'),
+('Marca C');
+
+
+INSERT INTO categorias (nombre) VALUES
+('Electrónica'),
+('Hogar'),
+('Ropa');
+
+
+INSERT INTO productos (nombre, stock_actual, precio_unitario, porcentaje_ganancia, marca_id, categoria_id) VALUES
+('Producto 1', 100, 500, 20.0, 1, 1),
+('Producto 2', 50, 300, 15.5, 2, 2),
+('Producto 3', 200, 150, 30.0, 3, 3);
+
+
+INSERT INTO compras (fecha, total, proveedor_id) VALUES
+('2024-10-10 12:30:00', 1000.0, 1),
+('2024-10-11 14:00:00', 2000.0, 2),
+('2024-10-12 15:45:00', 1500.0, 3);
+
+
+INSERT INTO detalle_compras (cantidad, precio_unitario, compra_id, producto_id) VALUES
+(10, 100.0, 1, 1),
+(20, 50.0, 2, 2),
+(15, 75.0, 3, 3);
+
+
+INSERT INTO ventas (fecha, total, numero_factura, cliente_id, usuario_id) VALUES
+('2024-10-13 10:00:00', 500.0, 'FAC001', 1, 1),
+('2024-10-14 11:30:00', 750.0, 'FAC002', 2, 2),
+('2024-10-15 09:45:00', 1000.0, 'FAC003', 3, 3);
+
+
+INSERT INTO detalle_ventas (cantidad, precio_unitario, venta_id, producto_id) VALUES
+(5, 100.0, 1, 1),
+(10, 75.0, 2, 2),
+(8, 125.0, 3, 3);
