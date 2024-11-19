@@ -177,7 +177,7 @@ namespace tp_cuatrimestral_equipo_19A
                     MarcasGridView.DataSource = null;
                     MarcasGridView.DataBind();
                     lblNoResultsMarca.Text = "No se encontraron marcas.";
-                    lblNoResults.CssClass = "text-dark";
+                    lblNoResultsMarca.CssClass = "text-dark";
 
                     lblNoResultsMarca.Visible = true;
 
