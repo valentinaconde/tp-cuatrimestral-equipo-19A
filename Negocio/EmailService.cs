@@ -16,16 +16,16 @@ namespace negocio
         public EmailService()
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential("a19b425d1f42cd", "ee3298e45e2b54");
+            server.Credentials = new NetworkCredential("smtp@mailtrap.io", "ca4df0993da21ef6ffec0df1cb596957");
             server.EnableSsl = true;
             server.Port = 2525;
-            server.Host = "smtp.mailtrap.io";
+            server.Host = "live.smtp.mailtrap.io";
         }
 
         public void armarCorreo(string emailDestino, string asunto, string cuerpo)
         {
             email = new MailMessage();
-            email.From = new MailAddress("noresponder@admincomercio.com");
+            email.From = new MailAddress("hello@demomailtrap.com");
             email.To.Add(emailDestino);
             email.Subject = asunto;
             email.IsBodyHtml = true;

@@ -45,6 +45,7 @@ namespace tp_cuatrimestral_equipo_19A
                     activo = true
                 };
 
+              
                 if (ClienteId.HasValue)
                 {
                     nuevoCliente.id = ClienteId.Value;
@@ -55,15 +56,40 @@ namespace tp_cuatrimestral_equipo_19A
                 }
                 else
                 {
-                    clienteNegocio.agregar(nuevoCliente);
-                    lblMessage.Text = "Cliente agregado exitosamente.";
+                    Cliente clienteActual = new Cliente();
+                    clienteActual = clienteNegocio.buscarClientePorDni(nuevoCliente.dni);
+
+                    if (clienteActual.nombre != null && clienteActual.activo == true)
+                    {
+
+                        lblMessage.Text = "El cliente ya existe.";
+                        lblMessage.CssClass = "text-danger";
+
+                    }
+                    else if (clienteActual.nombre != null && clienteActual.activo == false)
+                    {
+                        clienteNegocio.activarCliente(clienteActual.dni);
+                    }
+                    else
+                    {
+                        clienteNegocio.agregar(nuevoCliente);
+                        lblMessage.Text = "Cliente agregado exitosamente.";
+                        lblMessage.CssClass = "text-success";
+
+
+                    }
+
                 }
 
                 limpiarFormulario();
                 cargarClientes();
-                Response.Redirect(Request.RawUrl);
+
+         
             }
         }
+
+
+       
 
         protected void clientesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -116,7 +142,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (clientes.Count == 0)
             {
-                lblNoResults.Text = "No se encontraron categorías.";
+                lblNoResults.Text = "No se encontraron clientes.";
                 lblNoResults.Visible = true;
             }
             else
@@ -132,7 +158,6 @@ namespace tp_cuatrimestral_equipo_19A
         private void limpiarFormulario()
         {
             txtNombreCliente.Text = string.Empty;
-            lblMessage2.Text = string.Empty;
             txtDireccionCliente.Text = string.Empty;
             txtTelefonoCliente.Text = string.Empty;
             txtEmailCliente.Text = string.Empty;
@@ -167,7 +192,7 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 ClientesGridView.DataSource = null;
                 ClientesGridView.DataBind();
-                lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.Text = "No se encontraron clientes.";
                 lblNoResults.Visible = true;
             }
 
