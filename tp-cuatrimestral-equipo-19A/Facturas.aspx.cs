@@ -46,6 +46,8 @@ namespace tp_cuatrimestral_equipo_19A
             if (ventas.Count == 0)
             {
                 lblNoResults.Text = "No se encontraron Facturas.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
             else

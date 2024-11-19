@@ -52,6 +52,8 @@ namespace tp_cuatrimestral_equipo_19A
                 nuevoUsuario.id = UsuarioId.Value;
                 usuarioNegocio.modificar(nuevoUsuario);
                 lblMessage.Text = "Usuario modificado exitosamente.";
+                lblMessage.CssClass = "text-success";
+
                 btnAgregar.Text = "Agregar Usuario";
                 UsuarioId = null;
             }
@@ -71,6 +73,8 @@ namespace tp_cuatrimestral_equipo_19A
                 else if (usuarioActual.nombre != null && usuarioActual.activo == false)
                 {
                     usuarioNegocio.activarUsuario(usuarioActual.email);
+                    lblMessage.Text = "Usuario agregado exitosamente.";
+                    lblMessage.CssClass = "text-success";
                 }
                 else
                 {
@@ -109,6 +113,8 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 usuarioNegocio.eliminar(id);
                 lblMessage.Text = "Usuario eliminado exitosamente.";
+                lblMessage.CssClass = "text-success";
+
                 cargarUsuarios();
             }
         }
@@ -122,7 +128,9 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (usuarios.Count == 0)
             {
-                lblNoResults.Text = "No se encontraron proveedores.";
+                lblNoResults.Text = "No se encontraron usuarios.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
             else
@@ -141,8 +149,6 @@ namespace tp_cuatrimestral_equipo_19A
             txtApellido.Text = string.Empty;
             txtEmail.Text = string.Empty;
             ddlRol.SelectedIndex = 0;
-            lblMessage.Text = string.Empty;
-            lblMessage2.Text = string.Empty;
         }
 
         protected void UsuariosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -180,7 +186,9 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 UsuariosGridView.DataSource = null;
                 UsuariosGridView.DataBind();
-                lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.Text = "No se encontraron usuarios.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
 

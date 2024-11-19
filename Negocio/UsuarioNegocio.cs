@@ -29,7 +29,7 @@ namespace Negocio
                     aux.email = datos.Lector["email"].ToString();
                     aux.password = datos.Lector["password"].ToString();
                     aux.rol_id = (int)datos.Lector["rol_id"];
-                    
+
 
                     lista.Add(aux);
                 }
@@ -96,8 +96,7 @@ namespace Negocio
             try
             {
                 datos.setearParametro("@id", id);
-
-                datos.setearConsulta("delete from usuarios where id = @id");
+                datos.setearConsulta("update usuarios set activo = 0 where id = @id");
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -117,7 +116,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id from usuarios where email = @email");
+                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id, activo from usuarios where email = @email");
                 datos.setearParametro("@email", email);
                 datos.ejecutarLectura();
 
@@ -129,6 +128,7 @@ namespace Negocio
                     usuario.email = datos.Lector["email"].ToString();
                     usuario.password = datos.Lector["password"].ToString();
                     usuario.rol_id = (int)datos.Lector["rol_id"];
+                    usuario.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();
@@ -192,4 +192,7 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
+        }
+    }
 }

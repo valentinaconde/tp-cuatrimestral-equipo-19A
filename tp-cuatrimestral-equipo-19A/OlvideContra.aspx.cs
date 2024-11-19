@@ -34,8 +34,8 @@ namespace tp_cuatrimestral_equipo_19A
             emailService.armarCorreo(email, "Recuperar contraseña", "Tu contraseña es: " + usuario.password);
             emailService.enviarEmail();
             lblMessage.Text = "Email enviado exitosamente";
-            
-            //Response.Redirect("Login.aspx");
+            lblMessage.CssClass = "text-success";
+
 
         }
     }

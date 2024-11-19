@@ -51,6 +51,8 @@ namespace tp_cuatrimestral_equipo_19A
                     nuevoCliente.id = ClienteId.Value;
                     clienteNegocio.modificar(nuevoCliente);
                     lblMessage.Text = "Cliente modificado exitosamente.";
+                    lblMessage.CssClass = "text-success";
+
                     btnAgregarCliente.Text = "Agregar Cliente";
                     ClienteId = null;
                 }
@@ -69,6 +71,8 @@ namespace tp_cuatrimestral_equipo_19A
                     else if (clienteActual.nombre != null && clienteActual.activo == false)
                     {
                         clienteNegocio.activarCliente(clienteActual.dni);
+                        lblMessage.Text = "Cliente agregado exitosamente.";
+                        lblMessage.CssClass = "text-success";
                     }
                     else
                     {
@@ -117,12 +121,16 @@ namespace tp_cuatrimestral_equipo_19A
                 else
                 {
                     lblMessage2.Text = "Error al cargar el cliente.";
+                    lblMessage.CssClass = "text-danger";
+
                 }
             }
             else if (e.CommandName == "eliminar")
             {
                 clienteNegocio.eliminar(id);
                 lblMessage.Text = "Cliente eliminado exitosamente.";
+                lblMessage.CssClass = "text-success";
+
                 cargarClientes();
             }
         }
@@ -143,6 +151,8 @@ namespace tp_cuatrimestral_equipo_19A
             if (clientes.Count == 0)
             {
                 lblNoResults.Text = "No se encontraron clientes.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
             else
@@ -193,6 +203,8 @@ namespace tp_cuatrimestral_equipo_19A
                 ClientesGridView.DataSource = null;
                 ClientesGridView.DataBind();
                 lblNoResults.Text = "No se encontraron clientes.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
 

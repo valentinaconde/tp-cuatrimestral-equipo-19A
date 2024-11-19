@@ -25,10 +25,10 @@ namespace Negocio
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
                     aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
-                    if (aux.activo == true) lista.Add(aux); 
-                    
+                    if (aux.activo == true) lista.Add(aux);
+
                 }
-      
+
                 return lista;
             }
             catch (Exception ex)
@@ -171,6 +171,7 @@ namespace Negocio
             }
 
         }
+    }
 }
  
 

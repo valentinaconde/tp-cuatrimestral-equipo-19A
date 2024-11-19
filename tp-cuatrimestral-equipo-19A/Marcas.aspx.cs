@@ -53,6 +53,8 @@ namespace tp_cuatrimestral_equipo_19A
                 nuevaMarca.id = MarcaId.Value;
                 marcaNegocio.modificar(nuevaMarca.id, nuevaMarca.nombre);
                 lblMessage.Text = "Marca modificada exitosamente.";
+                lblMessage.CssClass = "text-success";
+
                 btnAgregarMarca.Text = "Agregar Marca";
                 MarcaId = null;
             }
@@ -71,6 +73,8 @@ namespace tp_cuatrimestral_equipo_19A
                     else if (marcaActual.nombre != null && marcaActual.activo == false)
                     {
                         marcaNegocio.activarMarca(marcaActual.nombre);
+                        lblMessage.Text = "Marca agregada exitosamente.";
+                        lblMessage.CssClass = "text-success";
                     }
                     else
                     {
@@ -110,6 +114,8 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 marcaNegocio.eliminar(id);
                 lblMessage.Text = "Marca eliminada exitosamente.";
+                lblMessage.CssClass = "text-success";
+
                 cargarMarcas();
             }
         }
@@ -136,8 +142,6 @@ namespace tp_cuatrimestral_equipo_19A
         private void limpiarFormulario()
         {
             txtNombreMarca.Text = string.Empty;
-            lblMessage.Text = string.Empty;
-            lblMessage2.Text = string.Empty;
         }
 
         private void UpdatePagerInfo()
@@ -173,6 +177,8 @@ namespace tp_cuatrimestral_equipo_19A
                     MarcasGridView.DataSource = null;
                     MarcasGridView.DataBind();
                     lblNoResultsMarca.Text = "No se encontraron marcas.";
+                    lblNoResults.CssClass = "text-dark";
+
                     lblNoResultsMarca.Visible = true;
 
                 }

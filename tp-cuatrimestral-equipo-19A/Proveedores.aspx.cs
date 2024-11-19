@@ -54,6 +54,7 @@ namespace tp_cuatrimestral_equipo_19A
                     nuevoProveedor.id = ProveedorId.Value;
                     proveedorNegocio.modificar(nuevoProveedor);
                     lblMessage.Text = "Proveedor modificado exitosamente.";
+                    lblMessage.CssClass = "text-success";
                     btnAgregarProveedor.Text = "Agregar Proveedor";
                     ProveedorId = null;
                 }
@@ -72,12 +73,15 @@ namespace tp_cuatrimestral_equipo_19A
                     else if (proveedorActual.nombre != null && proveedorActual.activo == false)
                     {
                         proveedorNegocio.activarProveedor(proveedorActual.cuit);
+                        lblMessage.Text = "Proveedor agregado exitosamente.";
+                        lblMessage.CssClass = "text-success";
                     }
                     else
                     {
                         proveedorNegocio.agregar(nuevoProveedor);
                         lblMessage.Text = "Proveedor agregado exitosamente.";
                         lblMessage.CssClass = "text-success";
+
 
 
                     }
@@ -120,6 +124,8 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 proveedorNegocio.eliminar(id);
                 lblMessage.Text = "Proveedor eliminado exitosamente.";
+                lblMessage.CssClass = "text-success";
+
                 cargarProveedores();
             }
         }
@@ -134,6 +140,8 @@ namespace tp_cuatrimestral_equipo_19A
             if (proveedores.Count == 0)
             {
                 lblNoResults.Text = "No se encontraron proveedores.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
             else
@@ -190,7 +198,9 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 ProveedoresGridView.DataSource = null;
                 ProveedoresGridView.DataBind();
-                lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.CssClass = "text-dark";
+                lblNoResults.Text = "No se encontraron proveedores.";
+                lblNoResults.CssClass = "text-dark";
                 lblNoResults.Visible = true;
             }
 

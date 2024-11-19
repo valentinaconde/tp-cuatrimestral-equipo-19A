@@ -61,7 +61,7 @@
                 <h4 class="mb-0 fst-italic">Listado de usuarios</h4>
             </div>
             <div class="card-body">
-                <asp:GridView ID="UsuariosGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="UsuariosGridView_RowCommand" AllowPaging="true" PageSize="3" OnPageIndexChanging="UsuariosGridView_PageIndexChanging">
+                <asp:GridView ID="UsuariosGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="UsuariosGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="UsuariosGridView_PageIndexChanging">
                     <Columns>
                         <asp:BoundField DataField="id" HeaderText="ID" />
                         <asp:BoundField DataField="nombre" HeaderText="Nombre" />

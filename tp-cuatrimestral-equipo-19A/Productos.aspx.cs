@@ -68,6 +68,7 @@ namespace tp_cuatrimestral_equipo_19A
                 nuevoProducto.id = ProductoId.Value;
                 productonegocio.modificar(nuevoProducto);
                 lblMessage.Text = "Producto modificado exitosamente.";
+                lblMessage.CssClass = "text-success";
                 btnAgregaProducto.Text = "Agregar Producto";
                 ProductoId = null;
             }
@@ -86,6 +87,8 @@ namespace tp_cuatrimestral_equipo_19A
                 else if (productoActual.nombre != null && productoActual.activo == false)
                 {
                     productonegocio.activarProducto(productoActual.nombre, productoActual.idmarca);
+                    lblMessage.Text = "Producto agregado exitosamente.";
+                    lblMessage.CssClass = "text-success";
                 }
                 else
                 {
@@ -153,6 +156,8 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 productonegocio.eliminar(id);
                 lblMessage.Text = "Producto eliminado exitosamente.";
+                lblMessage.CssClass = "text-success";
+
                 cargarProductos();
             }
 
@@ -167,6 +172,8 @@ namespace tp_cuatrimestral_equipo_19A
             if (productos.Count == 0)
             {
                 lblNoResults.Text = "No se encontraron productos.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
             else
@@ -246,6 +253,8 @@ namespace tp_cuatrimestral_equipo_19A
                 ProductosGridView.DataSource = null;
                 ProductosGridView.DataBind();
                 lblNoResults.Text = "No se encontraron Productos.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
 

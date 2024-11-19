@@ -53,7 +53,9 @@ namespace tp_cuatrimestral_equipo_19A
                 nuevaCategoria.id = CategoriaId.Value;
                 categoriaNegocio.modificar(nuevaCategoria.id, nuevaCategoria.nombre);
                 lblMessage.Text = "Categoría modificada exitosamente.";
-                btnAgregarCategoria.Text = "Agregar Categoría";
+                lblMessage.CssClass = "text-success";
+
+                    btnAgregarCategoria.Text = "Agregar Categoría";
                 CategoriaId = null;
             }
             else
@@ -68,9 +70,11 @@ namespace tp_cuatrimestral_equipo_19A
                         lblMessage.CssClass = "text-danger";
 
                     }
-                    else if (categoriaActual.nombre != null && nuevaCategoria.activo == false)
+                    else if (categoriaActual.nombre != null && categoriaActual.activo == false)
                     {
                         categoriaNegocio.activarCategoria(categoriaActual.nombre);
+                        lblMessage.Text = "Categoria agregada exitosamente.";
+                        lblMessage.CssClass = "text-success";
                     }
                     else
                     {
@@ -107,6 +111,7 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 categoriaNegocio.eliminar(id);
                 lblMessage.Text = "Categoría eliminada exitosamente.";
+                lblMessage.CssClass = "text-success";
                 cargarCategorias();
                 
             }
@@ -122,6 +127,7 @@ namespace tp_cuatrimestral_equipo_19A
             if(listaCategorias.Count == 0)
             {
                 lblNoResults.Text = "No se encontraron categorías.";
+                lblNoResults.CssClass = "text-dark";
                 lblNoResults.Visible = true;
             }
             else
@@ -139,8 +145,6 @@ namespace tp_cuatrimestral_equipo_19A
         private void limpiarFormulario()
         {
             txtNombreCategoria.Text = string.Empty;
-            lblMessage.Text = string.Empty;
-            lblMessage2.Text = string.Empty;
         }
 
         protected void categoriasGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -179,6 +183,8 @@ namespace tp_cuatrimestral_equipo_19A
                 CategoriasGridView.DataSource = null;
                 CategoriasGridView.DataBind();
                 lblNoResults.Text = "No se encontraron categorías.";
+                lblNoResults.CssClass = "text-dark";
+
                 lblNoResults.Visible = true;
             }
 

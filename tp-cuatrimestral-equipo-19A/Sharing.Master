@@ -25,6 +25,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager runat="server" />
         <div>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
                 <div class="container">
