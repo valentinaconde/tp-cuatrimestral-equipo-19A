@@ -18,7 +18,8 @@
                             <div class="col-md-4">
                                 <label for="txtDniCliente" class="form-label">DNI</label>
                                 <asp:TextBox ID="txtDniCliente" runat="server" CssClass="form-control" />
-                                <asp:RequiredFieldValidator ID="rfvDniCliente" runat="server" ControlToValidate="txtDniCliente" ErrorMessage="El DNI del cliente es obligatorio." CssClass="text-danger small" Display="Dynamic" />
+                                <asp:RequiredFieldValidator ID="rfvDniCliente" runat="server" ControlToValidate="txtDniCliente" ErrorMessage="El DNI del cliente es obligatorio." CssClass="text-danger small" Display="Static" />
+                                <asp:RegularExpressionValidator ID="revDniCliente" runat="server" ControlToValidate="txtDniCliente" ErrorMessage="Debe ser un número entero positivo." CssClass="text-danger small" Display="Static" ValidationExpression="^\d+$" />
                             </div>
                             <div class="col-md-4">
                                 <label for="txtDireccionCliente" class="form-label">Dirección</label>

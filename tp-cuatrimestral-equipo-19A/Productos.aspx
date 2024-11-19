@@ -33,6 +33,7 @@
                                 <label for="txtPorcentajeGanancia" class="form-label">Porcentaje de Ganancia</label>
                                 <asp:TextBox ID="txtPorcentajeGanancia" runat="server" CssClass="form-control" />
                                 <asp:RequiredFieldValidator ID="rfvPorcentajeGanancia" runat="server" ControlToValidate="txtPorcentajeGanancia" ErrorMessage="Este campo es obligatorio." CssClass="text-danger small" Display="Static" />
+                                <asp:RegularExpressionValidator ID="RevPorcentajeGanancia" runat="server" ControlToValidate="txtPorcentajeGanancia" ErrorMessage="Debe ser un número entero positivo." CssClass="text-danger small" Display="Dynamic" ValidationExpression="^\d+$" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="ddlMarca" class="form-label">Marca</label>
