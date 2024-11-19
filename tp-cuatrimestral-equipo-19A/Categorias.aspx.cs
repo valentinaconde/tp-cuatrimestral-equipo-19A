@@ -58,13 +58,32 @@ namespace tp_cuatrimestral_equipo_19A
             }
             else
             {
-                categoriaNegocio.agregar(nuevaCategoria.nombre);
-                lblMessage.Text = "Categoría agregada exitosamente.";
+                    Categoria categoriaActual = new Categoria();
+                    categoriaActual = categoriaNegocio.buscarCategoriaPorNombre(nuevaCategoria.nombre);
+
+                    if (categoriaActual.nombre != null && categoriaActual.activo == true)
+                    {
+
+                        lblMessage.Text = "La categoria ya existe.";
+                        lblMessage.CssClass = "text-danger";
+
+                    }
+                    else if (categoriaActual.nombre != null && nuevaCategoria.activo == false)
+                    {
+                        categoriaNegocio.activarCategoria(categoriaActual.nombre);
+                    }
+                    else
+                    {
+                        categoriaNegocio.agregar(nuevaCategoria.nombre);
+                        lblMessage.Text = "Categoria agregado exitosamente.";
+                        lblMessage.CssClass = "text-success";
+
+
+                    }
             }
 
             limpiarFormulario();
             cargarCategorias();
-            Response.Redirect(Request.RawUrl);
             }
         }
 

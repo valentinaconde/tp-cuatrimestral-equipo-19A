@@ -121,5 +121,53 @@ namespace Negocio
                 throw ex;
             }
         }
+
+        public Categoria buscarCategoriaPorNombre(string nombre)
+        {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id, nombre, activo from categorias where nombre = @nombre");
+                datos.setearParametro("@nombre", nombre);
+                datos.ejecutarLectura();
+
+                Categoria aux = new Categoria();
+
+                if (datos.Lector.Read())
+                {
+                    aux.id = (int)datos.Lector["id"];
+                    aux.nombre = datos.Lector["nombre"].ToString();
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
+                }
+
+                datos.cerrarConexion();
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void activarCategoria(string nombre)
+        {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update categorias set activo = 1 where nombre = @nombre");
+                datos.setearParametro("@nombre", nombre);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

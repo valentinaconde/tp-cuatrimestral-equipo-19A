@@ -58,13 +58,33 @@ namespace tp_cuatrimestral_equipo_19A
             }
             else
             {
-                marcaNegocio.agregar(nuevaMarca.nombre);
-                lblMessage.Text = "Marca agregada exitosamente.";
-            }
+                    Marca marcaActual = new Marca();
+                    marcaActual = marcaNegocio.buscarMarcaPorNombre(nuevaMarca.nombre);
+
+                    if (marcaActual.nombre != null && marcaActual.activo == true)
+                    {
+
+                        lblMessage.Text = "La marca ya existe.";
+                        lblMessage.CssClass = "text-danger";
+
+                    }
+                    else if (marcaActual.nombre != null && marcaActual.activo == false)
+                    {
+                        marcaNegocio.activarMarca(marcaActual.nombre);
+                    }
+                    else
+                    {
+                        marcaNegocio.agregar(nuevaMarca.nombre);
+                        lblMessage.Text = "Marca agregada exitosamente.";
+                        lblMessage.CssClass = "text-success";
+
+
+                    }
+                }
 
             limpiarFormulario();
             cargarMarcas();
-            Response.Redirect(Request.RawUrl);
+            
 
             }
         }

@@ -57,13 +57,33 @@ namespace tp_cuatrimestral_equipo_19A
             }
             else
             {
-                usuarioNegocio.agregar(nuevoUsuario.nombre, nuevoUsuario.apellido, nuevoUsuario.email, nuevoUsuario.password, nuevoUsuario.rol_id);
-                lblMessage.Text = "Usuario agregado exitosamente.";
+
+                Usuario usuarioActual = new Usuario();
+                usuarioActual = usuarioNegocio.buscarUsuarioPorEmail(nuevoUsuario.email);
+
+                if (usuarioActual.nombre != null && usuarioActual.activo == true)
+                {
+
+                    lblMessage.Text = "El usuario ya existe.";
+                    lblMessage.CssClass = "text-danger";
+
+                }
+                else if (usuarioActual.nombre != null && usuarioActual.activo == false)
+                {
+                    usuarioNegocio.activarUsuario(usuarioActual.email);
+                }
+                else
+                {
+                    usuarioNegocio.agregar(nuevoUsuario.nombre, nuevoUsuario.apellido, nuevoUsuario.email, nuevoUsuario.password, nuevoUsuario.rol_id);
+                    lblMessage.Text = "Usuario agregado exitosamente.";
+                    lblMessage.CssClass = "text-success";
+
+
+                }
             }
 
             limpiarFormulario();
             cargarUsuarios();
-            Response.Redirect(Request.RawUrl);
         }
 
         protected void UsuariosGridView_RowCommand(object sender, GridViewCommandEventArgs e)

@@ -125,7 +125,52 @@ namespace Negocio
             }
         }
 
-    }
+        public Marca buscarMarcaPorNombre(string nombre)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id, nombre from marcas where nombre = @nombre");
+                datos.setearParametro("@nombre", nombre);
+                datos.ejecutarLectura();
+
+                Marca aux = new Marca();
+
+                if (datos.Lector.Read())
+                {
+                    aux.id = (int)datos.Lector["id"];
+                    aux.nombre = datos.Lector["nombre"].ToString();
+                }
+
+                datos.cerrarConexion();
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void activarMarca(string nombre)
+        {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update marcas set activo = 1 where nombre = @nombre");
+                datos.setearParametro("@nombre", nombre);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
 }
  
 

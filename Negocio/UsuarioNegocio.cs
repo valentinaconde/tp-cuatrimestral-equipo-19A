@@ -173,5 +173,23 @@ namespace Negocio
 
             }
         }
-    }
+
+        public void activarUsuario(string email)
+        {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update usuarios set activo = 1 where email = @email");
+                datos.setearParametro("@email", email);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
 }
