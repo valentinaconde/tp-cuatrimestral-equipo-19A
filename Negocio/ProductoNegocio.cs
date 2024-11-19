@@ -182,5 +182,24 @@ namespace Negocio
                 throw ex;
             }
         }
-    }
+
+        public void activarProducto(string nombre, int marcaId)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update productos set activo = 1 where nombre = @nombre and marca_id = @marca_id");
+                datos.setearParametro("@nombre", nombre);
+                datos.setearParametro("@marca_id", marcaId);
+                datos.ejecutarAccion();
+                datos.Comando.Parameters.Clear();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
 }

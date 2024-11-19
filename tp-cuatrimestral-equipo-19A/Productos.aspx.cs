@@ -73,13 +73,32 @@ namespace tp_cuatrimestral_equipo_19A
             }
             else
             {
-                productonegocio.agregar(nuevoProducto);
-                lblMessage.Text = "Producto agregado exitosamente.";
+                Producto productoActual = new Producto();
+                productoActual = productonegocio.buscarProductoPorNombreYMarca(nuevoProducto.nombre, nuevoProducto.idmarca);
+
+                if (productoActual.nombre != null && productoActual.activo == true)
+                {
+
+                    lblMessage.Text = "El producto ya existe.";
+                    lblMessage.CssClass = "text-danger";
+
+                }
+                else if (productoActual.nombre != null && productoActual.activo == false)
+                {
+                    productonegocio.activarProducto(productoActual.nombre, productoActual.idmarca);
+                }
+                else
+                {
+                    productonegocio.agregar(nuevoProducto);
+                    lblMessage.Text = "Product agregado exitosamente.";
+                    lblMessage.CssClass = "text-success";
+
+
+                }
             }
 
             limpiarFormulario();
             cargarProductos();
-            Response.Redirect(Request.RawUrl);
 
         }
         protected void productosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
