@@ -103,7 +103,7 @@ namespace Negocio
             {
                 datos.setearParametro("@id", id);
                 datos.setearConsulta("update productos set activo = 0 where id = @id");
-                
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -202,4 +202,6 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+    }
 }

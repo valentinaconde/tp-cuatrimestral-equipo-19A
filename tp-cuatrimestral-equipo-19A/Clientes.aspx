@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Gestión de Clientes" Language="C#" MasterPageFile="~/Sharing.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Clientes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="SharingMain" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div class="container mt-5">
         <div class="card shadow">
             <div class="card-header bg-secondary text-white">

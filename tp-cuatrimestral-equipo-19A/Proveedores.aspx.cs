@@ -59,13 +59,32 @@ namespace tp_cuatrimestral_equipo_19A
                 }
                 else
                 {
-                    proveedorNegocio.agregar(nuevoProveedor);
-                    lblMessage.Text = "Proveedor agregado exitosamente.";
+                    Proveedor proveedorActual = new Proveedor();
+                    proveedorActual = proveedorNegocio.buscarProveedorPorCuit(nuevoProveedor.cuit);
+
+                    if (proveedorActual.nombre != null && proveedorActual.activo == true)
+                    {
+
+                        lblMessage.Text = "El proveedor ya existe.";
+                        lblMessage.CssClass = "text-danger";
+
+                    }
+                    else if (proveedorActual.nombre != null && proveedorActual.activo == false)
+                    {
+                        proveedorNegocio.activarProveedor(proveedorActual.cuit);
+                    }
+                    else
+                    {
+                        proveedorNegocio.agregar(nuevoProveedor);
+                        lblMessage.Text = "Proveedor agregado exitosamente.";
+                        lblMessage.CssClass = "text-success";
+
+
+                    }
                 }
 
                 limpiarFormulario();
                 cargarProveedores();
-                Response.Redirect(Request.RawUrl);
             }
         }
 

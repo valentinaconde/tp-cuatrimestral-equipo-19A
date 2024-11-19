@@ -142,5 +142,58 @@ namespace Negocio
                 throw ex;
             }
         }
+
+        public Proveedor buscarProveedorPorCuit(string cuit)
+        {
+
+            Proveedor proveedor = new Proveedor();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select * from proveedores where cuit = @cuit");
+                datos.setearParametro("@cuit", cuit);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    proveedor.id = (int)datos.Lector["id"];
+                    proveedor.nombre = datos.Lector["nombre"].ToString();
+                    proveedor.direccion = datos.Lector["direccion"].ToString();
+                    proveedor.telefono = datos.Lector["telefono"].ToString();
+                    proveedor.email = datos.Lector["email"].ToString();
+                    proveedor.cuit = datos.Lector["cuit"].ToString();
+                    proveedor.activo = (bool)datos.Lector["activo"];
+                }
+
+                datos.cerrarConexion();
+                return proveedor;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void activarProveedor(string cuit)
+        {
+
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update proveedores set activo = 1 where cuit = @cuit");
+                datos.setearParametro("@cuit", cuit);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

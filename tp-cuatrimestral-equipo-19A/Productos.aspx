@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Productos" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="Productos.aspx.cs" Inherits="tp_cuatrimestral_equipo_19A.Productos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div class="container my-5">
         <div class="card shadow">
             <div class="card-header bg-secondary text-white">

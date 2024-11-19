@@ -90,7 +90,7 @@ namespace tp_cuatrimestral_equipo_19A
                 else
                 {
                     productonegocio.agregar(nuevoProducto);
-                    lblMessage.Text = "Product agregado exitosamente.";
+                    lblMessage.Text = "Producto agregado exitosamente.";
                     lblMessage.CssClass = "text-success";
 
 
@@ -166,7 +166,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (productos.Count == 0)
             {
-                lblNoResults.Text = "No se encontraron categorías.";
+                lblNoResults.Text = "No se encontraron productos.";
                 lblNoResults.Visible = true;
             }
             else
@@ -208,8 +208,6 @@ namespace tp_cuatrimestral_equipo_19A
             txtPorcentajeGanancia.Text = string.Empty;
             ddlMarca.SelectedValue = "0";
             ddlCategoria.SelectedValue = "0";
-            lblMessage.Text = string.Empty;
-            lblMessage2.Text = string.Empty;
         }
 
         protected void ProductosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
