@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id from usuarios");
+                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id, activo from usuarios");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -29,9 +29,11 @@ namespace Negocio
                     aux.email = datos.Lector["email"].ToString();
                     aux.password = datos.Lector["password"].ToString();
                     aux.rol_id = (int)datos.Lector["rol_id"];
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
+                    if(aux.activo == true) lista.Add(aux);
 
 
-                    lista.Add(aux);
+
                 }
 
                 datos.cerrarConexion();
@@ -149,7 +151,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id from usuarios where id = @id");
+                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id, activo from usuarios where id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
@@ -161,6 +163,7 @@ namespace Negocio
                     usuario.email = datos.Lector["email"].ToString();
                     usuario.password = datos.Lector["password"].ToString();
                     usuario.rol_id = (int)datos.Lector["rol_id"];
+                    usuario.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();
