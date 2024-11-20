@@ -130,8 +130,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, nombre from marcas where nombre = @nombre");
-                datos.setearParametro("@nombre", nombre);
+                datos.setearConsulta("select id, nombre, activo from marcas where LOWER(nombre) = LOWER(@nombre)");
+                datos.setearParametro("@nombre", nombre.Trim());
                 datos.ejecutarLectura();
 
                 Marca aux = new Marca();
@@ -140,6 +140,7 @@ namespace Negocio
                 {
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
+                    aux.activo = (bool)datos.Lector["activo"];
                 }
 
                 datos.cerrarConexion();
