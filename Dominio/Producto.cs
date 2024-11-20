@@ -14,7 +14,9 @@ namespace Dominio
         public int precio_unitario { get; set; }
         public float ganancia { get; set; }
         public int idmarca { get; set; }
+        public string nombremarca { get; set; }
         public int idcategoria { get; set; }
+        public string nombrecategoria { get; set; }
         public bool activo { get; set; }
 
 

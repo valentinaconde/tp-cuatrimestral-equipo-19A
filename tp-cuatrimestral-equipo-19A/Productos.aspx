@@ -85,12 +85,12 @@
                         <asp:BoundField DataField="ganancia" HeaderText="Ganancia (%)" />
                         <asp:TemplateField HeaderText="Marca">
                             <ItemTemplate>
-                                <%# Eval("idmarca") %>
+                                <%# Eval("nombremarca") %>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Categoría">
                             <ItemTemplate>
-                                <%# Eval("idcategoria") %>
+                                <%# Eval("nombrecategoria") %>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>

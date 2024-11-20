@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, stock_actual, precio_unitario, porcentaje_ganancia, marca_id, categoria_id, activo from productos");
+                datos.setearConsulta("SELECT p.id, p.nombre, p.stock_actual, p.precio_unitario, p.porcentaje_ganancia, p.marca_id,p.categoria_id, p.activo, m.nombre AS nombreMarca, c.nombre AS nombreCategoria FROM Productos p JOIN Marcas m ON p.marca_id = m.id JOIN Categorias c ON p.categoria_id = c.id");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -29,7 +29,9 @@ namespace Negocio
                     aux.precio_unitario = (int)datos.Lector["precio_unitario"];
                     aux.ganancia = Convert.ToSingle(datos.Lector["porcentaje_ganancia"]);
                     aux.idmarca = (int)datos.Lector["marca_id"];
+                    aux.nombremarca = datos.Lector["nombreMarca"].ToString();
                     aux.idcategoria = (int)datos.Lector["categoria_id"];
+                    aux.nombrecategoria = datos.Lector["nombreCategoria"].ToString();
                     aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
                     if (aux.activo == true) lista.Add(aux);
                 }
