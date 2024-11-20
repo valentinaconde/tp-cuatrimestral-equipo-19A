@@ -33,13 +33,15 @@ namespace tp_cuatrimestral_equipo_19A
                 dtProductos.Columns.Add("Porcentaje");
                 dtProductos.Columns.Add("Precio");
                 dtProductos.Columns.Add("Categoria");
+                dtProductos.Columns.Add("Marca");
                 ViewState["dtProductos"] = dtProductos;
+                listarDropdowns();
             }
             else
             {
                 dtProductos = (DataTable)ViewState["dtProductos"];
             }
-            listarDropdowns();
+            
         }
 
         protected void listarDropdowns()
@@ -71,6 +73,7 @@ namespace tp_cuatrimestral_equipo_19A
             if(txtProducto.Text == string.Empty || txtPorcentaje.Text == string.Empty || txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || txtFecha.Text == string.Empty)
             {
                 txtErrorCompras.Text = "Debe completar todos los campos.";
+                txtErrorCompras.CssClass = "text-danger";
                 return;
             }
             DataRow dr = dtProductos.NewRow();
@@ -79,6 +82,7 @@ namespace tp_cuatrimestral_equipo_19A
             dr["Precio"] = txtPrecio.Text;
             dr["Porcentaje"] = txtPorcentaje.Text;
             dr["Categoria"] = ddlCategoria.SelectedValue;
+            dr["Marca"] = ddlMarca.SelectedValue;
             dtProductos.Rows.Add(dr);
 
             ViewState["dtProductos"] = dtProductos;
@@ -91,6 +95,10 @@ namespace tp_cuatrimestral_equipo_19A
             txtPrecio.Text = string.Empty;
             txtPorcentaje.Text = string.Empty;
             txtErrorCompras.Text = "";
+            ddlMarca.SelectedIndex = 0;
+            ddlCategoria.SelectedIndex = 0;
+
+
         }
 
         protected void btnRegistrarCompra_Click(object sender, EventArgs e)
@@ -119,7 +127,7 @@ namespace tp_cuatrimestral_equipo_19A
                     ProductoNegocio productoNegocio = new ProductoNegocio();
                     Producto producto = new Producto();
                     producto.nombre = row["Producto"].ToString();
-                    producto.idmarca = int.Parse(ddlMarca.SelectedValue);
+                    producto.idmarca = Convert.ToInt32(row["Marca"]);
 
                     producto = productoNegocio.buscarProductoPorNombreYMarca(producto.nombre, producto.idmarca);
                     if (producto.id > 0 && producto.activo == true)
@@ -138,8 +146,8 @@ namespace tp_cuatrimestral_equipo_19A
                         producto.precio_unitario = int.Parse(row["Precio"].ToString());
                         producto.ganancia = float.Parse(row["Porcentaje"].ToString());
                         producto.nombre = row["Producto"].ToString();
-                        producto.idcategoria = int.Parse(ddlCategoria.SelectedValue);
-                        producto.idmarca = int.Parse(ddlMarca.SelectedValue);
+                        producto.idcategoria = Convert.ToInt32(row["Categoria"]);
+                        producto.idmarca = Convert.ToInt32(row["Marca"]);
                         producto.activo = true;
                         productoNegocio.agregar(producto);
                         producto = productoNegocio.buscarProductoPorNombreYMarca(producto.nombre, producto.idmarca);
@@ -167,10 +175,12 @@ namespace tp_cuatrimestral_equipo_19A
                 gvProductos.DataBind();
 
                 txtErrorCompras.Text = "Agregado con exito";
+                txtErrorCompras.CssClass = "text-success";
             }
             catch (Exception ex)
             {
                 txtErrorCompras.Text = "Error al registrar la compra" + ex;
+                txtErrorCompras.CssClass = "text-danger";
             }
             
         }
