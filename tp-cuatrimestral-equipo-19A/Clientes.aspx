@@ -9,7 +9,7 @@
             <div class="card-body">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <div class="row mb-4">
+                        <div class="row ">
                             <div class="col-md-4">
                                 <label for="txtNombreCliente" class="form-label">Nombre</label>
                                 <asp:TextBox ID="txtNombreCliente" runat="server" CssClass="form-control" />

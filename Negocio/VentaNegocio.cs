@@ -18,7 +18,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT v.id, v.fecha, v.total, v.numero_factura, v.cliente_id, v.usuario_id, c.nombre AS cliente_nombre, c.dni AS cliente_dni, u.nombre AS usuario_nombre FROM ventas v JOIN clientes c ON v.cliente_id = c.id JOIN usuarios u ON v.usuario_id = u.id");
+                datos.setearConsulta("SELECT v.id, v.fecha, v.total, v.numero_factura, v.cliente_id, v.usuario_id, c.nombre AS cliente_nombre, c.dni AS cliente_dni, u.nombre AS usuario_nombre FROM ventas v JOIN clientes c ON v.cliente_id = c.id JOIN usuarios u ON v.usuario_id = u.id ORDER BY v.id DESC");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -216,19 +216,6 @@ namespace Negocio
 
                 try
                 {
-                    //datos.setearConsulta("SELECT id FROM ventas WHERE numero_factura = @numeroFactura");
-                    //datos.setearParametro("@numeroFactura", numeroFactura);
-                    //datos.ejecutarLectura();
-
-                    //int ventaId = 0;
-                    //if (datos.Lector.Read())
-                    //{
-                    //    ventaId = (int)datos.Lector["id"];
-                    //}
-                    //else
-                    //{
-                    //    throw new Exception("No se encontró una venta con el número de factura proporcionado.");
-                    //}
 
                     datos.setearConsulta("SELECT dv.producto_id, dv.cantidad, dv.precio_unitario, p.nombre FROM detalle_ventas dv INNER JOIN productos p ON dv.producto_id = p.id WHERE dv.venta_id = @ventaId");
                     datos.setearParametro("@ventaId", numeroFactura);
