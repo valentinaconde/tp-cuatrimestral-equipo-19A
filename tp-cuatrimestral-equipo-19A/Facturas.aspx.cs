@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace tp_cuatrimestral_equipo_19A
 {
@@ -95,18 +98,76 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (factura != null)
             {
-                string contenido = $"Factura N°: {factura.numero_factura}\n";
-                contenido += $"Fecha: {factura.fecha:dd/MM/yyyy}\n";
-                contenido += $"Cliente ID: {factura.cliente_id}\n";
-                contenido += $"Usuario ID: {factura.usuario_id}\n";
-                contenido += $"Total: ${factura.total}\n";
-                contenido += "-------------------------------------\n";
-                contenido += "Gracias por su compra.";
 
-                Response.Clear();
-                Response.ContentType = "text/plain";
-                Response.AddHeader("Content-Disposition", $"attachment; filename=Factura_{factura.numero_factura}.txt");
-                Response.Write(contenido);
+                List <DetalleVenta> detalleVentas = ventaNegocio.listarDetallesFactura(facturaId.ToString());
+                Cliente cliente = new Cliente();
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                cliente =  clienteNegocio.buscarClientePorId(factura.cliente_id);
+
+                Usuario usuario = new Usuario();
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                usuario = usuarioNegocio.buscarUsuarioPorId(factura.usuario_id);
+
+
+
+
+                Document pdfDoc = new Document(PageSize.A4);
+                MemoryStream ms = new MemoryStream();
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, ms);
+                pdfDoc.Open();
+
+                pdfDoc.Add(new Paragraph($"Factura N°: {factura.numero_factura}"));
+                pdfDoc.Add(new Paragraph($"Fecha: {factura.fecha:dd/MM/yyyy}"));
+                pdfDoc.Add(new Paragraph($"DNI Cliente: {cliente.dni}"));
+                pdfDoc.Add(new Paragraph($"Nombre Cliente: {cliente.nombre}"));
+                pdfDoc.Add(new Paragraph($"Vendedor ID: {usuario.id}"));
+                pdfDoc.Add(new Paragraph($"Nombre vendedor: {usuario.nombre} {usuario.apellido}"));
+                pdfDoc.Add(new Paragraph(" "));
+
+                PdfPTable table = new PdfPTable(3);
+
+                PdfPCell headerCell = new PdfPCell();
+                headerCell.Padding = 5;
+
+                headerCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                headerCell.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                headerCell.Phrase = new Phrase("Producto");
+                table.AddCell(headerCell);
+
+                headerCell.Phrase = new Phrase("Cantidad");
+                table.AddCell(headerCell);
+
+                headerCell.Phrase = new Phrase("Precio Unitario");
+                table.AddCell(headerCell);
+
+                PdfPCell dataCell = new PdfPCell();
+                dataCell.Padding = 5;
+
+                foreach (var detalle in detalleVentas)
+                {
+                    dataCell.Phrase = new Phrase(detalle.Producto.nombre);
+                    table.AddCell(dataCell);
+
+                    dataCell.Phrase = new Phrase(detalle.Cantidad.ToString());
+                    table.AddCell(dataCell);
+
+                    dataCell.Phrase = new Phrase(detalle.PrecioUnitario.ToString("C"));
+                    table.AddCell(dataCell);
+                }
+
+                pdfDoc.Add(table);
+
+                pdfDoc.Add(new Paragraph(" "));
+                pdfDoc.Add(new Paragraph($"Total: ${factura.total}"));
+                pdfDoc.Add(new Paragraph("Gracias por su compra."));
+
+                pdfDoc.Close();
+                writer.Close();
+
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", $"attachment; filename=Factura_{factura.numero_factura}.pdf");
+                Response.BinaryWrite(ms.ToArray());
                 Response.End();
             }
             else
@@ -115,8 +176,18 @@ namespace tp_cuatrimestral_equipo_19A
             }
 
         }
-        private string GenerarFacturaHtml(Venta factura)
+        private string GenerarFacturaHtml(Venta factura, Cliente cliente, Usuario usuario, List<DetalleVenta> detalleVentas)
         {
+            string detallesHtml = "";
+            foreach (var detalle in detalleVentas)
+            {
+                detallesHtml += $@"
+                <tr>
+                    <td>{detalle.Producto.nombre}</td>
+                    <td>{detalle.Cantidad}</td>
+                    <td>{detalle.PrecioUnitario:C}</td>
+                </tr>";
+            }
 
             return $@"
      <!DOCTYPE html>
@@ -127,26 +198,44 @@ namespace tp_cuatrimestral_equipo_19A
          <title>Factura N° {factura.numero_factura}</title>
          <style>
             body {{ font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }}
-           header {{text-align: center; margin-bottom: 20px; }}
-         .detalles {{ margin-top: 20px;}}
-          .detalles p {{ margin: 5px 0;}}
-         hr {{ border: 1px solid #ddd; margin: 20px 0; }}
-         .footer {{text-align: center; font-weight: bold; margin-top: 20px; }}
+            header {{ text-align: center; margin-bottom: 20px; }}
+            .detalles {{ margin-top: 20px; }}
+            .detalles p {{ margin: 5px 0; }}
+            hr {{ border: 1px solid #ddd; margin: 20px 0; }}
+            .footer {{ text-align: center; font-weight: bold; margin-top: 20px; }}
+            table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
+            table, th, td {{ border: 1px solid black; }}
+            th, td {{ padding: 10px; text-align: left; }}
          </style>
      </head>
      <body>
          <header>
-         <h2>Factura N° {factura.numero_factura}</h2>
+             <h2>Factura N° {factura.numero_factura}</h2>
          </header>
          <section class='detalles'>
-         <p><strong>Fecha:</strong> {factura.fecha:dd/MM/yyyy}</p>
-         <p><strong>Cliente:</strong> {factura.cliente_id}</p>
-         <p><strong>Usuario:</strong> {factura.usuario_id}</p>
-         <p><strong>Total:</strong> ${factura.total}</p>
+             <p><strong>Fecha:</strong> {factura.fecha:dd/MM/yyyy}</p>
+             <p><strong>DNI Cliente:</strong> {cliente.dni}</p>
+             <p><strong>Nombre Cliente:</strong> {cliente.nombre}</p>
+             <p><strong>Vendedor ID:</strong> {usuario.id}</p>
+             <p><strong>Nombre Vendedor:</strong> {usuario.nombre} {usuario.apellido}</p>
          </section>
          <hr />
+         <table>
+             <thead>
+                 <tr>
+                     <th>Producto</th>
+                     <th>Cantidad</th>
+                     <th>Precio Unitario</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 {detallesHtml}
+             </tbody>
+         </table>
+         <hr />
+         <p><strong>Total:</strong> ${factura.total}</p>
          <div class='footer'>
-         <p>Gracias por su compra<p>
+             <p>Gracias por su compra</p>
          </div>
      </body>
      </html>";
@@ -162,8 +251,18 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (factura != null)
             {
+                List<DetalleVenta> detalleVentas = ventaNegocio.listarDetallesFactura(facturaId.ToString());
+                Cliente cliente = new Cliente();
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                cliente = clienteNegocio.buscarClientePorId(factura.cliente_id);
 
-                string facturaHtml = GenerarFacturaHtml(factura).Replace("'", "\\'").Replace("\n", "").Replace("\r", "");
+                Usuario usuario = new Usuario();
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                usuario = usuarioNegocio.buscarUsuarioPorId(factura.usuario_id);
+
+                string facturaHtml = GenerarFacturaHtml(factura, cliente, usuario, detalleVentas).Replace("'", "\\'").Replace("\n", "").Replace("\r", "");
+
+
 
 
                 string script = $@"

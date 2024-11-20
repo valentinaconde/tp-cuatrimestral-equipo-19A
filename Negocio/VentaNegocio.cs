@@ -204,7 +204,58 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-       
-        
-    }
+
+            public List<DetalleVenta> listarDetallesFactura(string numeroFactura)
+            {
+                AccesoDatos datos = new AccesoDatos();
+                List<DetalleVenta> detalles = new List<DetalleVenta>();
+
+                try
+                {
+                    //datos.setearConsulta("SELECT id FROM ventas WHERE numero_factura = @numeroFactura");
+                    //datos.setearParametro("@numeroFactura", numeroFactura);
+                    //datos.ejecutarLectura();
+
+                    //int ventaId = 0;
+                    //if (datos.Lector.Read())
+                    //{
+                    //    ventaId = (int)datos.Lector["id"];
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception("No se encontró una venta con el número de factura proporcionado.");
+                    //}
+
+                    datos.setearConsulta("SELECT dv.producto_id, dv.cantidad, dv.precio_unitario, p.nombre FROM detalle_ventas dv INNER JOIN productos p ON dv.producto_id = p.id WHERE dv.venta_id = @ventaId");
+                    datos.setearParametro("@ventaId", numeroFactura);
+                    datos.ejecutarLectura();
+
+                    while (datos.Lector.Read())
+                    {
+                        DetalleVenta detalle = new DetalleVenta();
+                        detalle.Producto = new Producto
+                        {
+                            id = (int)datos.Lector["producto_id"],
+                            nombre = datos.Lector["nombre"].ToString()
+                        };
+                        detalle.Cantidad = (int)datos.Lector["cantidad"];
+                        detalle.PrecioUnitario = Convert.ToSingle(datos.Lector["precio_unitario"]);
+
+                        detalles.Add(detalle);
+                    }
+
+                    return detalles;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+            }
+        }
+
+
 }

@@ -8,9 +8,9 @@
     <asp:GridView ID="FacturasGridView" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" OnRowCommand="facturasGridView_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="FacturasGridView_PageIndexChanging" OnSelectedIndexChanged="FacturasGridView_SelectedIndexChanged" DataKeyNames="id">
     <Columns>
         <asp:BoundField DataField="id" HeaderText="ID" />
-        <asp:BoundField DataField="fecha" HeaderText="Nombre" />
-        <asp:BoundField DataField="total" HeaderText="StockActual" />
-        <asp:BoundField DataField="numero_factura" HeaderText="PrecioUnitario" />
+        <asp:BoundField DataField="fecha" HeaderText="Fecha" />
+        <asp:BoundField DataField="total" HeaderText="Total" />
+        <asp:BoundField DataField="numero_factura" HeaderText="Numero factura" />
         <asp:TemplateField HeaderText="Cliente">
             <ItemTemplate>
                 <%# Eval("cliente_id") %>
