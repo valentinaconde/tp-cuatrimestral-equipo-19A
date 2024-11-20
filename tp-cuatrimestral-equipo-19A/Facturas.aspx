@@ -13,12 +13,12 @@
         <asp:BoundField DataField="numero_factura" HeaderText="Numero factura" />
         <asp:TemplateField HeaderText="Cliente">
             <ItemTemplate>
-                <%# Eval("cliente_id") %>
+                <%# Eval("cliente_dni") %>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField HeaderText="Usuario">
+        <asp:TemplateField HeaderText="Vendedor">
             <ItemTemplate>
-                <%# Eval("usuario_id") %>
+                <%# Eval("usuario_nombre") %>
             </ItemTemplate>
         </asp:TemplateField>
         <asp:TemplateField>

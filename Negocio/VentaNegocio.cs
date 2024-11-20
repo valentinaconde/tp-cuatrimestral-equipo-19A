@@ -18,7 +18,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id, fecha,total, numero_factura, cliente_id, usuario_id from VENTAS");
+                datos.setearConsulta("SELECT v.id, v.fecha, v.total, v.numero_factura, v.cliente_id, v.usuario_id, c.nombre AS cliente_nombre, c.dni AS cliente_dni, u.nombre AS usuario_nombre FROM ventas v JOIN clientes c ON v.cliente_id = c.id JOIN usuarios u ON v.usuario_id = u.id");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -31,6 +31,10 @@ namespace Negocio
                     aux.numero_factura = datos.Lector["numero_factura"].ToString();
                     aux.cliente_id = (int)datos.Lector["cliente_id"];
                     aux.usuario_id = (int)datos.Lector["usuario_id"];
+                    aux.cliente_nombre = datos.Lector["cliente_nombre"].ToString();
+                    aux.usuario_nombre = datos.Lector["usuario_nombre"].ToString();
+                    aux.cliente_dni = datos.Lector["cliente_dni"].ToString();
+
 
                     lista.Add(aux);
                 }
