@@ -115,5 +115,72 @@ namespace tp_cuatrimestral_equipo_19A
             }
 
         }
+        private string GenerarFacturaHtml(Venta factura)
+        {
+
+            return $@"
+     <!DOCTYPE html>
+     <html lang='es'>
+     <head>
+         <meta charset='UTF-8'>
+         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+         <title>Factura N° {factura.numero_factura}</title>
+         <style>
+            body {{ font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }}
+           header {{text-align: center; margin-bottom: 20px; }}
+         .detalles {{ margin-top: 20px;}}
+          .detalles p {{ margin: 5px 0;}}
+         hr {{ border: 1px solid #ddd; margin: 20px 0; }}
+         .footer {{text-align: center; font-weight: bold; margin-top: 20px; }}
+         </style>
+     </head>
+     <body>
+         <header>
+         <h2>Factura N° {factura.numero_factura}</h2>
+         </header>
+         <section class='detalles'>
+         <p><strong>Fecha:</strong> {factura.fecha:dd/MM/yyyy}</p>
+         <p><strong>Cliente:</strong> {factura.cliente_id}</p>
+         <p><strong>Usuario:</strong> {factura.usuario_id}</p>
+         <p><strong>Total:</strong> ${factura.total}</p>
+         </section>
+         <hr />
+         <div class='footer'>
+         <p>Gracias por su compra<p>
+         </div>
+     </body>
+     </html>";
+        }
+        protected void btnImprimirFactura_Click(object sender, EventArgs e)
+        {
+            Button btnImprimir = (Button)sender;
+            GridViewRow fila = (GridViewRow)btnImprimir.NamingContainer;
+            int facturaId = Convert.ToInt32(FacturasGridView.DataKeys[fila.RowIndex].Value);
+
+            VentaNegocio ventaNegocio = new VentaNegocio();
+            Venta factura = ventaNegocio.BuscarPorId(facturaId);
+
+            if (factura != null)
+            {
+
+                string facturaHtml = GenerarFacturaHtml(factura).Replace("'", "\\'").Replace("\n", "").Replace("\r", "");
+
+
+                string script = $@"
+         var printWindow = window.open('', '', 'height=650,width=900');
+         printWindow.document.write('<html><head><title>Factura</title></head><body>');
+         printWindow.document.write('{facturaHtml}');
+         printWindow.document.write('</body></html>');
+         printWindow.document.close();
+         printWindow.print();";
+
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpenFacturaPrintWindow", script, true);
+            }
+            else
+            {
+                Response.Write("Factura no encontrada.");
+            }
+        }
     }
 }

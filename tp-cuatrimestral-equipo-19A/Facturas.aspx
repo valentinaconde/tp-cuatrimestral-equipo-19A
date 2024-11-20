@@ -26,6 +26,11 @@
                 <asp:Button ID="btnGenerarFactura" runat="server" CssClass="btn btn-primary mb-5" Text="Generar" OnClick="btnGenerarFactura_Click" />
             </ItemTemplate>
         </asp:TemplateField>
+        <asp:TemplateField>
+    <ItemTemplate>
+        <asp:Button ID="btnImprimirFactura" runat="server" CssClass="btn btn-secondary mb-5" Text="Imprimir" OnClick="btnImprimirFactura_Click"  AutoPostBack="false" />
+    </ItemTemplate>
+</asp:TemplateField>
     </Columns>
         <PagerTemplate>
     <div class="d-flex justify-content-center align-items-center">
