@@ -104,7 +104,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select id, nombre from marcas where id = @id");
+                datos.setearConsulta("select id, nombre, activo from marcas where id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
@@ -114,6 +114,7 @@ namespace Negocio
                 {
                     aux.id = (int)datos.Lector["id"];
                     aux.nombre = datos.Lector["nombre"].ToString();
+                    aux.activo = Convert.ToBoolean(datos.Lector["activo"]);
                 }
 
                 datos.cerrarConexion();

@@ -61,9 +61,24 @@ namespace tp_cuatrimestral_equipo_19A
                     }
                     else if (marcaActual.nombre != null && marcaActual.activo == false)
                     {
+                        if (MarcaId.HasValue)
+                        {
+                            nuevaMarca.id = MarcaId.Value;
+                            marcaNegocio.modificar(nuevaMarca.id, nuevaMarca.nombre);
+                            lblMessage.Text = "Marca modificada exitosamente.";
+                            lblMessage.CssClass = "text-success";
+
+                            btnAgregarMarca.Text = "Agregar Marca";
+                            MarcaId = null;
+                        }
+                    else
+                    {
                         marcaNegocio.activarMarca(marcaActual.nombre);
                         lblMessage.Text = "Marca agregada exitosamente.";
                         lblMessage.CssClass = "text-success";
+                    }
+
+                       
                     }
                     else
                     {

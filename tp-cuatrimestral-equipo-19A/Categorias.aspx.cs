@@ -62,9 +62,23 @@ namespace tp_cuatrimestral_equipo_19A
                     }
                     else if (categoriaActual.nombre != null && categoriaActual.activo == false)
                     {
+                    if (CategoriaId.HasValue)
+                    {
+                        nuevaCategoria.id = CategoriaId.Value;
+                        categoriaNegocio.modificar(nuevaCategoria.id, nuevaCategoria.nombre);
+                        lblMessage.Text = "Categoría modificada exitosamente.";
+                        lblMessage.CssClass = "text-success";
+
+                        btnAgregarCategoria.Text = "Agregar Categoría";
+                        CategoriaId = null;
+                    }
+                    else
+                    {
                         categoriaNegocio.activarCategoria(categoriaActual.nombre);
                         lblMessage.Text = "Categoria agregada exitosamente.";
                         lblMessage.CssClass = "text-success";
+                    }
+                 
                     }
                     else
                     {
