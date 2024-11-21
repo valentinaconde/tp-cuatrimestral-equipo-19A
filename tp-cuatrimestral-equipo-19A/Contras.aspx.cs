@@ -21,7 +21,7 @@ namespace tp_cuatrimestral_equipo_19A
             string contrasenaActual = txtContrasenaActual.Text;
             string nuevaContrasena = txtNuevaContrasena.Text;
 
-            lblMessage.Text = usuario.password;
+            //lblMessage.Text = usuario.password;
             if (contrasenaActual != usuario.password)
             {
                 lblMessage.Text = "Contraseña no coincide con la actual.";
@@ -29,6 +29,7 @@ namespace tp_cuatrimestral_equipo_19A
             else
             {
                 usuario.password = nuevaContrasena;
+                lblMessage.Text = "Contraseña fue cambiada con exito.";
             }
             if(contrasenaActual == nuevaContrasena)
             {
