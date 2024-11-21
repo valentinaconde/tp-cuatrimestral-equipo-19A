@@ -118,6 +118,8 @@ namespace tp_cuatrimestral_equipo_19A
             if (ddlProducto.SelectedItem == null || txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || txtFecha.Text == string.Empty)
             {
                 txtErrorVentas.Text = "Debe completar todos los campos.";
+                txtErrorVentas.CssClass = "text-danger";
+
                 return;
             }
 
@@ -144,6 +146,8 @@ namespace tp_cuatrimestral_equipo_19A
                 if (dtProductos.Rows.Count == 0)
                 {
                     txtErrorVentas.Text = "Debe agregar al menos un producto.";
+                    txtErrorVentas.CssClass = "text-danger";
+
                     return;
                 }
 
@@ -152,6 +156,8 @@ namespace tp_cuatrimestral_equipo_19A
                 if (!DateTime.TryParseExact(txtFecha.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fecha))
                 {
                     txtErrorVentas.Text = "Formato de fecha inválido. Use el formato dd/MM/yyyy.";
+                    txtErrorVentas.CssClass = "text-danger";
+
                     return;
                 }
 
@@ -169,6 +175,8 @@ namespace tp_cuatrimestral_equipo_19A
                         if (producto.stockactual < int.Parse(row["Cantidad"].ToString()))
                         {
                             txtErrorVentas.Text = "No hay suficiente stock para el producto " + producto.nombre;
+                            txtErrorVentas.CssClass = "text-danger";
+
                             return;
                         }
 
@@ -207,11 +215,14 @@ namespace tp_cuatrimestral_equipo_19A
                 gvProductos.DataBind();
 
                 txtErrorVentas.Text = "Venta registrada con éxito";
+                txtErrorVentas.CssClass = "text-success";
                 limpiarFormulario();
             }
             catch (Exception ex)
             {
                 txtErrorVentas.Text = "Error al registrar la venta: " + ex;
+                txtErrorVentas.CssClass = "text-danger";
+
             }
         }
         protected void btnEliminar_Click(object sender, EventArgs e)

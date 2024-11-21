@@ -13,18 +13,18 @@
                             <div class="col-md-4 mb-3">
                                 <label for="txtNombreProducto" class="form-label">Nombre</label>
                                 <asp:TextBox ID="txtNombreProducto" runat="server" CssClass="form-control" />
-                                <asp:RequiredFieldValidator ID="rfvNombreProducto" runat="server" ControlToValidate="txtNombreProducto" ErrorMessage="El nombre del Producto es obligatorio." CssClass="text-danger small" Display="Static" />
+                                <asp:RequiredFieldValidator ID="rfvNombreProducto" runat="server" ControlToValidate="txtNombreProducto" ErrorMessage="El nombre del Producto es obligatorio." CssClass="text-danger small" Display="Dynamic" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="txtStockActual" class="form-label">Stock Actual</label>
                                 <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" />
-                                <asp:RequiredFieldValidator ID="rfvStockProducto" runat="server" ControlToValidate="txtStockActual" ErrorMessage="El stock del producto es obligatorio." CssClass="text-danger small" Display="Static" />
+                                <asp:RequiredFieldValidator ID="rfvStockProducto" runat="server" ControlToValidate="txtStockActual" ErrorMessage="El stock del producto es obligatorio." CssClass="text-danger small" Display="Dynamic" />
                                 <asp:RegularExpressionValidator ID="revStockActual" runat="server" ControlToValidate="txtStockActual" ErrorMessage="Debe ser un número entero positivo." CssClass="text-danger small" Display="Dynamic" ValidationExpression="^\d+$" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="txtPrecioUnitario" class="form-label">Precio Unitario</label>
                                 <asp:TextBox ID="txtPrecioUnitario" runat="server" CssClass="form-control" />
-                                <asp:RequiredFieldValidator ID="rfvPrecioUnitario" runat="server" ControlToValidate="txtPrecioUnitario" ErrorMessage="El precio unitario es obligatorio." CssClass="text-danger small" Display="Static" />
+                                <asp:RequiredFieldValidator ID="rfvPrecioUnitario" runat="server" ControlToValidate="txtPrecioUnitario" ErrorMessage="El precio unitario es obligatorio." CssClass="text-danger small" Display="Dynamic" />
                                 <asp:RegularExpressionValidator ID="revPrecioUnitario" runat="server" ControlToValidate="txtPrecioUnitario" ErrorMessage="Debe ser un número entero positivo." CssClass="text-danger small" Display="Dynamic" ValidationExpression="^\d+$" />
                             </div>
                         </div>
@@ -32,20 +32,20 @@
                             <div class="col-md-4 mb-3">
                                 <label for="txtPorcentajeGanancia" class="form-label">Porcentaje de Ganancia</label>
                                 <asp:TextBox ID="txtPorcentajeGanancia" runat="server" CssClass="form-control" />
-                                <asp:RequiredFieldValidator ID="rfvPorcentajeGanancia" runat="server" ControlToValidate="txtPorcentajeGanancia" ErrorMessage="Este campo es obligatorio." CssClass="text-danger small" Display="Static" />
+                                <asp:RequiredFieldValidator ID="rfvPorcentajeGanancia" runat="server" ControlToValidate="txtPorcentajeGanancia" ErrorMessage="Este campo es obligatorio." CssClass="text-danger small" Display="Dynamic" />
                                 <asp:RegularExpressionValidator ID="RevPorcentajeGanancia" runat="server" ControlToValidate="txtPorcentajeGanancia" ErrorMessage="Debe ser un número entero positivo." CssClass="text-danger small" Display="Dynamic" ValidationExpression="^\d+$" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="ddlMarca" class="form-label">Marca</label>
                                 <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select">
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="rfvMarca" runat="server" ControlToValidate="ddlMarca" InitialValue="" ErrorMessage="La marca es requerida." CssClass="text-danger small" Display="Static" />
+                                <asp:RequiredFieldValidator ID="rfvMarca" runat="server" ControlToValidate="ddlMarca" InitialValue="" ErrorMessage="La marca es requerida." CssClass="text-danger small" Display="Dynamic" />
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="ddlCategoria" class="form-label">Categoría</label>
                                 <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select">
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="rfvCategoria" runat="server" ControlToValidate="ddlCategoria" InitialValue="" ErrorMessage="La categoría es requerida." CssClass="text-danger small" Display="Static" />
+                                <asp:RequiredFieldValidator ID="rfvCategoria" runat="server" ControlToValidate="ddlCategoria" InitialValue="" ErrorMessage="La categoría es requerida." CssClass="text-danger small" Display="Dynamic" />
                             </div>
                         </div>
                         <div class="d-flex justify-content-start gap-3">

@@ -106,6 +106,8 @@ namespace tp_cuatrimestral_equipo_19A
         }
         protected void productosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            lblNoResults.Text = "";
+            lblMessage.Text = "";
             if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             ProductoNegocio productonegocio = new ProductoNegocio();
