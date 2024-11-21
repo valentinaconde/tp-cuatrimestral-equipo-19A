@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
@@ -183,6 +184,22 @@ namespace tp_cuatrimestral_equipo_19A
                 txtErrorCompras.CssClass = "text-danger";
             }
             
+        }
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DataTable dtProductos = ViewState["dtProductos"] as DataTable;
+
+            if (dtProductos != null)
+            {
+                Button btnEliminar = (Button)sender;
+                GridViewRow row = (GridViewRow)btnEliminar.NamingContainer;
+                int Index = row.RowIndex;
+                dtProductos.Rows.RemoveAt(Index);
+
+                ViewState["dtProductos"] = dtProductos;
+                gvProductos.DataSource = dtProductos;
+                gvProductos.DataBind();
+            }
         }
     }
 }

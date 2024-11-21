@@ -109,6 +109,11 @@
                 <asp:BoundField DataField="Porcentaje" HeaderText="Porcentaje de ganancia" />
                 <asp:BoundField DataField="Categoria" HeaderText="Categoria" />
                 <asp:BoundField DataField="Marca" HeaderText="Marca" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-primary mb-5" Text="Eliminar" CommandArgument='<%# Container.DataItemIndex %>' OnClick="btnEliminar_Click" />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
         <div class="d-flex align-items-center gap-2">
