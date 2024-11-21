@@ -105,6 +105,7 @@ namespace tp_cuatrimestral_equipo_19A
             
 
 
+
         }
 
         protected void btnRegistrarCompra_Click(object sender, EventArgs e)
