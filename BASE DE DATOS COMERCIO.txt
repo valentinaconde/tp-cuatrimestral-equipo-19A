@@ -166,9 +166,9 @@ INSERT INTO detalle_compras (cantidad, precio_unitario, compra_id, producto_id) 
 
 
 INSERT INTO ventas (fecha, total, numero_factura, cliente_id, usuario_id) VALUES
-('2024-10-13 10:00:00', 500.0, 'FAC001', 1, 1),
-('2024-10-14 11:30:00', 750.0, 'FAC002', 2, 2),
-('2024-10-15 09:45:00', 1000.0, 'FAC003', 3, 3);
+('2024-10-13 10:00:00', 500.0, '00001', 1, 1),
+('2024-10-14 11:30:00', 750.0, '00002', 2, 2),
+('2024-10-15 09:45:00', 1000.0, '00003', 3, 3);
 
 
 INSERT INTO detalle_ventas (cantidad, precio_unitario, venta_id, producto_id) VALUES
