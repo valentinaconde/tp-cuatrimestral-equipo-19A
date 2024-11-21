@@ -185,14 +185,18 @@ namespace Negocio
             }
         }
 
-        public void activarProducto(string nombre, int marcaId)
+        public void activarProducto(string nombre, int marcaId, int stockActual, int precioUnitario, float ganancia, int idCategoria)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update productos set activo = 1 where nombre = @nombre and marca_id = @marca_id");
+                datos.setearConsulta("update productos set categoria_id = @categoria_id, stock_actual = @stock_actual, precio_unitario = @precio_unitario, porcentaje_ganancia = @porcentaje_ganancia, activo = 1 where nombre = @nombre and marca_id = @marca_id");
                 datos.setearParametro("@nombre", nombre);
                 datos.setearParametro("@marca_id", marcaId);
+                datos.setearParametro("@stock_actual", stockActual);
+                datos.setearParametro("@precio_unitario", precioUnitario);
+                datos.setearParametro("@porcentaje_ganancia", ganancia);
+                datos.setearParametro("@categoria_id", idCategoria);
                 datos.ejecutarAccion();
                 datos.Comando.Parameters.Clear();
             }

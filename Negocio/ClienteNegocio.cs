@@ -175,13 +175,17 @@ namespace Negocio
             }
         }
 
-        public void activarCliente(string dni)
+        public void activarCliente(string dni, string direccion, string telefono, string email)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update clientes set activo = 1 where dni = @dni");
+                datos.setearConsulta("update clientes set activo = 1, direccion = @direccion, telefono = @telefono, email = @email where dni = @dni");
                 datos.setearParametro("@dni", dni);
+                datos.setearParametro("@direccion", direccion);
+                datos.setearParametro("@telefono", telefono);
+                datos.setearParametro("@email", email);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

@@ -70,7 +70,7 @@ namespace tp_cuatrimestral_equipo_19A
                     }
                     else if (clienteActual.nombre != null && clienteActual.activo == false)
                     {
-                        clienteNegocio.activarCliente(clienteActual.dni);
+                        clienteNegocio.activarCliente(clienteActual.dni, nuevoCliente.direccion, nuevoCliente.telefono, nuevoCliente.email);
                         lblMessage.Text = "Cliente agregado exitosamente.";
                         lblMessage.CssClass = "text-success";
                     }

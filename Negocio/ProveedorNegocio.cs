@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, direccion, telefono, email, cuit, activo from proveedores");
+                datos.setearConsulta("select id, nombre, direccion, telefono, email, cuit, activo from proveedores order by id desc");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -175,14 +175,18 @@ namespace Negocio
             }
         }
 
-        public void activarProveedor(string cuit)
+        public void activarProveedor(string cuit, string direccion, string telefono, string email)
         {
 
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update proveedores set activo = 1 where cuit = @cuit");
+                datos.setearConsulta("update proveedores set activo = 1, direccion = @direccion, telefono = @telefono, email = @email, where cuit = @cuit");
                 datos.setearParametro("@cuit", cuit);
+                datos.setearParametro("@direccion", direccion);
+                datos.setearParametro("@telefono", telefono);
+                datos.setearParametro("@email", email);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

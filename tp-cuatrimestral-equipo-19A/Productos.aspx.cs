@@ -86,7 +86,7 @@ namespace tp_cuatrimestral_equipo_19A
                 }
                 else if (productoActual.nombre != null && productoActual.activo == false)
                 {
-                    productonegocio.activarProducto(productoActual.nombre, productoActual.idmarca);
+                    productonegocio.activarProducto(productoActual.nombre, productoActual.idmarca, nuevoProducto.stockactual, nuevoProducto.precio_unitario, nuevoProducto.ganancia, nuevoProducto.idcategoria);
                     lblMessage.Text = "Producto agregado exitosamente.";
                     lblMessage.CssClass = "text-success";
                 }

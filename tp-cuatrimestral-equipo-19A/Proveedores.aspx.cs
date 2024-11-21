@@ -72,7 +72,7 @@ namespace tp_cuatrimestral_equipo_19A
                     }
                     else if (proveedorActual.nombre != null && proveedorActual.activo == false)
                     {
-                        proveedorNegocio.activarProveedor(proveedorActual.cuit);
+                        proveedorNegocio.activarProveedor(proveedorActual.cuit, nuevoProveedor.direccion, nuevoProveedor.telefono, nuevoProveedor.email);
                         lblMessage.Text = "Proveedor agregado exitosamente.";
                         lblMessage.CssClass = "text-success";
                     }
@@ -102,6 +102,8 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (e.CommandName == "editar")
             {
+                txtNombreProveedor.Enabled = false;
+                txtCuitProveedor.Enabled = false;
                 Proveedor proveedor = proveedorNegocio.buscarProveedorPorId(id);
                 if (proveedor != null && proveedor.activo == true)
                 {
@@ -161,6 +163,8 @@ namespace tp_cuatrimestral_equipo_19A
             txtTelefonoProveedor.Text = string.Empty;
             txtEmailProveedor.Text = string.Empty;
             txtCuitProveedor.Text = string.Empty;
+            txtNombreProveedor.Enabled = true;
+            txtCuitProveedor.Enabled = true;
         }
 
         protected void ProveedoresGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
