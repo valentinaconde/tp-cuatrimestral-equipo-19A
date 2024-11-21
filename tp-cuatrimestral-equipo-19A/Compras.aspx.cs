@@ -75,6 +75,7 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 txtErrorCompras.Text = "Debe completar todos los campos.";
                 txtErrorCompras.CssClass = "text-danger";
+                limpiarLabelsEn3segundos();
                 return;
             }
             DataRow dr = dtProductos.NewRow();
@@ -86,18 +87,22 @@ namespace tp_cuatrimestral_equipo_19A
             dr["Marca"] = ddlMarca.SelectedValue;
             dtProductos.Rows.Add(dr);
 
+
+
             ViewState["dtProductos"] = dtProductos;
             gvProductos.DataSource = dtProductos;
             gvProductos.DataBind();
 
+
+            txtProducto.Text = " ";
+            txtCantidad.Text = " ";
+            txtPrecio.Text = " ";
+            txtPorcentaje.Text = " ";
+            txtErrorCompras.Text = " ";
+            ddlMarca.ClearSelection();
+            ddlCategoria.ClearSelection();
+
             
-            txtProducto.Text = string.Empty;
-            txtCantidad.Text = string.Empty;
-            txtPrecio.Text = string.Empty;
-            txtPorcentaje.Text = string.Empty;
-            txtErrorCompras.Text = "";
-            ddlMarca.SelectedIndex = 0;
-            ddlCategoria.SelectedIndex = 0;
 
 
         }
@@ -109,6 +114,7 @@ namespace tp_cuatrimestral_equipo_19A
                 if (dtProductos.Rows.Count == 0)
                 {
                     txtErrorCompras.Text = "Debe agregar al menos un producto.";
+                    limpiarLabelsEn3segundos();
                     return;
                 }
 
@@ -117,6 +123,7 @@ namespace tp_cuatrimestral_equipo_19A
                 if (!DateTime.TryParseExact(txtFecha.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fecha))
                 {
                     txtErrorCompras.Text = "Formato de fecha inválido. Use el formato dd/MM/yyyy.";
+                    limpiarLabelsEn3segundos();
                     return;
                 }
                 float total = 0;
@@ -177,13 +184,17 @@ namespace tp_cuatrimestral_equipo_19A
 
                 txtErrorCompras.Text = "Agregado con exito";
                 txtErrorCompras.CssClass = "text-success";
+                limpiarLabelsEn3segundos();
             }
             catch (Exception ex)
             {
                 txtErrorCompras.Text = "Error al registrar la compra" + ex;
                 txtErrorCompras.CssClass = "text-danger";
+                limpiarLabelsEn3segundos();
             }
-            
+
+
+
         }
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -200,6 +211,16 @@ namespace tp_cuatrimestral_equipo_19A
                 gvProductos.DataSource = dtProductos;
                 gvProductos.DataBind();
             }
+        }
+
+        private void limpiarLabelsEn3segundos()
+        {
+            string script = @"
+            setTimeout(function() {
+                document.getElementById('" + txtErrorCompras.ClientID + @"').innerText = '';
+            }, 3000);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "limpiarLabels", script, true);
         }
     }
 }

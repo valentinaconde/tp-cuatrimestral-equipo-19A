@@ -98,8 +98,6 @@
                 </asp:DropDownList>
             </div>
         </div>
-         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-     <ContentTemplate>
         <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-secondary mt-3" Text="Agregar Producto" OnClick="btnAgregarProducto_Click" />
         <asp:GridView ID="gvProductos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered mt-3">
             <Columns>
@@ -122,8 +120,6 @@
             <asp:Button ID="btnRegistrarCompra" runat="server" CssClass="btn btn-primary mt-3" Text="Registrar Compra" OnClick="btnRegistrarCompra_Click" />
             <asp:Label ID="txtErrorCompras" runat="server" CssClass="w-100 border-0 text-danger mt-3" />
         </div>
-             </ContentTemplate>
-</asp:UpdatePanel>
 
     </div>
 </asp:Content>
