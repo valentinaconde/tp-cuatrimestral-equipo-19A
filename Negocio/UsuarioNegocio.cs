@@ -73,11 +73,10 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update usuarios set nombre = @nombre, apellido = @apellido, email = @correo, password = @password, rol_id = @rol_id where id = @id");
+                datos.setearConsulta("update usuarios set nombre = @nombre, apellido = @apellido, email = @correo, rol_id = @rol_id where id = @id");
                 datos.setearParametro("@nombre", usuario.nombre);
                 datos.setearParametro("@apellido", usuario.apellido);
                 datos.setearParametro("@correo", usuario.email);
-                datos.setearParametro("@password", usuario.password);
                 datos.setearParametro("@rol_id", usuario.rol_id);
                 datos.setearParametro("@id", usuario.id);
                 datos.ejecutarAccion();

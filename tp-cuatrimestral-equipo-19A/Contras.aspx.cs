@@ -21,24 +21,27 @@ namespace tp_cuatrimestral_equipo_19A
             string contrasenaActual = txtContrasenaActual.Text;
             string nuevaContrasena = txtNuevaContrasena.Text;
 
-            //lblMessage.Text = usuario.password;
             if (contrasenaActual != usuario.password)
             {
-                lblMessage.Text = "Contraseña no coincide con la actual.";
+                lblMessage.Text = "La contraseña ingresada no coincide con la actual.";
+                lblMessage.CssClass = "text-danger";
             }
             else
             {
                 usuario.password = nuevaContrasena;
-                lblMessage.Text = "Contraseña fue cambiada con exito.";
+                lblMessage.Text = "La contraseña fue cambiada con exito.";
+                lblMessage.CssClass = "text-success";
             }
             if(contrasenaActual == nuevaContrasena)
             {
                 lblMessage.Text = "Las contraseñas son iguales.";
+                lblMessage.CssClass = "text-danger";
                 return;
             }
             if(nuevaContrasena.Length < 6)
             {
                 lblMessage.Text = "La contraseña debe tener minimo 6 caracteres.";
+                lblMessage.CssClass = "text-danger";
                 return;
             }
 
