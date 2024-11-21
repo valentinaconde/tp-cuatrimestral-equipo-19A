@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select * from clientes");
+                datos.setearConsulta("select * from clientes order by id desc ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

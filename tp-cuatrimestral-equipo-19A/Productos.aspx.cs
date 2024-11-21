@@ -117,7 +117,7 @@ namespace tp_cuatrimestral_equipo_19A
                 Producto producto = productonegocio.buscarProductoPorId(id);
                 if (producto.activo == true)
                 {
-                    txtNombreProducto.ReadOnly = true;
+                    txtNombreProducto.Enabled = false;
                     ddlMarca.Enabled = false;
                     ddlCategoria.Enabled = false;
                     txtNombreProducto.Text = producto.nombre;
@@ -220,6 +220,9 @@ namespace tp_cuatrimestral_equipo_19A
             txtPorcentajeGanancia.Text = string.Empty;
             ddlMarca.SelectedValue = "0";
             ddlCategoria.SelectedValue = "0";
+            txtNombreProducto.Enabled = true;
+            ddlMarca.Enabled = true;
+            ddlCategoria.Enabled = true;
         }
 
         protected void ProductosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)

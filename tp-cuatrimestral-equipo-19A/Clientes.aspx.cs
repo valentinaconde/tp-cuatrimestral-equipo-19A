@@ -105,6 +105,9 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (e.CommandName == "editar")
             {
+                txtNombreCliente.Enabled = false;
+                txtDniCliente.Enabled = false;
+
                 Cliente cliente = clienteNegocio.buscarClientePorId(id);
                 if (cliente != null && cliente.activo)
                 {
@@ -171,7 +174,9 @@ namespace tp_cuatrimestral_equipo_19A
             txtDireccionCliente.Text = string.Empty;
             txtTelefonoCliente.Text = string.Empty;
             txtEmailCliente.Text = string.Empty;
-            txtDniCliente.Text = string.Empty; 
+            txtDniCliente.Text = string.Empty;
+            txtNombreCliente.Enabled = true;
+            txtDniCliente.Enabled = true;
         }
 
         private void UpdatePagerInfo()
