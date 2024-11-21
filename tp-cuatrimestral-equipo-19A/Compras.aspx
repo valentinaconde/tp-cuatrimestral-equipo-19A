@@ -111,7 +111,9 @@
                 <asp:BoundField DataField="Marca" HeaderText="Marca" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-primary mb-5" Text="Eliminar" CommandArgument='<%# Container.DataItemIndex %>' OnClick="btnEliminar_Click" />
+                        <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-sm" Text="Eliminar" CommandArgument='<%# Container.DataItemIndex %>' OnClick="btnEliminar_Click">
+                            <span class="material-symbols-outlined text-danger">delete</span>
+                        </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

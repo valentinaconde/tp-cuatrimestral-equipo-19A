@@ -191,7 +191,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (dtProductos != null)
             {
-                Button btnEliminar = (Button)sender;
+                LinkButton btnEliminar = (LinkButton)sender;
                 GridViewRow row = (GridViewRow)btnEliminar.NamingContainer;
                 int Index = row.RowIndex;
                 dtProductos.Rows.RemoveAt(Index);
