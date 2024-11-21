@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id, activo from usuarios");
+                datos.setearConsulta("select id, nombre, apellido, email, password, rol_id, activo from usuarios order by id desc");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

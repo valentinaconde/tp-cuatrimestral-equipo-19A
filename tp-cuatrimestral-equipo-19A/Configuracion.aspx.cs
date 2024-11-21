@@ -98,6 +98,8 @@ namespace tp_cuatrimestral_equipo_19A
 
             if (e.CommandName == "editar")
             {
+                txtNombre.Enabled = false;
+                txtApellido.Enabled = false;
                 Usuario usuario = usuarioNegocio.buscarUsuarioPorId(id);
                 if (usuario.email != null)
                 {
@@ -149,6 +151,8 @@ namespace tp_cuatrimestral_equipo_19A
             txtApellido.Text = string.Empty;
             txtEmail.Text = string.Empty;
             ddlRol.SelectedIndex = 0;
+            txtNombre.Enabled = true;
+            txtApellido.Enabled = true;
         }
 
         protected void UsuariosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)

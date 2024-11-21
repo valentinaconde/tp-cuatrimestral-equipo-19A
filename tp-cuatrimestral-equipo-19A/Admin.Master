@@ -58,7 +58,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Marcas.aspx">Marcas</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Clientes.aspx">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Proveedores.aspx">Proveedores</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Configuracion.aspx">Configuracion</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Configuracion.aspx">Usuarios</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Contras.aspx">Contraseñas</a></li>
                     </ul>
                     <ul class="navbar-nav">
