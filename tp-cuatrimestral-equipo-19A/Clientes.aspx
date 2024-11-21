@@ -11,7 +11,7 @@
                     <ContentTemplate>
                         <div class="row ">
                             <div class="col-md-4">
-                                <label for="txtNombreCliente" class="form-label">Nombre</label>
+                                <label for="txtNombreCliente" class="form-label">Nombre y apellido</label>
                                 <asp:TextBox ID="txtNombreCliente" runat="server" CssClass="form-control" />
                                 <asp:RequiredFieldValidator ID="rfvNombreCliente" runat="server" ControlToValidate="txtNombreCliente" ErrorMessage="El nombre del cliente es obligatorio." CssClass="text-danger small" Display="Dynamic" />
                             </div>

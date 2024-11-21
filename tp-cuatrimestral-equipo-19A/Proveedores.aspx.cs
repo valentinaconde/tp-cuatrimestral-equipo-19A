@@ -89,6 +89,7 @@ namespace tp_cuatrimestral_equipo_19A
 
                 limpiarFormulario();
                 cargarProveedores();
+                limpiarLabelsEn3segundos();
             }
         }
 
@@ -130,6 +131,7 @@ namespace tp_cuatrimestral_equipo_19A
 
                 cargarProveedores();
             }
+            limpiarLabelsEn3segundos();
         }
 
         private void cargarProveedores()
@@ -213,6 +215,17 @@ namespace tp_cuatrimestral_equipo_19A
                 cargarProveedores();
                 lblNoResults.Visible = false;
             }
+        }
+
+        private void limpiarLabelsEn3segundos()
+        {
+            string script = @"
+            setTimeout(function() {
+                document.getElementById('" + lblMessage.ClientID + @"').innerText = '';
+                document.getElementById('" + lblMessage2.ClientID + @"').innerText = '';
+            }, 3000);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "limpiarLabels", script, true);
         }
     }
 }

@@ -88,6 +88,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarUsuarios();
+            limpiarLabelsEn3segundos();
         }
 
         protected void UsuariosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -119,6 +120,7 @@ namespace tp_cuatrimestral_equipo_19A
 
                 cargarUsuarios();
             }
+            limpiarLabelsEn3segundos();
         }
 
         private void cargarUsuarios()
@@ -201,6 +203,17 @@ namespace tp_cuatrimestral_equipo_19A
                 cargarUsuarios();
                 lblNoResults.Visible = false;
             }
+        }
+
+        private void limpiarLabelsEn3segundos()
+        {
+            string script = @"
+            setTimeout(function() {
+                document.getElementById('" + lblMessage.ClientID + @"').innerText = '';
+                document.getElementById('" + lblMessage2.ClientID + @"').innerText = '';
+            }, 3000);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "limpiarLabels", script, true);
         }
     }
 }

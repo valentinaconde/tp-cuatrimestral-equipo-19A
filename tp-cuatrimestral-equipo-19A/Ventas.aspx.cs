@@ -119,6 +119,7 @@ namespace tp_cuatrimestral_equipo_19A
             {
                 txtErrorVentas.Text = "Debe completar todos los campos.";
                 txtErrorVentas.CssClass = "text-danger";
+                limpiarLabelsEn3segundos();
 
                 return;
             }
@@ -147,6 +148,7 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     txtErrorVentas.Text = "Debe agregar al menos un producto.";
                     txtErrorVentas.CssClass = "text-danger";
+                    limpiarLabelsEn3segundos();
 
                     return;
                 }
@@ -157,6 +159,7 @@ namespace tp_cuatrimestral_equipo_19A
                 {
                     txtErrorVentas.Text = "Formato de fecha inválido. Use el formato dd/MM/yyyy.";
                     txtErrorVentas.CssClass = "text-danger";
+                    limpiarLabelsEn3segundos();
 
                     return;
                 }
@@ -176,7 +179,7 @@ namespace tp_cuatrimestral_equipo_19A
                         {
                             txtErrorVentas.Text = "No hay suficiente stock para el producto " + producto.nombre;
                             txtErrorVentas.CssClass = "text-danger";
-
+                            limpiarLabelsEn3segundos();
                             return;
                         }
 
@@ -195,6 +198,7 @@ namespace tp_cuatrimestral_equipo_19A
                     else
                     {
                         txtErrorVentas.Text = "Producto no encontrado: " + row["Producto"].ToString();
+                        limpiarLabelsEn3segundos();
                         return;
                     }
                 }
@@ -217,11 +221,13 @@ namespace tp_cuatrimestral_equipo_19A
                 txtErrorVentas.Text = "Venta registrada con éxito";
                 txtErrorVentas.CssClass = "text-success";
                 limpiarFormulario();
+                limpiarLabelsEn3segundos();
             }
             catch (Exception ex)
             {
                 txtErrorVentas.Text = "Error al registrar la venta: " + ex;
                 txtErrorVentas.CssClass = "text-danger";
+                limpiarLabelsEn3segundos();
 
             }
         }
@@ -253,5 +259,17 @@ namespace tp_cuatrimestral_equipo_19A
         {
 
         }
+
+        private void limpiarLabelsEn3segundos()
+        {
+            string script = @"
+            setTimeout(function() {
+                document.getElementById('" + txtErrorVentas.ClientID + @"').innerText = '';
+            }, 3000);";
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "limpiarLabels", script, true);
+        }
+
+
     }
 }

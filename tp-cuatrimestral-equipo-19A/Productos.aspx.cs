@@ -39,6 +39,7 @@ namespace tp_cuatrimestral_equipo_19A
         }
         protected void btnAgregarProducto_Click(object sender, EventArgs e)
         {
+
             if (ddlMarca.SelectedValue == "0")
             {
                 lblMessage.Text = "Por favor, seleccione una marca.";
@@ -102,6 +103,7 @@ namespace tp_cuatrimestral_equipo_19A
 
             limpiarFormulario();
             cargarProductos();
+            limpiarLabelsEn3segundos();
 
         }
         protected void productosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -164,6 +166,7 @@ namespace tp_cuatrimestral_equipo_19A
                 lblMessage.CssClass = "text-success";
 
                 cargarProductos();
+                limpiarLabelsEn3segundos();
             }
 
         }
@@ -225,6 +228,16 @@ namespace tp_cuatrimestral_equipo_19A
             ddlCategoria.Enabled = true;
         }
 
+        private void limpiarLabelsEn3segundos()
+        {
+            string script = @"
+            setTimeout(function() {
+                document.getElementById('" + lblMessage.ClientID + @"').innerText = '';
+                document.getElementById('" + lblMessage2.ClientID + @"').innerText = '';
+            }, 3000);"; 
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "limpiarLabels", script, true);
+        }
         protected void ProductosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             ProductosGridView.PageIndex = e.NewPageIndex;
