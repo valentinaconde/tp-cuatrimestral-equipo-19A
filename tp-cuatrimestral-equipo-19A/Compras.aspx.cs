@@ -94,11 +94,11 @@ namespace tp_cuatrimestral_equipo_19A
             gvProductos.DataBind();
 
 
-            txtProducto.Text = " ";
-            txtCantidad.Text = " ";
-            txtPrecio.Text = " ";
-            txtPorcentaje.Text = " ";
-            txtErrorCompras.Text = " ";
+            txtProducto.Text = "";
+            txtCantidad.Text = "";
+            txtPrecio.Text = "";
+            txtPorcentaje.Text = "";
+            txtErrorCompras.Text = "";
             ddlMarca.ClearSelection();
             ddlCategoria.ClearSelection();
 
