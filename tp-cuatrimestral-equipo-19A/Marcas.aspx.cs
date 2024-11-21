@@ -48,18 +48,7 @@ namespace tp_cuatrimestral_equipo_19A
                 activo = true
             };
 
-            if (MarcaId.HasValue)
-            {
-                nuevaMarca.id = MarcaId.Value;
-                marcaNegocio.modificar(nuevaMarca.id, nuevaMarca.nombre);
-                lblMessage.Text = "Marca modificada exitosamente.";
-                lblMessage.CssClass = "text-success";
-
-                btnAgregarMarca.Text = "Agregar Marca";
-                MarcaId = null;
-            }
-            else
-            {
+          
                     Marca marcaActual = new Marca();
                     marcaActual = marcaNegocio.buscarMarcaPorNombre(nuevaMarca.nombre);
 
@@ -78,13 +67,26 @@ namespace tp_cuatrimestral_equipo_19A
                     }
                     else
                     {
-                        marcaNegocio.agregar(nuevaMarca.nombre);
-                        lblMessage.Text = "Marca agregada exitosamente.";
-                        lblMessage.CssClass = "text-success";
+                        if (MarcaId.HasValue)
+                        {
+                            nuevaMarca.id = MarcaId.Value;
+                            marcaNegocio.modificar(nuevaMarca.id, nuevaMarca.nombre);
+                            lblMessage.Text = "Marca modificada exitosamente.";
+                            lblMessage.CssClass = "text-success";
+
+                            btnAgregarMarca.Text = "Agregar Marca";
+                            MarcaId = null;
+                        }
+                        else
+                        {
+                            marcaNegocio.agregar(nuevaMarca.nombre);
+                            lblMessage.Text = "Marca agregada exitosamente.";
+                            lblMessage.CssClass = "text-success";
+                        }
+                      
 
 
                     }
-                }
 
             limpiarFormulario();
             cargarMarcas();

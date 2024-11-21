@@ -78,12 +78,16 @@ namespace tp_cuatrimestral_equipo_19A
                         btnAgregarCategoria.Text = "Agregar Categoría";
                         CategoriaId = null;
                     }
-                    categoriaNegocio.agregar(nuevaCategoria.nombre);
+                    else
+                    {
+                        categoriaNegocio.agregar(nuevaCategoria.nombre);
                         lblMessage.Text = "Categoria agregado exitosamente.";
                         lblMessage.CssClass = "text-success";
 
-
                     }
+
+
+                }
             
 
             limpiarFormulario();
