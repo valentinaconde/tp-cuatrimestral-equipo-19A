@@ -243,11 +243,11 @@ namespace tp_cuatrimestral_equipo_19A
         }
         private void limpiarFormulario()
         {
-            txtFecha.Text = string.Empty;
+            ddlCliente.ClearSelection();
+            ddlProducto.ClearSelection();
             txtCantidad.Text = string.Empty;
             txtPrecio.Text = string.Empty;
-            ddlCliente.SelectedIndex = 0;
-            ddlProducto.SelectedIndex = 0;
+            txtFecha.Text = string.Empty;
         }
         protected void gvProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
