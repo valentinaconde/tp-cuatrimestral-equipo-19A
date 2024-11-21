@@ -207,6 +207,7 @@ namespace tp_cuatrimestral_equipo_19A
                 gvProductos.DataBind();
 
                 txtErrorVentas.Text = "Venta registrada con éxito";
+                limpiarFormulario();
             }
             catch (Exception ex)
             {
@@ -228,6 +229,14 @@ namespace tp_cuatrimestral_equipo_19A
                 gvProductos.DataSource = dtProductos;
                 gvProductos.DataBind();
             }
+        }
+        private void limpiarFormulario()
+        {
+            txtFecha.Text = string.Empty;
+            txtCantidad.Text = string.Empty;
+            txtPrecio.Text = string.Empty;
+            ddlCliente.SelectedIndex = 0;
+            ddlProducto.SelectedIndex = 0;
         }
         protected void gvProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
