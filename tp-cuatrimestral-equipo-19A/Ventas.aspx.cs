@@ -213,6 +213,25 @@ namespace tp_cuatrimestral_equipo_19A
                 txtErrorVentas.Text = "Error al registrar la venta: " + ex;
             }
         }
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DataTable dtProductos = ViewState["dtProductos"] as DataTable;
 
+            if (dtProductos != null)
+            {
+                Button btnEliminar = (Button)sender;
+                GridViewRow row = (GridViewRow)btnEliminar.NamingContainer;
+                int Index = row.RowIndex;
+                dtProductos.Rows.RemoveAt(Index);
+
+                ViewState["dtProductos"] = dtProductos;
+                gvProductos.DataSource = dtProductos;
+                gvProductos.DataBind();
+            }
+        }
+        protected void gvProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

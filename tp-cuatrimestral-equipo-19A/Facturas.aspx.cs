@@ -29,14 +29,7 @@ namespace tp_cuatrimestral_equipo_19A
         }
         protected void facturasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            //if (e.CommandName == "Page") return;
-            //int id = Convert.ToInt32(e.CommandArgument);
-            //VentaNegocio ventanegocio = new VentaNegocio();
-
-            //if (e.CommandName == "generar")
-            //{
-
-            //}
+           
 
         }
         private void cargarFacturas()

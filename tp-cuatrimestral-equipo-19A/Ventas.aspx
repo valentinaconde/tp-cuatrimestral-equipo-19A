@@ -91,12 +91,16 @@
 
 
     <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-secondary mt-3" Text="Agregar Producto" OnClick="btnAgregarProducto_Click" />
-    <asp:GridView ID="gvProductos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered mt-3">
+    <asp:GridView ID="gvProductos" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered mt-3" OnSelectedIndexChanged="gvProductos_SelectedIndexChanged">
         <Columns>
             <asp:BoundField DataField="Producto" HeaderText="Producto" />
             <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
             <asp:BoundField DataField="Precio" HeaderText="Precio" />
-
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-primary mb-5" Text="Eliminar" CommandArgument='<%# Container.DataItemIndex %>' OnClick="btnEliminar_Click" />
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <div class="d-flex align-items-center gap-2">
