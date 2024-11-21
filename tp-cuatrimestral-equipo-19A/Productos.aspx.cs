@@ -117,6 +117,9 @@ namespace tp_cuatrimestral_equipo_19A
                 Producto producto = productonegocio.buscarProductoPorId(id);
                 if (producto.activo == true)
                 {
+                    txtNombreProducto.ReadOnly = true;
+                    ddlMarca.Enabled = false;
+                    ddlCategoria.Enabled = false;
                     txtNombreProducto.Text = producto.nombre;
                     txtStockActual.Text = producto.stockactual.ToString();
                     txtPrecioUnitario.Text = producto.precio_unitario.ToString();

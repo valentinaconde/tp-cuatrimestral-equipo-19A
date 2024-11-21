@@ -48,19 +48,9 @@ namespace tp_cuatrimestral_equipo_19A
                     activo = true
                 };
 
-            if (CategoriaId.HasValue)
-            {
-                nuevaCategoria.id = CategoriaId.Value;
-                categoriaNegocio.modificar(nuevaCategoria.id, nuevaCategoria.nombre);
-                lblMessage.Text = "Categoría modificada exitosamente.";
-                lblMessage.CssClass = "text-success";
+               
 
-                    btnAgregarCategoria.Text = "Agregar Categoría";
-                CategoriaId = null;
-            }
-            else
-            {
-                    Categoria categoriaActual = new Categoria();
+                Categoria categoriaActual = new Categoria();
                     categoriaActual = categoriaNegocio.buscarCategoriaPorNombre(nuevaCategoria.nombre);
 
                     if (categoriaActual.nombre != null && categoriaActual.activo == true)
@@ -78,13 +68,23 @@ namespace tp_cuatrimestral_equipo_19A
                     }
                     else
                     {
-                        categoriaNegocio.agregar(nuevaCategoria.nombre);
+                    if (CategoriaId.HasValue)
+                    {
+                        nuevaCategoria.id = CategoriaId.Value;
+                        categoriaNegocio.modificar(nuevaCategoria.id, nuevaCategoria.nombre);
+                        lblMessage.Text = "Categoría modificada exitosamente.";
+                        lblMessage.CssClass = "text-success";
+
+                        btnAgregarCategoria.Text = "Agregar Categoría";
+                        CategoriaId = null;
+                    }
+                    categoriaNegocio.agregar(nuevaCategoria.nombre);
                         lblMessage.Text = "Categoria agregado exitosamente.";
                         lblMessage.CssClass = "text-success";
 
 
                     }
-            }
+            
 
             limpiarFormulario();
             cargarCategorias();
