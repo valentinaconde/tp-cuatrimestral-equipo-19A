@@ -97,6 +97,7 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void categoriasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            lblMessage.Text = "";
             if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
@@ -116,6 +117,7 @@ namespace tp_cuatrimestral_equipo_19A
                 categoriaNegocio.eliminar(id);
                 lblMessage.Text = "Categoría eliminada exitosamente.";
                 lblMessage.CssClass = "text-success";
+                btnAgregarCategoria.Text = "Agregar Categoría";
                 cargarCategorias();
                 
             }
@@ -149,6 +151,7 @@ namespace tp_cuatrimestral_equipo_19A
         private void limpiarFormulario()
         {
             txtNombreCategoria.Text = string.Empty;
+            btnAgregarCategoria.Text = "Agregar Categoría";
         }
 
         protected void categoriasGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)

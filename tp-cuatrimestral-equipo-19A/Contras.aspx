@@ -17,10 +17,11 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="form-group col-4">
+            <div class="form-group col-4 mb-2">
                 <asp:Button ID="btnCambiarContrasena" runat="server" CssClass="btn btn-primary" Text="Aceptar" OnClick="btnCambiarContrasena_Click" />
-                <asp:Label ID="lblMessage" runat="server" CssClass="text-danger" />
             </div>
+                <asp:Label ID="lblMessage" runat="server" CssClass="text-danger pt-2" />
+
         </div>
     </div>
 </asp:Content>

@@ -97,6 +97,7 @@ namespace tp_cuatrimestral_equipo_19A
 
         protected void marcasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            lblMessage.Text = "";
             if (e.CommandName == "Page") return;
             int id = Convert.ToInt32(e.CommandArgument);
             MarcaNegocio marcaNegocio = new MarcaNegocio();
@@ -117,6 +118,7 @@ namespace tp_cuatrimestral_equipo_19A
                 marcaNegocio.eliminar(id);
                 lblMessage.Text = "Marca eliminada exitosamente.";
                 lblMessage.CssClass = "text-success";
+                btnAgregarMarca.Text = "Agregar Marca";
 
                 cargarMarcas();
             }
@@ -144,6 +146,8 @@ namespace tp_cuatrimestral_equipo_19A
         private void limpiarFormulario()
         {
             txtNombreMarca.Text = string.Empty;
+            btnAgregarMarca.Text = "Agregar Marca";
+
         }
 
         private void UpdatePagerInfo()

@@ -181,7 +181,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update proveedores set activo = 1, direccion = @direccion, telefono = @telefono, email = @email, where cuit = @cuit");
+                datos.setearConsulta("update proveedores set activo = 1, direccion = @direccion, telefono = @telefono, email = @email where cuit = @cuit");
                 datos.setearParametro("@cuit", cuit);
                 datos.setearParametro("@direccion", direccion);
                 datos.setearParametro("@telefono", telefono);
